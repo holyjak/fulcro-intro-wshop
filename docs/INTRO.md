@@ -11,13 +11,17 @@ Fulcro is a full-stack web framework for a _graph API_. What are the key parts?
 
 Let's zoom in on the Frontend. I thas
 
-* the UI component tree <-- props tree
-* a normalized cache of data called "client DB"
-* an asynchronous transaction subsystem ("Tx") for triggering mutations and data loads from the components
+* the **UI** component tree
+* the client-side **state**, called "client DB", and storing data mostly in a _normalized_ form
+* an asynchronous **transaction** subsystem ("Tx") for triggering mutations and data loads from the components
 
-Let's see what happens the render the UI:
+Let's see what happens to render the UI:
 
 ![](./fulcro-ui-query-data.svg)
+
+1. Fulcro asks the `Root` component for its _query_, which composes the queries of its children (and so forth)
+2. Fulcro fulfills the query using the data in the client DB, producing a tree of data, also known as _props_ (= properties)
+3. Fulcro invokes the Root's render function passing it the props tree; Root in turn renders its children, passing them the relevant sub-trees
 
 Keyword cloud:
 
