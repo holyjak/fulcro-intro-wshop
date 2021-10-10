@@ -1,0 +1,6 @@
+resources/public/js/
+node_modules/
+.clj-kondo/.cache
+.cpcache/
+.lsp/.cache/
+.shadow-cljs/
