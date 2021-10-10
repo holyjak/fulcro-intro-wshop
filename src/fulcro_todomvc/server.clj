@@ -9,7 +9,7 @@
     [ring.middleware.content-type :refer [wrap-content-type]]
     [ring.middleware.not-modified :refer [wrap-not-modified]]
     [ring.middleware.resource :refer [wrap-resource]]
-    [ring.util.response :refer [response file-response resource-response]]
+    [ring.util.response :refer [content-type response file-response resource-response]]
     [taoensso.timbre :as log]
     [clojure.tools.namespace.repl :as tools-ns]
     [com.fulcrologic.fulcro.algorithms.tempid :as tempid]))
@@ -131,12 +131,20 @@
                   (p/post-process-parser-plugin p/elide-not-found)
                   p/error-handler-plugin]}))
 
+(defn wrap-index [handler]
+  (fn [req]
+    (if (= "/" (:uri req))
+      (-> (handler (assoc req :uri "/index.html", :path-info "/index.html"))
+          (content-type "text/html"))
+      (handler req))))
+
 (def middleware (-> not-found-handler
                   (wrap-api {:uri    "/api"
                              :parser (fn [query] (parser {} query))})
                   (fmw/wrap-transit-params)
                   (fmw/wrap-transit-response)
                   (wrap-resource "public")
+                  wrap-index
                   wrap-content-type
                   wrap-not-modified))
 
@@ -146,6 +154,7 @@
   (let [result (web/run middleware {:host "0.0.0.0"
                                     :port 8181})]
     (reset! server result)
+    ((requiring-resolve 'clojure.java.browse/browse-url) "http://localhost:8181")
     (fn [] (web/stop result))))
 
 (comment

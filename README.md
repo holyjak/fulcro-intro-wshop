@@ -26,13 +26,31 @@ After that, **run the application** as described below at least once, so that al
 Usage
 -----
 
+### Running the app from VS Code with Calva
+
+To make everyone's lives simpler, it is _recommended_ that use use VS Code with [Calva](https://calva.io/), no matter what is your preferred editor / IDE. You only [need to know a few Calva keybindings](https://github.com/holyjak/interactive-dev-wshop/blob/master/Cheatsheet.md#vs-code-and-calva-shortcuts) to be sufficiently effective during the workshop.
+
+To run the application using Calva:
+
+**FIXME: Does not work yet (need to start the server from the repl; cljs fails to connect)**
+
+* _View - Command Palette... - [Calva: Start a Project REPL and Connect (aka Jack-In)](https://calva.io/connect/)_
+* Select _deps.edn + shadow.clj_
+* Select `:dev` for the aliases to launch with
+* In the `output.calva-repl` window, type and execute `((requiring-resolve 'fulcro-todomvc.server/http-server))`
+* Select `:todomvc` for the build to connect to
+
+### Running the app from the terminal
+
+You can start the app, both the frontend build and the backend server, from the terminal, as described below. But it is preferable to use VS Code with Calva and start them from Calva, which will provide you with better code inspection capabilities.
+
 ```bash
-yarn install
-npx shadow-cljs watch todomvc
+# In a terminal (preferable: use Calva):
+❯ yarn install
+❯ npx shadow-cljs watch todomvc
+
 # In another terminal:
 ❯ clj -A:dev
 Clojure 1.10.3
 user=> ((requiring-resolve 'fulcro-todomvc.server/http-server))
 ```
-
-then go to http://localhost:8181/index.html
