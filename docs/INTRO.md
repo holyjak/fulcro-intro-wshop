@@ -34,3 +34,5 @@ Keyword cloud:
 * EQL
 * Pathom
 * Query
+
+TP: You do not need to understand everything here. We will be coming back to these terms in the exercises. There you will experience and grok them.
