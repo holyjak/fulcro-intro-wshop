@@ -1,19 +1,19 @@
 # A very brief introduction to Fulcro
 
-Fulcro is a full-stack web framework for a _graph API_. What are the key parts?
+Fulcro is a full-stack web framework for a _graph API_. These are the key parts:
 
 * On the _frontend_ we have a **UI** tree composed of React _components_
 * It talks to a **graph API** on the _backend_ to query for data and to effect _mutations_ (changes)
   * A single endpoint (x REST)
-  * _Frontend describes_ what data it wants using EDN Query Language (EQL), _backend fills them in_, returning a data tree
+  * _Frontend describes_ what data it wants using EDN Query Language (EQL) and _backend fills them in_, returning a data tree
 
 ![](./fulcro-system-view.svg)
 
-Let's zoom in on the Frontend. I thas
+Let's zoom in on the Frontend. It has:
 
 * the **UI** component tree
-* the client-side **state**, called "client DB", and storing data mostly in a _normalized_ form
-* an asynchronous **transaction** subsystem ("Tx") for triggering mutations and data loads from the components
+* a client-side **state**, called "client DB", and storing data mostly in a _normalized_ form
+* an asynchronous **transaction** subsystem ("Tx") for triggering local and remote mutations and data loads from the components
 
 Let's see what happens to render the UI:
 
