@@ -12,6 +12,16 @@ In this workshop you will get a brief introduction to Fulcro and then get your h
 Prerequisites
 --------------
 
+### Theoretical
+
+There are no "hard" theoretical prerequisites other than general experience with Clojure development but it will help a lot if you:
+
+* Have an experience with ClojureScript
+* Have an idea about how React works
+* Have an idea about GraphQL
+
+### Practical
+
 * Clone / download this repository to a directory on your computer
 * Install Java, [Clojure CLI tools](https://clojure.org/guides/getting_started), [Node and npm](https://nodejs.org/en/)
 * In a Chromium browser such as Vivaldi or Chrome:

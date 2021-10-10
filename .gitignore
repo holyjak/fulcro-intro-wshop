@@ -4,3 +4,5 @@ node_modules/
 .cpcache/
 .lsp/.cache/
 .shadow-cljs/
+.calva/
+.nrepl-port
