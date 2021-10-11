@@ -43,7 +43,7 @@ To make everyone's lives simpler, it is _recommended_ that use use VS Code with 
 To run the application using Calva:
 
 * _View - Command Palette... - [Calva: Start a Project REPL and Connect (aka Jack-In)](https://calva.io/connect/)_
-* Select shadow-cljs_
+* Select _shadow-cljs_
 * Select `:todomvc` for the aliases to launch with (Note it is not enough press `enter` on the item, you need to first press `space` or click the checkbox.)
 * Wait a few seconds, then select `:todomvc` for the build to connect to
 * Once you see the message `[:todomvc] Build completed.` in the Calva Jack-in terminal:
