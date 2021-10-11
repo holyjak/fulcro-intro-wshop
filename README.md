@@ -47,12 +47,11 @@ To run the application using Calva:
 * Select `:todomvc` for the aliases to launch with (Note it is not enough press `enter` on the item, you need to first press `space` or click the checkbox.)
 * Wait a few seconds, then select `:todomvc` for the build to connect to
 * Once you see the message `[:todomvc] Build completed.` in the Calva Jack-in terminal:
-    1. Open the file `src/fulcro_todomvc/server.clj`
-    1. Load the file: **Calva: Load current Current File and Dependencies**
+    1. Open the file `src/fulcro_todomvc/server.clj` (_Go_ - _Go to File..._)
+    1. Load the file by executing the command _Calva: Load current Current File and Dependencies_
     1. Scroll down to the `(comment ...)` form and place the cursor in `(http-server)`, then press `alt+enter`
        * This will evaluate the form (call the `http-server` function)
        * The web browser will open with your application
-
 
 ### Running the app from the terminal
 
