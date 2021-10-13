@@ -80,3 +80,10 @@ LESSON: We saw how data is stored in the client DB mostly in a normalized form (
 ----
 
 **TO BE CONTINUED**
+
+1. load!-ing data from the server, transactions
+2. mutations
+
+## Next steps
+
+If you want to learn more Fulcro, study the [Minimalist Fulcro Tutorial](https://fulcro-community.github.io/guides/tutorial-minimalist-fulcro/) and do the accompanying exercises.
