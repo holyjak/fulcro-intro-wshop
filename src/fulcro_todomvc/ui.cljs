@@ -1,6 +1,8 @@
 (ns fulcro-todomvc.ui
   (:require
+    [com.fulcrologic.fulcro.application :as app]
     [com.fulcrologic.fulcro.algorithms.tempid :as tmp]
+    [com.fulcrologic.fulcro.algorithms.denormalize :as fdn]
     [com.fulcrologic.fulcro.components :as comp :refer [defsc]]
     [com.fulcrologic.fulcro.dom :as dom]
     [com.fulcrologic.fulcro.mutations :as mut :refer [defmutation]]
@@ -173,3 +175,33 @@
    :query         [{:root/todo (comp/get-query TodoList)}]}
   (dom/div {}
     (ui-todo-list todo)))
+
+(comment
+  ;; Exercise 3.1
+  (comp/get-query TodoItem) ; TodoList, Root
+  ;; Exercise 3.1
+  (-> (comp/ident->components app [:item/id 1])
+      first
+      (comp/props))
+  ;; _Exercise 3.4
+  (binding [*print-meta* true] (pr-str (comp/get-query TodoList)))
+
+  ;; Exercise 4.1
+  (comp/get-query Root)
+  ;; Exercise 4.2
+  (tap> (comp/get-query Root))
+  ;; Exercise 4.3
+  (let [state (app/current-state app)]
+    (tap> (fdn/db->tree
+            (comp/get-query Root)
+            state state)))
+
+  )
+
+{:list/id 1
+ :ui/new-item-text ""
+ :list/title "The List"
+ :list/items
+ [{:item/id 1, :item/label "Item 1", :item/complete false}
+  {:item/id 2, :item/label "Item 2", :item/complete false}
+  {:item/id 3, :item/label "Item 3", :item/complete false}]}
