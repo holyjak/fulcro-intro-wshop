@@ -152,24 +152,6 @@
 
 (def ui-todo-list (comp/factory TodoList))
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; Alternate root/application for trying out raw components mixed with Fulcro
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;(defn Application [_]
-;  (dom/div {}
-;    (let [todo-list (raw/use-root app :root/todo-mvo TodoList {:initialize? true})]
-;      (raw/with-fulcro app
-;        (ui-todo-list todo-list)))))
-;
-;(defsc Root [this {:root/keys [router] :as props}]
-;  {:use-hooks? true}
-;  (dom/div {}
-;    (raw/create-element Application)))
-
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; Normal Fulcro Root
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (defsc Root [this {:root/keys [todo] :as props}]
   {:initial-state {:root/todo {}}
    :query         [{:root/todo (comp/get-query TodoList)}]}
@@ -179,7 +161,7 @@
 (comment
   ;; Exercise 3.1
   (comp/get-query TodoItem) ; TodoList, Root
-  ;; Exercise 3.1
+  ;; Exercise 3.2
   (-> (comp/ident->components app [:item/id 1])
       first
       (comp/props))
@@ -195,13 +177,8 @@
     (tap> (fdn/db->tree
             (comp/get-query Root)
             state state)))
+  
+  ;; Exercise 5.4
+  (tap> (app/current-state app))
 
-  )
-
-{:list/id 1
- :ui/new-item-text ""
- :list/title "The List"
- :list/items
- [{:item/id 1, :item/label "Item 1", :item/complete false}
-  {:item/id 2, :item/label "Item 2", :item/complete false}
-  {:item/id 3, :item/label "Item 3", :item/complete false}]}
+  ,)

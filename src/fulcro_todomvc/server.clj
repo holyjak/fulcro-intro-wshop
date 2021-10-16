@@ -159,10 +159,14 @@
 
 (comment
 
+  ;; Calva setup: Execute the line below to start the server
   (http-server)
-  (web/stop @server)
-  (tools-ns/refresh-all)
 
+
+  (web/stop @server)
+
+
+  (tools-ns/refresh-all)
   (async/<!! (parser {} `[(fulcro-todomvc.api/todo-new-item {:id 2 :text "Hello"})]))
 
   @item-db

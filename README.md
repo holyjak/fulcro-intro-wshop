@@ -69,6 +69,8 @@ Clojure 1.10.3
 user=> ((requiring-resolve 'fulcro-todomvc.server/http-server))
 ```
 
+Connect you editor to the browser REPL. In Calva, execute _Calva: Connect to a Running REPL Server in the Project_ - select shadow-cljs - accept the default localhost:9000.
+
 ### Troubleshooting problems with running the application
 
 * If the application does not work properly when you start it from Calva then try to start it manually from the terminal, as described above.

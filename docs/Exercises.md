@@ -9,9 +9,9 @@ Start by opening the application in the browser and opening the browser Dev Tool
 
 1. Open the **Components tab** of the dev tools (provided by the React dev tools)
 2. Explore the tree of the components displayed
-3. Select one of the `TodoItem` elements - can you see its props on the right side?
+3. Select one of the `TodoItem` elements - can you see its props on the right side (or at the bottom, on a smaller screen)?
 
-LESSON: The UI is indeed a tree of components.
+LESSON: The UI is indeed a tree of components: `Root > TodoList > TodoItem`.
 
 ### 2. Component props and query
 
@@ -20,23 +20,25 @@ React dev tools cannot show us the props of the component because it is a Clojur
 1. Open now the **Fulcro Inspect** tab and its **Element** sub-tab.
 2. Click the _Pick Element_ in the top left corner and then click "Item 1" in the webapp
 3. You should now see the details of the TodoItem, including
-  * its "ident", meaning "identifier", namely `[:item/id 1]`
-  * its props, including `:item/complete` and `:item/label`
+  * its "_ident_", meaning "identifier", namely `[:item/id 1]`
+  * its _props_, including `:item/complete` and `:item/label`
+    (click the ▶ to expand them)
   * its _query_ - notice how the props mostly mirror the query
 4. Mark "Item 1" as complete by clicking to the left of its label and change its text by double-clicking on it and typing something then clicking outside of the list. How have the props changed?
+  * You might need to _Pick Element_ again to see the changes
   * Notice that for most purposes, having a prop with the value `false` and not having the prop at all are equivalent
-5. Pick another list item element and compare its values with the original item
-6. Select the whole `TodoList` and look at its props
+5. _Pick_ another list item element and compare its values with the original item
+6. Select the whole `TodoList` and look at its ident, props, and query
 
 LESSON: We have learned to use _Fulcro Inspect - Element_ to explore a component and we have learned that it has props, ident, and a query. We saw that the props mirror what is specified in the query.
 
 ### 3. Exploring the query
 
-The query of a component declares its data needs and Fulcro uses it to build the props for the component. We have seen it using Fulcro Inspect - Element, now we will explore it using the code.
+The query of a component declares its data needs and Fulcro uses it to build the props for the component. We have seen it using Fulcro Inspect - Element, now we will explore it using the REPL.
 
-1. Open `src/fulcro_todomvc/ui.cljs`, scroll to the bottom and inside the `(comment ...)
+1. Open `src/fulcro_todomvc/ui.cljs`, scroll to the bottom and inside the `(comment ...)` find _Exercise 3.1_ and
    evaluate the `get-query` call, read the result
-2. Now let's look at what the props look like - at the same place, eval `(-> ... (comp/props)))` Compare the props and the query
+2. Now let's look at what the props look like - at the same place, under _Exercise 3.2_, eval the `(-> ... (comp/props)))` form. Compare the props and the query
 3. Repeat for `TodoList` (remember you can find its ident using the Element tab)
 
 We see that `TodoList` queries for these props (some omitted): `[:list/id :list/items :list/title :list/filter]`.
@@ -49,11 +51,11 @@ But it also elaborates what it wants for each of the `:list/items` elements, nam
 
 and includes this in its query instead of just `:list/items`. Now [look at the code](https://github.com/holyjak/fulcro-intro-wshop/blob/4992e994cb51bef46d6aaca5f7515da9c9536fb0/src/fulcro_todomvc/ui.cljs#L123) to see how it does that - it does not simply paste the child's query, it uses `(comp/get-query TodoItem)` to get it. This is important, because it include some important metadata. Let's have a look at it:
 
-4. In `ui.cljs`, execute the `(binding ...)` form marked with _Exercise 3.4_.
+4. In `ui.cljs`, under _Exercise 3.4_, execute the form `(binding ...)` and explore te output.
 
-EQL Primer: An EQL query includes 1) _properties_ such as `:list/label`, 2) joins of the form `{<property or ident> <query>}`, 3) or idents such as `[:item/id 1]` to ask for the data of the entity with that ident (and we can again use a join to precise what data)
+**EQL Primer**: An EQL query includes 1) _properties_ such as `:list/label`, 2) joins of the form `{<property or ident> <query>}`, 3) or idents such as `[:item/id 1]` to ask for the data of the entity with that ident (and we can again use a join to precise what data)
 
-LESSON: Components declare their data needs using `:query`, listing the properties they want. They _join_ in the query of their children using `get-query` to include the child's needs and thus to specify what properties of a nested data entity to include. The query also includes metadata that Fulcro needs for its processing.
+LESSON: Components declare their data needs using `:query`, listing the properties they want. They _join_ in the query of each child using `get-query` to include the child's needs and thus to specify what properties of a nested data entity to include. The query also includes metadata that Fulcro needs for its processing.
 
 ### 4. Root query
 

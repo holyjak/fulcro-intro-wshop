@@ -1,6 +1,6 @@
 # A very brief introduction to Fulcro
 
-_Disclaimer: I'm not going to talk about WHY things are they way they are. Read https://fulcro-community.github.io/guides/tutorial-minimalist-fulcro/index.html#_why_fulcro to learn about that._
+_Disclaimer: I'm not going to talk about WHY things are they way they are. Read https://fulcro-community.github.io/guides/tutorial-minimalist-fulcro/index.html#\_why\_fulcro to learn about that._
 
 Fulcro is a full-stack web framework for a _graph API_. These are the key parts:
 
@@ -17,7 +17,7 @@ Let's zoom in on the Frontend. It has:
 * a client-side **state**, called "client DB", and storing data mostly in a _normalized_ form
 * an asynchronous **transaction** subsystem ("Tx") for triggering local and remote mutations and data loads from the components
 
-Let's see what happens to render the UI:
+Let's zoom in even more, in the UI tree and its rendering:
 
 ![](./fulcro-ui-query-data.svg)
 
@@ -34,7 +34,6 @@ Keyword cloud:
 * Transaction
 * Client DB
 * EQL
-* Pathom
 * Query
 
 TP: You do not need to understand everything here. We will be coming back to these terms in the exercises. There you will experience and grok them.
