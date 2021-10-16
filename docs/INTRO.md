@@ -1,6 +1,6 @@
 # A very brief introduction to Fulcro
 
-_Disclaimer: I'm not going to talk about WHY things are they way they are. Read https://fulcro-community.github.io/guides/tutorial-minimalist-fulcro/index.html#_why_fulcro_
+_Disclaimer: I'm not going to talk about WHY things are they way they are. Read https://fulcro-community.github.io/guides/tutorial-minimalist-fulcro/index.html#_why_fulcro to learn about that._
 
 Fulcro is a full-stack web framework for a _graph API_. These are the key parts:
 

@@ -31,7 +31,7 @@ There are no "hard" theoretical prerequisites other than general experience with
     * Under "Console": "Enable Custom Formatters"
     * Under "Network": "Disable Cache (while devtools is open)"
 
-After that, **run the application** as described below at least once, so that all dependencies are downloaded before the workshop.
+After that, **run the application** as described below at least once, so that all dependencies are downloaded before the workshop. Make sure you can see the To Do application in the browser. If not, follow the _Troubleshooting_ instructions below.
 
 Usage
 -----
@@ -42,9 +42,10 @@ To make everyone's lives simpler, it is _recommended_ that use use VS Code with 
 
 To run the application using Calva:
 
-* _View - Command Palette... - [Calva: Start a Project REPL and Connect (aka Jack-In)](https://calva.io/connect/)_
+* Make sure Node dependencies are installed. In the terminal, run `npm install` (or use yarn)
+* In the menu _View - Command Palette... - [Calva: Start a Project REPL and Connect (aka Jack-In)](https://calva.io/connect/)_
 * Select _shadow-cljs_
-* Select `:todomvc` for the aliases to launch with (Note it is not enough press `enter` on the item, you need to first press `space` or click the checkbox.)
+* Select `:todomvc` for the aliases to launch with (Note that it is not enough to press `enter` on the item, you need to first press `space` or click the checkbox.)
 * Wait a few seconds, then select `:todomvc` for the build to connect to
 * Once you see the message `[:todomvc] Build completed.` in the Calva Jack-in terminal:
     1. Open the file `src/fulcro_todomvc/server.clj` (_Go_ - _Go to File..._)
@@ -59,7 +60,7 @@ You can start the app, both the frontend build and the backend server, from the 
 
 ```bash
 # In a terminal (preferable: use Calva):
-❯ yarn install
+❯ npm install # or yarn install
 ❯ npx shadow-cljs watch todomvc
 
 # In another terminal:
@@ -67,3 +68,24 @@ You can start the app, both the frontend build and the backend server, from the 
 Clojure 1.10.3
 user=> ((requiring-resolve 'fulcro-todomvc.server/http-server))
 ```
+
+### Troubleshooting problems with running the application
+
+* If the application does not work properly when you start it from Calva then try to start it manually from the terminal, as described above.
+* Are there any errors from shadow-cljs? Look both in the Calva Jack-in _Terminal_ at the bottom of VS Code (if you have closed it: _View - Open View..._ - type `terminal` - you should see 3, where the third is the one you want, "1.1 Calva Jack-in: shadow-cljs") There is lot of output, including the following lines:
+
+```
+npx shadow-cljs -d cider/cider-nrepl:0.26.0 watch :todomvc
+shadow-cljs - config: /some/path/to/fulcro-intro-wshop/shadow-cljs.edn
+shadow-cljs - starting via "clojure"
+[..]
+shadow-cljs - server version: 2.15.5 running at http://localhost:9630
+shadow-cljs - nREPL server started on port 9000
+shadow-cljs - watching build :todomvc
+[:todomvc] Configuring build.
+[:todomvc] Compiling ...
+[..]
+[:todomvc] Build completed. (260 files, 0 compiled, 0 warnings, 11.01s)
+```
+
+* Look also into `output.calva-repl` for any problems. (You can re-open it by running _Go - Go to File..._ - type `output.calva-repl`)
