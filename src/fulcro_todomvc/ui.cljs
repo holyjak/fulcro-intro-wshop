@@ -8,7 +8,8 @@
     [com.fulcrologic.fulcro.mutations :as mut :refer [defmutation]]
     [fulcro-todomvc.api :as api]
     [fulcro-todomvc.app :refer [app]]
-    [goog.object :as gobj] ))
+    [goog.object :as gobj]
+    [cljs.pprint :as pprint]))
 
 (defn is-enter? [evt] (= 13 (.-keyCode evt)))
 (defn is-escape? [evt] (= 27 (.-keyCode evt)))
@@ -164,9 +165,10 @@
   ;; Exercise 3.2
   (-> (comp/ident->components app [:item/id 1])
       first
-      (comp/props))
+      (comp/props)
+      (tap>))
   ;; _Exercise 3.4
-  (binding [*print-meta* true] (pr-str (comp/get-query TodoList)))
+  (binding [*print-meta* true] (tap> (pr-str (comp/get-query TodoList))))
 
   ;; Exercise 4.1
   (comp/get-query Root)
@@ -177,8 +179,9 @@
     (tap> (fdn/db->tree
             (comp/get-query Root)
             state state)))
-  
+
   ;; Exercise 5.4
   (tap> (app/current-state app))
 
-  ,)
+
+  )

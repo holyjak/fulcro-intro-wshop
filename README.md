@@ -27,6 +27,7 @@ There are no "hard" theoretical prerequisites other than general experience with
 * In a Chromium browser such as Vivaldi or Chrome:
   * Install [Fulcro Inspect](https://chrome.google.com/webstore/detail/fulcro-inspect/meeijplnfjcihnhkpanepcaffklobaal)
   * Install [React Developer Tools](https://chrome.google.com/webstore/detail/fulcro-inspect/meeijplnfjcihnhkpanepcaffklobaal)
+  * Restart the browser after you install the two plugins
   * Configure [Chrome Development Settings](https://developers.google.com/web/tools/chrome-devtools/customize): 
     * Under "Console": "Enable Custom Formatters"
     * Under "Network": "Disable Cache (while devtools is open)"

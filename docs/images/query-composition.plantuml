@@ -1,0 +1,10 @@
+@startdot
+digraph foo {
+  node [shape=box, style=rounded]
+  "Client DB" [shape=cylinder]
+
+  TodoItem -> TodoList [label=" :item/id :item/label :item/complete ..."]
+  TodoList -> Root [label=" :list/id :list/title {:list/items <TodoItem query>} ..."]
+  Root -> "Client DB" [label=" {:root/todo <TodoList query>}"]
+}
+@enddot

@@ -1,0 +1,8 @@
+@startuml
+rectangle Root {
+    rectangle TodoList {
+        collections TodoItem
+    }
+}
+
+@enduml

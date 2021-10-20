@@ -9,7 +9,7 @@ Fulcro is a full-stack web framework for a _graph API_. These are the key parts:
   * A single endpoint (x REST)
   * _Frontend describes_ what data it wants using EDN Query Language (EQL) and _backend fills them in_, returning a data tree
 
-![](./fulcro-system-view.svg)
+![](./images/fulcro-system-view.svg)
 
 Let's zoom in on the Frontend. It has:
 
@@ -19,11 +19,21 @@ Let's zoom in on the Frontend. It has:
 
 Let's zoom in even more, in the UI tree and its rendering:
 
-![](./fulcro-ui-query-data.svg)
+![](./images/fulcro-ui-query-data.svg)
 
 1. Fulcro asks the `Root` component for its _query_, which composes the queries of its children (and so forth)
 2. Fulcro fulfills the query using the data in the client DB, producing a tree of data, also known as _props_ (= properties)
 3. Fulcro invokes the Root's render function passing it the props tree; Root in turn renders its children, passing them the relevant sub-trees
+
+What is a Fulcro component anyway?
+
+```clojure
+(defsc <Name> [this props]
+  {<config options>}
+  (dom/div 
+    (dom/h1 "Hello" (:name props) "!")
+    (some-child-component (:some-child props))))
+```
 
 Keyword cloud:
 
