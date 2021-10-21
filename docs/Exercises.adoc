@@ -177,14 +177,14 @@ In the previous exercise we have observed the _effect_ of the application loadin
    :query [:list/id :list/title {:list/items (get-query TodoItem)} ...]}
   ...)
 ```
+7. At the top left of the _DB_ tab, click on the `<` next to the slider a few times, until the list 2 and item 99 disappear from the DB. This way you can go back and forward in the history (and the UI, since it will always reflect the DB state - though there is nothing to see now).
 
-LESSON: Load targets a backend resolver by providing the inputs it responds to. It includes a component's query to request a particular subset of the available data and its (and children's) ident to normalize the data into the Client DB.
+LESSON: Load targets a backend resolver by providing the inputs it responds to. It includes a component's query to request a particular subset of the available data and its (and children's) ident to normalize the data into the Client DB. You can use the DB view to go back in history and look at the data and UI at any prior point.
 
 ----
 **TO BE CONTINUED**
 
-2. mutations
-3. DB - demonstrate going back in history b/c it is cool
+1. mutations
 ----
 
 ## Next steps
