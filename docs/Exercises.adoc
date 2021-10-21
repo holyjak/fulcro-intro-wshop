@@ -89,7 +89,7 @@ Now https://github.com/holyjak/fulcro-intro-wshop/blob/4992e994cb51bef46d6aaca5f
 
 4. In `ui.cljs`, under _Exercise 3.4_, execute the form `(binding ...)` and explore te output in Shadow Inspect - pay attention to the metadata maps `^{...}` preceding some query vectors.
 
-[#eql-primer]**EQL Primer**: An EQL query includes 1) _properties_ such as `:list/label`, 2) _joins_ of the form `{<property or ident> <query>}`, 3) or _idents_ such as `[:item/id 1]` to ask for the data of the entity with that ident (and we can again use a join to precise what data)
+[#eql-primer]**EQL Primer**: An EQL query includes 1) _properties_ such as `:list/label`, 2) _joins_ of the form `{<property or ident> <query>}`, 3) _idents_ such as `[:item/id 1]` to ask for the data of the entity with that ident (and we can again use a join to precise what data).
 
 LESSON: Components declare their data needs using `:query`, listing the properties they want. They _join_ in the query of each child using `get-query` to include the child's needs and thus to specify what properties of a nested data entity to include. The query also includes metadata that Fulcro needs for its processing.
 
@@ -180,6 +180,20 @@ In the previous exercise we have observed the _effect_ of the application loadin
 7. At the top left of the _DB_ tab, click on the `<` next to the slider a few times, until the list 2 and item 99 disappear from the DB. This way you can go back and forward in the history (and the UI, since it will always reflect the DB state - though there is nothing to see now).
 
 LESSON: Load targets a backend resolver by providing the inputs it responds to. It includes a component's query to request a particular subset of the available data and its (and children's) ident to normalize the data into the Client DB. You can use the DB view to go back in history and look at the data and UI at any prior point.
+
+### 8. Changing local and remote data with mutations
+
+To change state either in the frontend or in the backend, you "transact" (submit to the transaction subsystem) a mutation. A mutation is just data, namely the list `(<namespaced symbol> {<parameter key-value pairs>})`. You can register a "handler" for that symbol both on the frontend and backend using the Fulcro/Pathom `defmutation` macros. Let's trigger a mutation and explore it.
+
+1. Mark "Item 3" as complete by clicking to the left of it. This essentially triggers this DOM event handler (simplified):
++
+```clojure
+:onChange #(comp/transact! this [(api/todo-check {:id (:item/id props)})])
+```
++
+Note: The `todo-check` call simply returns a list of its name and parameters, as you will soon see
+2. Look at the transaction in the _Transactions_ tab and verify it indeed is a list
+3. Explore it in Fulcro Inspect's _Network_ tab
 
 ----
 **TO BE CONTINUED**

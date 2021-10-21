@@ -34,33 +34,33 @@
     {:tempids {id new-id}
      :item/id new-id}))
 
-(pc/defmutation todo-check [env {:keys [id list-id]}]
+(pc/defmutation todo-check [env {:keys [id]}]
   {::pc/sym    `fulcro-todomvc.api/todo-check
-   ::pc/params [:list-id :id]
+   ::pc/params [:id]
    ::pc/output []}
   (log/info "Checked item" id)
   (swap! item-db assoc-in [id :item/complete] true)
   {})
 
-(pc/defmutation todo-uncheck [env {:keys [id list-id]}]
+(pc/defmutation todo-uncheck [env {:keys [id]}]
   {::pc/sym    `fulcro-todomvc.api/todo-uncheck
-   ::pc/params [:list-id :id]
+   ::pc/params [:id]
    ::pc/output []}
   (log/info "Unchecked item" id)
   (swap! item-db assoc-in [id :item/complete] false)
   {})
 
-(pc/defmutation commit-label-change [env {:keys [id list-id text]}]
+(pc/defmutation commit-label-change [env {:keys [id text]}]
   {::pc/sym    `fulcro-todomvc.api/commit-label-change
-   ::pc/params [:list-id :id :text]
+   ::pc/params [:id :text]
    ::pc/output []}
   (log/info "Set item label text of" id "to" text)
   (swap! item-db assoc-in [id :item/label] text)
   {})
 
-(pc/defmutation todo-delete-item [env {:keys [id list-id]}]
+(pc/defmutation todo-delete-item [env {:keys [id]}]
   {::pc/sym    `fulcro-todomvc.api/todo-delete-item
-   ::pc/params [:list-id :id]
+   ::pc/params [:id]
    ::pc/output []}
   (log/info "Deleted item" id)
   (swap! item-db dissoc id)
@@ -72,25 +72,25 @@
            [id (f todo)]))
     db))
 
-(pc/defmutation todo-check-all [env {:keys [list-id]}]
+(pc/defmutation todo-check-all [env _]
   {::pc/sym    `fulcro-todomvc.api/todo-check-all
-   ::pc/params [:list-id]
+   ::pc/params []
    ::pc/output []}
   (log/info "Checked all items")
   (swap! item-db to-all-todos #(assoc % :item/complete true))
   {})
 
-(pc/defmutation todo-uncheck-all [env {:keys [list-id]}]
+(pc/defmutation todo-uncheck-all [env _]
   {::pc/sym    `fulcro-todomvc.api/todo-uncheck-all
-   ::pc/params [:list-id]
+   ::pc/params []
    ::pc/output []}
   (log/info "Unchecked all items")
   (swap! item-db to-all-todos #(assoc % :item/complete false))
   {})
 
-(pc/defmutation todo-clear-complete [env {:keys [list-id]}]
+(pc/defmutation todo-clear-complete [env _]
   {::pc/sym    `fulcro-todomvc.api/todo-clear-complete
-   ::pc/params [:list-id]
+   ::pc/params []
    ::pc/output []}
   (log/info "Cleared completed items")
   (swap! item-db (fn [db] (into {} (remove #(-> % val :item/complete)) db)))
