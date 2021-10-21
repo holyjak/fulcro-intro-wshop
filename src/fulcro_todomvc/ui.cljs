@@ -184,8 +184,13 @@
   ;; Exercise 5.4
   (tap> (app/current-state app))
 
-  ;; Exercise 7
-  (df/load! app [:item/id 1] nil)
+  ;; Exercise 7.1
+  (df/load! app [:list/id 2] TodoList)
+
+  ;; Exercise 9.1
+  (comp/transact! app [(api/todo-uncheck {:id 3})])
+  ;; Exercise 9.2
+  (comp/transact! app [(api/todo-check {:id 3})])
 
 
   )
