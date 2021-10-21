@@ -89,7 +89,7 @@ Now https://github.com/holyjak/fulcro-intro-wshop/blob/4992e994cb51bef46d6aaca5f
 
 4. In `ui.cljs`, under _Exercise 3.4_, execute the form `(binding ...)` and explore te output in Shadow Inspect - pay attention to the metadata maps `^{...}` preceding some query vectors.
 
-**EQL Primer**: An EQL query includes 1) _properties_ such as `:list/label`, 2) _joins_ of the form `{<property or ident> <query>}`, 3) or _idents_ such as `[:item/id 1]` to ask for the data of the entity with that ident (and we can again use a join to precise what data)
+[#eql-primer]**EQL Primer**: An EQL query includes 1) _properties_ such as `:list/label`, 2) _joins_ of the form `{<property or ident> <query>}`, 3) or _idents_ such as `[:item/id 1]` to ask for the data of the entity with that ident (and we can again use a join to precise what data)
 
 LESSON: Components declare their data needs using `:query`, listing the properties they want. They _join_ in the query of each child using `get-query` to include the child's needs and thus to specify what properties of a nested data entity to include. The query also includes metadata that Fulcro needs for its processing.
 
@@ -128,13 +128,64 @@ Notice that you are looking at the very _same data_ that you can see in Fulcro I
 
 LESSON: We saw how data is stored in the client DB mostly in a normalized form (`<entity name>/id -> <id value> -> <map of props, with idents as values to link to other entities>`) and how idents are used to link entities together. We have experienced how Fulcro fulfills a query by "walking" the client DB. We have seen that the client DB is nothing else than a map (of maps of maps, mostly).
 
-----
+### 6. Loading data from the server
 
+Where does the todo list data come from? From the server, as we will see. But first, let's review what the frontend part of a Fulcro application looks like:
+
+.Fulcro overview
+image::images/fulcro-system-view.svg["Fulcro overview",400]
+
+Remember that any "request for a change" passes through the "asynchronous" transaction subsystem (marked _Tx_) and that this includes both queries - i.e. data loads - and mutations. Notice also that EQL queries are used both for getting the props tree from the Client DB (not shown in the figure) and for loading data from the backend into the Client DB. Let's see how the loading looks in practice.
+
+1. In Fulcro Inspect, open the _Transactions_ tab. You should see a single transaction there, a [.underline]#LOAD#, and its EQL query. Explore the query. +
+Tip: If you do not see the transaction then try to hard-reload the browser tab.
+2. Click on the transaction (i.e. mutation) to see its details. Notice that the transaction is simply data, of the form `(<fully qualified symbol> {options...})`. Let's explore the details of its query. +
+   Note: Sadly, the _Diff added_ / _Diff removed_ does not work in the current version of Fulcro Inspect, so ignore it.
+3. Open Fulcro Inspect's _Network_ tab (not the browser's!). You should see a single _Request_ with the load's query. Click it to see its details and the _Response_ and notice how the response data tree mirrors the EQL query.
+4. Now click the _[Send to query]_ button next to the Response in the details, which will send you to the _EQL_ tab. Once there, press also the _[(Re)load Pathom Index]_ button to the very right (for autocompletion) and then the _[Run EQL]_ button next to it. Here we can play with EQL queries that the backend can answer.
+5. Play with the query. Delete some attributes (keywords), add a made-up attribute and run it again. Replace the `{:list/items ...}` join with just the plain `:list/items` attribute and re-run^1^. (Note: The data is returned primarily by the https://github.com/holyjak/fulcro-intro-wshop/blob/37c467a3ad69598c37034ad1eb372d31b5be91b2/src/fulcro_todomvc/server.clj#L100[`list-resolver`].)
+6. Review the <<eql-primer,EQL Primer>> above
+7. Change the query to the ident query `[[:item/id 1]]`. What do you get back?
+8. Change the plain ident query to a join, to specify the details of what you want from the item, run. (See ^2^ below for help.)
+9. [Optional] Open the _Index Explorer_ tab and click its _[Load index]_ button. Then collapse the _▼ Attributes_ section so that you will see the _Resolvers_ and click e.g. the `.../list-resolver`. Here you can see all the resolvers defined on the server, what input they need, and what attributes they can output.
+
+^1^) Nothing changed, you still get all the items details - because that is Pathom's default behavior. +
+^2^) The query thus becomes `[ {[:item/id 1] [<some item attributes...>]} ]`
+
+LESSON: EQL queries are used both to turn data from the Client DB into a props tree and to load data from the backend into the Client DB. All changes in the application, including loading data, pass through the transaction subsystem and thus show up in the _Transactions_ view of Fulcro Inspect. You have further used the _Network_ tab to see both the load request and response. Finally, you have used the _EQL_ tab to experiment with crafting different queries that the server could resolve.
+
+### 7. Loading data from the REPL
+
+In the previous exercise we have observed the _effect_ of the application loading its data. Now we will trigger the load ourselves from the code, in the same manner that the application https://github.com/holyjak/fulcro-intro-wshop/blob/main/src/fulcro_todomvc/main.cljs#L13[does in its startup code].
+
+1. Go to `ui.cljs` and evaluate the `df/load!` form marked _Exercise 7.1_ +
+   (Note: df/load! is just a helper function that eventually transacts a mutation)
+2. Notice that it only returns a uuid of the submitted transaction, which is executed asynchronously
+3. Also notice that we pass it the ident of the thing we want to load and a component - internally, Fulcro will `(comp/get-query <the component>)`, and this is the query we can see sent to the backend.
+4. Check that you can see the transaction in the Fulcro Inspect _Transactions_ tab and explore the request and response in its _Network_ tab.
+ * Notice that the ident and the query of the component that you supplied to `df/load!` have been combined into a join query - which the backend can resolve because it https://github.com/holyjak/fulcro-intro-wshop/blob/37c467a3ad69598c37034ad1eb372d31b5be91b2/src/fulcro_todomvc/server.clj#L100[has the `list-resolver`] that takes a `:list/id` and returns its data
+5. Go to _Fulcro Inspect - DB_ and expand `:list/id` to verify the list `2` has been added there. Then expand `:item/id` to verify that the item `99` has also been added there.
+6. Notice that Fulcro has placed each _data entity_ - both list and item - into their correct "tables" (`:list/id` and `:item/id`, respectively) and that the list links to the item using its ident. I.e. Fulcro has normalized the incoming data tree into the Client DB's "entity tables". That is only possible because both `TodoList` and `TodoItem` declare their `:ident` and thanks to the metadata linking each (sub)query to the component it comes from:
++
+```clojure
+(defsc TodoItem [_ _]
+  {:ident :item/id, :query [:item/id :item/label ...]}
+  ...)
+
+(defsc TodoList [_ _]
+  {:ident :list/id
+   :query [:list/id :list/title {:list/items (get-query TodoItem)} ...]}
+  ...)
+```
+
+LESSON: Load targets a backend resolver by providing the inputs it responds to. It includes a component's query to request a particular subset of the available data and its (and children's) ident to normalize the data into the Client DB.
+
+----
 **TO BE CONTINUED**
 
-1. load!-ing data from the server, transactions
 2. mutations
 3. DB - demonstrate going back in history b/c it is cool
+----
 
 ## Next steps
 

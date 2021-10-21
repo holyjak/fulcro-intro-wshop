@@ -1,6 +1,7 @@
 (ns fulcro-todomvc.ui
   (:require
     [com.fulcrologic.fulcro.application :as app]
+    [com.fulcrologic.fulcro.data-fetch :as df]
     [com.fulcrologic.fulcro.algorithms.tempid :as tmp]
     [com.fulcrologic.fulcro.algorithms.denormalize :as fdn]
     [com.fulcrologic.fulcro.components :as comp :refer [defsc]]
@@ -182,6 +183,9 @@
 
   ;; Exercise 5.4
   (tap> (app/current-state app))
+
+  ;; Exercise 7
+  (df/load! app [:item/id 1] nil)
 
 
   )

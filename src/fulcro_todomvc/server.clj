@@ -96,15 +96,28 @@
   (swap! item-db (fn [db] (into {} (remove #(-> % val :item/complete)) db)))
   {})
 
+;; Support for Fulcro Inspect - Index Explorer
+(pc/defresolver index-explorer
+  "This resolver is necessary to make it possible to use 'Load index' in Fulcro Inspect - EQL"
+  [env _]
+  {::pc/input  #{:com.wsscode.pathom.viz.index-explorer/id}
+   ::pc/output [:com.wsscode.pathom.viz.index-explorer/index]}
+  {:com.wsscode.pathom.viz.index-explorer/index
+   (-> (get env ::pc/indexes)
+       (update ::pc/index-resolvers #(into {} (map (fn [[k v]] [k (dissoc v ::pc/resolve)])) %))
+       (update ::pc/index-mutations #(into {} (map (fn [[k v]] [k (dissoc v ::pc/mutate)])) %)))})
+
 ;; How to go from :list/id to that list's details
-(pc/defresolver list-resolver [env params]
+(pc/defresolver list-resolver [env {id :list/id :as params}]
   {::pc/input  #{:list/id}
    ::pc/output [:list/title {:list/items [:item/id]}]}
   ;; normally you'd pull the list from the db, and satisfy the listed
   ;; outputs. For demo, we just always return the same list details.
-  {:list/title "The List"
-   :list/items (into []
-                 (sort-by :item/label (vals @item-db)))})
+  (case id
+    1 {:list/title "The List"
+       :list/items (into [] (sort-by :item/label (vals @item-db)))}
+    2 {:list/title "Another List"
+       :list/items [{:item/id 99, :item/label "Hardcoded item", :item/complete true}]}))
 
 ;; how to go from :item/id to item details.
 (pc/defresolver item-resolver [env {:keys [item/id] :as params}]
@@ -113,7 +126,10 @@
   (get @item-db id))
 
 ;; define a list with our resolvers
-(def my-resolvers [list-resolver item-resolver
+(def my-resolvers [index-explorer
+                   ;; app resolvers:
+                   list-resolver item-resolver
+                   ;; mutations:
                    todo-new-item commit-label-change todo-delete-item
                    todo-check todo-uncheck
                    todo-check-all todo-uncheck-all
@@ -148,7 +164,7 @@
                   wrap-content-type
                   wrap-not-modified))
 
-(def server (atom nil))
+(defonce server (atom nil))
 
 (defn http-server []
   (let [result (web/run middleware {:host "0.0.0.0"
