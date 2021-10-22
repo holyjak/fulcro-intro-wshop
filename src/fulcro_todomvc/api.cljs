@@ -47,7 +47,7 @@
 (defmutation todo-check
   "Check the given item, by id."
   [{:keys [id]}]
-  (action [{:keys [state]}]
+  (action [{:keys [state]}] ; <- `state` is the atom holding the Client DB
     (swap! state set-item-checked* id true))
   (remote [_] true))
 
