@@ -194,16 +194,16 @@ To change state either in the frontend or in the backend, you "transact" (submit
 Note: The `todo-check` call simply returns the surrounding list, quoted
 2. Look at the transaction in the _Transactions_ tab and verify it indeed is a list
 3. Explore it in Fulcro Inspect's _Network_ tab
-4. Read the https://github.com/holyjak/fulcro-intro-wshop/blob/d6fd2965af36046e9ffe8279b521fec6e3151fc5/src/fulcro_todomvc/api.cljs#L47[frontend Fulcro defmutation] code. The `action` is performed to handle the mutation on the frontend while `(remote [_] true)` instructs Fulcro to also send the mutation to the backend (as we have seen in the Network tab)
-5. Read the https://github.com/holyjak/fulcro-intro-wshop/blob/ee34d8fbf300be221e36244384d36704a051693e/src/fulcro_todomvc/server.clj#L37[backend Pathom defmutation] code. 
- * It explicitly sets its symbol `::pc/sym` to match what the frontend is sending (otherwise it would default to `<current ns>/<its name>`, i.e. `fulcro-todomvc.server/todo-check`)
+4. Read the https://github.com/holyjak/fulcro-intro-wshop/blob/5412e1117d498bfa91241a1c16fe9cc25b72c996/src/fulcro_todomvc/api.cljs#L47[frontend Fulcro defmutation] code. The `action` is performed to handle the mutation on the frontend while `(remote [_] true)` instructs Fulcro to also send the mutation to the backend (as we have seen in the Network tab)
+5. Read the https://github.com/holyjak/fulcro-intro-wshop/blob/5412e1117d498bfa91241a1c16fe9cc25b72c996/src/fulcro_todomvc/server.clj#L37[backend Pathom defmutation] code
+ * It explicitly sets its symbol `::pc/sym` to match what the frontend is sending (otherwise it would default to `<current ns>/<its name>`, i.e. `fulcro-todomvc.server/todo-check`, and not be executed to handle this mutation)
  * It updates the server-side "db" and returns an empty map (as we have seen in the Network tab)
 
 LESSON: A mutation is data that can have a handler associated on the frontend and backend. The frontend handler action updates the Client DB and the mutation is then sent to the backend as an EQL transaction iff it is marked as remote. The backend handler gets the same parameters (plus the general pathom environment) and typically updates a data store. 
 
 ### 9. Triggering a mutation manually
 
-As always in Fulcro, we do not need to click around but we can trigger the mutation from the REPL.
+As always in Fulcro, we do not need to click around and we can trigger the mutation from the REPL.
 
 1. Go to `ui.cljs` and eval the form marked _Exercise 9.1_
 2. Observe that the UI now shows the item as not completed
