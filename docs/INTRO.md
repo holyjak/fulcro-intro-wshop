@@ -2,8 +2,9 @@
 
 _Disclaimer: I'm not going to talk about WHY things are they way they are. Read https://fulcro-community.github.io/guides/tutorial-minimalist-fulcro/index.html#_why_fulcro to learn about that._
 
-Fulcro is a full-stack web framework for a _graph API_. These are the key parts:
+Fulcro is a full-stack web framework for a _graph API_. Let's unpack that:
 
+* Full-stack = both _frontend_ and some _backend_ integration
 * On the _frontend_ we have a **UI** tree composed of React _components_
 * It talks to a **graph API** on the _backend_ to query for data and to effect _mutations_ (changes)
   * A single endpoint (x REST)
