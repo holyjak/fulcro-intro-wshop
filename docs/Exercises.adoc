@@ -110,7 +110,7 @@ and includes this in its query instead of just `:list/items`. Let's visualize ho
 .Query composition
 image::images/query-composition.svg["Query composition",250]
 +
-Now https://github.com/holyjak/fulcro-intro-wshop/blob/4992e994cb51bef46d6aaca5f7515da9c9536fb0/src/fulcro_todomvc/ui.cljs#L123[look at the code] to see how the child's query is included - it is not simply pasted in the parent, it is included via `(comp/get-query TodoItem)`. This is important because it brings with it some important metadata. Let's have a look at it:
+Now https://github.com/holyjak/fulcro-intro-wshop/blob/ccad99e8af91882c0091bedf8bd353689353a82e/src/fulcro_todomvc/ui.cljs#L126[look at the code] to see how the child's query is included - it is not simply pasted in the parent, it is included via `(comp/get-query TodoItem)`. This is important because it brings with it some important metadata. Let's have a look at it:
 
 5. In `ui.cljs`, under _Exercise 3.5_, execute the form `(binding ...)` and explore the output in Shadow Inspect
  * The output is a string and thus displayed in a single line, making it hard to read. Fortunately you only need to notice the metadata maps `^{...}` preceding some query vectors
@@ -171,7 +171,7 @@ Tip: If you do not see the transaction then try to hard-reload the browser tab.
    Note: Sadly, the _Diff added_ / _Diff removed_ does not work in the current version of Fulcro Inspect, so ignore it.
 3. Open Fulcro Inspect's _Network_ tab (not the browser's!). You should see a single _Request_ with the load's query. Click it to see its details and the _Response_ and notice how the response data tree mirrors the EQL query.
 4. Now click the _[Send to query]_ button next to the Request in the details, which will send you to the _EQL_ tab. Once there, press also the _[(Re)load Pathom Index]_ button to the very right (for autocompletion) and then the _[Run EQL]_ button next to it. Here we can play with EQL queries that the backend can answer.
-5. Play with the query. Delete some attributes (keywords), add a made-up attribute and run it again. Replace the `{:list/items ...}` join with just the plain `:list/items` attribute and re-run. (Note: The data is returned primarily by the https://github.com/holyjak/fulcro-intro-wshop/blob/37c467a3ad69598c37034ad1eb372d31b5be91b2/src/fulcro_todomvc/server.clj#L100[`list-resolver`].)
+5. Play with the query. Delete some attributes (keywords), add a made-up attribute and run it again. Replace the `{:list/items ...}` join with just the plain `:list/items` attribute and re-run. (Note: The data is returned primarily by the https://github.com/holyjak/fulcro-intro-wshop/blob/ccad99e8af91882c0091bedf8bd353689353a82e/src/fulcro_todomvc/server.clj#L111[`list-resolver`].)
  * As you have noticed, Pathom by default returns all attributes of a _nested entity_ if you do not declare what you want using a join
 6. Review the <<eql-primer,EQL Primer>> above
 7. Replace the whole query with the ident query `[[:item/id 1]]`. What do you get back?
@@ -187,14 +187,14 @@ LESSON: EQL queries are used both to turn data from the Client DB into a props t
 
 ### 7. Loading data from the REPL
 
-In the previous exercise we have observed the _effect_ of the application loading its data. Now we will trigger the load ourselves from the code, in the same manner that the application https://github.com/holyjak/fulcro-intro-wshop/blob/main/src/fulcro_todomvc/main.cljs#L13[does in its startup code].
+In the previous exercise we have observed the _effect_ of the application loading its data. Now we will trigger the load ourselves from the code, in the same manner that the application https://github.com/holyjak/fulcro-intro-wshop/blob/ccad99e8af91882c0091bedf8bd353689353a82e/src/fulcro_todomvc/main.cljs#L13[does in its startup code].
 
 1. Go to `ui.cljs` and evaluate the `df/load!` form marked _Exercise 7.1_ +
    (Note: df/load! is just a helper function that eventually transacts a Fulcro mutation (the Fulcro and Pathom concept of a mutation diverge slightly and not all F. mutations are P. mutations but let's ignore that for now))
  * Notice that it only returns a uuid of the submitted transaction, which is executed asynchronously
  * Also notice that we pass it the ident of the thing we want to load and a component - internally, Fulcro will call `(comp/get-query <the component>)`
 2. Check that you can see the transaction in the Fulcro Inspect _Transactions_ tab and explore the request and response in its _Network_ tab.
- * Notice that the ident and the query of the component that you supplied to `df/load!` have been combined into a join query - which the backend can resolve because it https://github.com/holyjak/fulcro-intro-wshop/blob/0fbae263cef4a5a8e0c7b2d770fa544771576135/src/fulcro_todomvc/server.clj#L111[has the `list-resolver`] that takes a `:list/id` and returns its data
+ * Notice that the ident and the query of the component that you supplied to `df/load!` have been combined into a join query - which the backend can resolve because it https://github.com/holyjak/fulcro-intro-wshop/blob/ccad99e8af91882c0091bedf8bd353689353a82e/src/fulcro_todomvc/server.clj#L111[has the `list-resolver`] that takes a `:list/id` and returns its data
  * Notice the shape of the response - it is a tree
 3. Go to _Fulcro Inspect - DB_ and expand `:list/id` to verify the list `2` has been added there. Then expand `:item/id` to verify that the item `99` has also been added and item 1 updated
  * Notice the shape of the data in the client DB: is it exactly the same as the response (a single tree) or not?
@@ -226,10 +226,10 @@ To change state either in the frontend or in the backend, you "transact" (submit
 Note: The `todo-check` call simply returns the surrounding list, quoted
 2. Look at the transaction in the _Transactions_ tab and verify it indeed is a list
 3. Explore it in Fulcro Inspect's _Network_ tab
-4. Read the https://github.com/holyjak/fulcro-intro-wshop/blob/5412e1117d498bfa91241a1c16fe9cc25b72c996/src/fulcro_todomvc/api.cljs#L47[frontend Fulcro defmutation] code.
+4. Read the https://github.com/holyjak/fulcro-intro-wshop/blob/ccad99e8af91882c0091bedf8bd353689353a82e/src/fulcro_todomvc/api.cljs#L47[frontend Fulcro defmutation] code.
  * `action` is performed to handle the mutation on the frontend 
  * `(remote [_] true)` instructs Fulcro to also send the mutation to the backend (as we have seen in the Network tab)
-5. Read the https://github.com/holyjak/fulcro-intro-wshop/blob/5412e1117d498bfa91241a1c16fe9cc25b72c996/src/fulcro_todomvc/server.clj#L37[backend Pathom defmutation] code
+5. Read the https://github.com/holyjak/fulcro-intro-wshop/blob/ccad99e8af91882c0091bedf8bd353689353a82e/src/fulcro_todomvc/server.clj#L37[backend Pathom defmutation] code
  * It explicitly sets its symbol `::pc/sym` to match what the frontend is sending (otherwise it would default to `<current ns>/<its name>`, i.e. `fulcro-todomvc.server/todo-check`, and not be executed to handle this mutation)
  * It updates the server-side "db" and returns an empty map (as we have seen in the Network tab)
 
