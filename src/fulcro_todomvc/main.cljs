@@ -10,7 +10,8 @@
 
 (defn ^:export start []
   (app/mount! app ui/Root "app")
-  (df/load! app [:list/id 1] ui/TodoList)
+  (df/load! app [:list/id 1] ui/TodoList
+    {:target [:root/current-list]})
   (log/merge-config! {:output-fn prefix-output-fn
                       :appenders {:console (console-appender)}}))
 

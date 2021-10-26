@@ -115,9 +115,11 @@
   ;; outputs. For demo, we just always return the same list details.
   (case id
     1 {:list/title "The List"
-       :list/items (into [] (sort-by :item/label (vals @item-db)))}
+       :list/items (into [] (sort-by :item/id (vals @item-db)))}
     2 {:list/title "Another List"
-       :list/items [{:item/id 99, :item/label "Hardcoded item", :item/complete true}]}))
+       :list/items [{:item/id 99, :item/label "Hardcoded item", :item/complete true}
+                    (assoc (get @item-db 1)
+                      :item/label "Item 1 - re-loaded from server")]}))
 
 ;; how to go from :item/id to item details.
 (pc/defresolver item-resolver [env {:keys [item/id] :as params}]

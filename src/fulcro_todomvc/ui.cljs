@@ -122,8 +122,7 @@
               :target "_blank"} "TodoMVC"))))
 
 (defsc TodoList [this {:list/keys [id items filter title] :as props}]
-  {:initial-state {:list/id 1 :ui/new-item-text "" :list/items [] :list/title "main" :list/filter :list.filter/none}
-   :ident         :list/id
+  {:ident         :list/id
    :query         [:list/id :ui/new-item-text {:list/items (comp/get-query TodoItem)} :list/title :list/filter]}
   (let [num-todos       (count items)
         completed-todos (filterv :item/complete items)
@@ -154,11 +153,10 @@
 
 (def ui-todo-list (comp/factory TodoList))
 
-(defsc Root [this {:root/keys [todo] :as props}]
-  {:initial-state {:root/todo {}}
-   :query         [{:root/todo (comp/get-query TodoList)}]}
+(defsc Root [this {:root/keys [current-list] :as props}]
+  {:query         [{:root/current-list (comp/get-query TodoList)}]}
   (dom/div {}
-    (ui-todo-list todo)))
+    (ui-todo-list current-list)))
 
 (comment
   ;; Exercise 3.1
@@ -167,8 +165,9 @@
   (-> (comp/ident->components app [:item/id 1])
       first
       (comp/props)
+      ;; BEWARE: Open Shadow-cljs Inspect to see the output, see the instructions
       (tap>))
-  ;; _Exercise 3.4
+  ;; _Exercise 3.5
   (binding [*print-meta* true] (tap> (pr-str (comp/get-query TodoList))))
 
   ;; Exercise 4.1
