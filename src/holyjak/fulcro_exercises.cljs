@@ -161,10 +161,10 @@
     ;; - Understand merge! as a crucial step on the path to load!
     ;;
     ;; RESOURCES:
-    ;; - the docs for merge-component! (https://fulcro-community.github.io/guides/tutorial-minimalist-fulcro/#_pre_study_merging_data_into_the_client_db_with_merge_component)
-    ;;   are relevant because merge! is very similar to merge-component! but for the Root instead of
-    ;;   some child component (and without the need for an ident)
-    ;; - https://book.fulcrologic.com/#_using_com_fulcrologic_fulcro_componentsmerge
+    ;; - the intro to merge-component! (https://fulcro-community.github.io/guides/tutorial-minimalist-fulcro/#_pre_study_merging_data_into_the_client_db_with_merge_component)
+    ;;   is relevant because merge! behaves very similary to merge-component! - the difference is that it works for the Root instead of
+    ;;   some child component and it takes a query instead of a component (because it doesn't need an ident)
+    ;; - merge! docs: https://book.fulcrologic.com/#_using_com_fulcrologic_fulcro_componentsmerge
     (defsc Root4 [_ _]
       {}
       "TODO")
@@ -257,7 +257,7 @@
     ;; 4. Rewrite the code to use merge/merge-component! instead.
     ;;    What is the correct target component? How to make sure the data looks
     ;;    just like before?
-    ;;   Really try your best to get the make the right merge-component! call!
+    ;;   Really try your best to make the right merge-component! call!
     ; (hint 5)
     ; (hint 5)
     ; (hint 5)
