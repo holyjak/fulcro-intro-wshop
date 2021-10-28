@@ -1,16 +1,20 @@
-# Exercises
+# Workshop
 
-Workshop exercises.
+By now, the https://github.com/holyjak/fulcro-intro-wshop/blob/main/docs/INTRO.md[brief introduction to Fulcro] should have been presented to you. Keep the document at hand because you might want to refer to it again during the workshop.
 
-(You might want to refer back to the link:./INTRO.md[INTRO.md] so keep it open somewhere.)
+## Part 1: App exercises
 
-## Setup
+These interactive exercises introduce you to Fulcro concepts and the way of working with a Fulcro application
+
+### Setup
 
 Start by http://localhost:8181[opening the application] in the browser and opening the browser Dev Tools.
 
-TIP: It might be easier to read this rendered, for example by looking at in the browser: https://github.com/holyjak/fulcro-intro-wshop/blob/main/docs/Exercises.adoc
+Make sure that Calva is connected to the REPL, with the server started, as described in link:./https://github.com/holyjak/fulcro-intro-wshop/blob/main/README.md#running-the-app-from-vs-code-with-calva[Readme: Running the app from VS Code with Calva].
 
-### Recommended window layout
+TIP: It might be easier to read this rendered, for example by looking at in the browser: https://github.com/holyjak/fulcro-intro-wshop/blob/main/docs/Workshop.adoc
+
+#### Recommended window layout
 
 It is best to lay out your windows so that you can always see the exercises and then either the webapp or Calva (except of the last exercise, where we need both Calva and the webapp):
 
@@ -18,17 +22,18 @@ It is best to lay out your windows so that you can always see the exercises and 
 |===
 | Left window | Right window
 
-| https://github.com/holyjak/fulcro-intro-wshop/blob/main/docs/Exercises.adoc[Exercises] tab | 
+| https://github.com/holyjak/fulcro-intro-wshop/blob/main/docs/Workshop.adoc#exercises[Exercises] tab | 
 http://localhost:8181[Webapp] tab + http://localhost:9630/inspect-latest[Shadow-Cljs] tab +
 or +
 Calva
 |===
 
-## Exercises
+[#exercises]
+### Exercise instructions
 
 Note: You have about 5 - 10 minutes per exercise.
 
-### 1. Component tree
+#### 1. Component tree
 
 1. Open the React dev tools' **Components tab**
 2. Explore the tree of the components displayed
@@ -60,7 +65,7 @@ The following code is a simplified version of the code defining the UI:
 
 LESSON: The UI is indeed a tree of components: `Root > TodoList > TodoItem`.
 
-### 2. Component props and query
+#### 2. Component props and query
 
 React dev tools cannot show us the props of the component because it is a ClojureScript data structure. Let's have a look at them using Fulcro Inspect!
 
@@ -79,7 +84,7 @@ React dev tools cannot show us the props of the component because it is a Clojur
 
 LESSON: We have learned to use _Fulcro Inspect - Element_ to explore a component and we have learned that it has props, ident, and a query. We saw that the props mirror what is specified in the query.
 
-### 3. Exploring the query
+#### 3. Exploring the query
 
 The query of a component declares its data needs and Fulcro uses it to build the props for the component. We have seen it using Fulcro Inspect - Element, now we will explore it using the REPL.
 
@@ -119,7 +124,7 @@ Now https://github.com/holyjak/fulcro-intro-wshop/blob/ccad99e8af91882c0091bedf8
 
 LESSON: Components declare their data needs using `:query`, listing the properties they want. They _join_ in the query of each child using `get-query` to include the child's needs and thus to specify what properties of a nested data entity to include. The query also includes metadata that Fulcro needs for its processing.
 
-### 4. Root query
+#### 4. Root query
 
 Despite a common misconception, Fulcro does not supply props to every and each component individually. It only supplies props to the root component - and it uses only the root query, which composes the queries of its children and so on, as we have seen. So let's have a look at the query and how it is turned into a props tree.
 
@@ -129,7 +134,7 @@ Despite a common misconception, Fulcro does not supply props to every and each c
 
 LESSON: The Root query is turned to a props tree using the client DB. Shadow Inspect is a fine tool for looking at complex data.
 
-### 5. Exploring the client DB
+#### 5. Exploring the client DB
 
 This is the Root query: 
 
@@ -155,7 +160,7 @@ We will use it to navigate the client DB to see how Fulcro builds the props tree
 
 LESSON: We saw how data is stored in the client DB mostly in a normalized form (`<entity name>/id -> <id value> -> <map of props, with idents as values to link to other entities>`) and how idents are used to link entities together. We have experienced how Fulcro fulfills a query by "walking" the client DB. We have seen that the client DB is nothing else than a map (of maps of maps, mostly).
 
-### 6. Loading data from the server
+#### 6. Loading data from the server
 
 Where does the current-list list data come from? From the server, as we will see. But first, let's review what the frontend part of a Fulcro application looks like:
 
@@ -185,7 +190,7 @@ Tip: If you do not see the transaction then try to hard-reload the browser tab.
 
 LESSON: EQL queries are used both to turn data from the Client DB into a props tree and to load data from the backend into the Client DB. All changes in the application, including loading data, pass through the transaction subsystem and thus show up in the _Transactions_ view of Fulcro Inspect. You have further used the _Network_ tab to see both the load request and response. Finally, you have used the _EQL_ tab to experiment with crafting different queries that the server could resolve.
 
-### 7. Loading data from the REPL
+#### 7. Loading data from the REPL
 
 In the previous exercise we have observed the _effect_ of the application loading its data. Now we will trigger the load ourselves from the code, in the same manner that the application https://github.com/holyjak/fulcro-intro-wshop/blob/ccad99e8af91882c0091bedf8bd353689353a82e/src/fulcro_todomvc/main.cljs#L13[does in its startup code].
 
@@ -213,7 +218,7 @@ In the previous exercise we have observed the _effect_ of the application loadin
 
 LESSON: Load targets a backend resolver by providing the inputs it responds to. It includes a component's query to request a particular subset of the available data and uses the component's (and children's) ident to normalize the data into the Client DB. 
 
-### 8. Changing local and remote data with mutations
+#### 8. Changing local and remote data with mutations
 
 To change state either in the frontend or in the backend, you "transact" (submit to the transaction subsystem) a mutation. A mutation is just data, namely a list of `(<namespaced symbol> {<parameter key-value pairs>})`. You can register a "handler" for that symbol both on the frontend and backend using the Fulcro/Pathom `defmutation` macros. Let's trigger a mutation and explore it.
 
@@ -235,7 +240,7 @@ Note: The `todo-check` call simply returns the surrounding list, quoted
 
 LESSON: A mutation is data that can have a handler associated on the frontend and backend. The frontend handler action updates the Client DB and the mutation is then sent to the backend as an EQL transaction iff it is marked as remote. The backend handler gets the same parameters (plus the general pathom environment) and typically updates a data store. 
 
-### 9. Triggering a mutation manually
+#### 9. Triggering a mutation manually
 
 As always in Fulcro, we do not need to click around and we can trigger the mutation from the REPL.
 
@@ -251,7 +256,7 @@ As always in Fulcro, we do not need to click around and we can trigger the mutat
 
 LESSON: Mutations can be local-only or both local and remote. You can use the DB view to go back in history and look at the data and UI at any prior point in time.
 
-## Summary - lessons learned
+### Summary - lessons learned
 
 1. UI is a tree of components
 2. A component declares its data needs using `:query` and identifies the ID attribute using `:ident`
@@ -266,6 +271,39 @@ LESSON: Mutations can be local-only or both local and remote. You can use the DB
 11. There is superb tooling in Fulcro Inspect and Shadow Inspect
 12. Fulcro is REPL-friendly - almost everything can be done from the REPL
 
-## Next steps
+## Interlude: Questions and answers
 
-If you want to learn more Fulcro, study the https://fulcro-community.github.io/guides/tutorial-minimalist-fulcro/[Minimalist Fulcro Tutorial] and do the accompanying exercises.
+Now is the time to ask any questions you might have, before we proceed to the final part.
+
+## Part 2: Coding exercises
+
+You will now get the chance to test your understanding of Fulcro concepts by completing coding exercises
+(included from https://github.com/fulcro-community/fulcro-exercises[fulcro-exercises]).
+
+### Setup
+
+1. Stop the running todomvc REPL (either by clicking `REPL` in VS Code's bottom toolbar or running _Calva: Disconnect from the REPL Server_).
+2. Start REPL for the exercises:
+  .. In the menu _View - Command Palette... - Calva: Start a Project REPL and Connect (aka Jack-In)_
+  .. Select _shadow-cljs_
+  .. Select (only!) `:coding` for the aliases to launch with
+  .. Wait a few seconds, then select `:coding` for the build to connect to
+3. Navigate to http://localhost:9001
+4. Open `src/holyjak/fulcro_exercises.cljs`, read the ns docstring and then work through it from top to bottom, following the `;; TASK` instructions
+5. You might need to refer to the https://fulcro-community.github.io/guides/tutorial-minimalist-fulcro/[Minimalist Fulcro Tutorial] to refresh your knowledge or fill in any gaps
+
+### Help
+
+#### Troubleshooting and getting help during the exercises
+
+Use repeatedly `(hint <exercise number>)` (as long as there are any more hints for the exercise) to get useful tips when you get stuck.
+
+Leverage the [Fulcro Troubleshooting Decision Tree](https://blog.jakubholy.net/2020/troubleshooting-fulcro/) to help you troubleshoot your problems.
+
+Leverage Fulcro Inspect (especially the DB and perhaps Element tabs), check the Chrome JS Console for warnings and errors.
+
+#### Various problems and solutions
+
+##### Fulcro Inspect shows an empty client DB
+
+It might help to close it, reload the page, then open it again.

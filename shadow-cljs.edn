@@ -8,5 +8,13 @@
                          :dev        {:compiler-options {:external-config {:guardrails {}}}}
                          :modules    {:main {:entries [fulcro-todomvc.main]}}
                          :devtools   {:preloads [com.fulcrologic.fulcro.inspect.preload
-                                                 com.fulcrologic.fulcro.inspect.dom-picker-preload]}}}}
+                                                 com.fulcrologic.fulcro.inspect.dom-picker-preload]}}
+            :coding     {:target     :browser
+                         :output-dir "resources/public/js"
+                         :asset-path "/js"
+                         :dev        {:compiler-options {:external-config {:guardrails {}}}}
+                         :modules    {:main {:init-fn holyjak.fulcro-exercises/init}}
+                         :devtools   {:preloads [com.fulcrologic.fulcro.inspect.preload
+                                                 com.fulcrologic.fulcro.inspect.dom-picker-preload]
+                                      :after-load holyjak.fulcro-exercises.impl/refresh}}}}
 
