@@ -1,5 +1,5 @@
-Workshop: Introduction to Fulcro
-================================
+Workshop: Introduction to creating webapps with Fulcro
+======================================================
 
 An online workshop held as a part of [re:Clojure 2021](https://www.reclojure.org/) on December 1st, 3-5pm GMT. See the [workshop Eventbrite page](https://www.eventbrite.com/e/reclojure-introduction-to-fulcro-workshop-tickets-188718210247) for details and registration.
 
