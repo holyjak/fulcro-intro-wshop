@@ -178,7 +178,7 @@
     ; (hint 4)
     ,))
 
-(comment ; 5 "Normalization and merge-component!"
+(comment ; 5 "Normalization and merge! and merge-component!"
   (do
     ;; TASK:
     ;; Let's see how to insert data into the client DB for our UI to display!
@@ -201,6 +201,7 @@
     ;; - https://fulcro-community.github.io/guides/tutorial-minimalist-fulcro/#_components_query
     ;; - https://fulcro-community.github.io/guides/tutorial-minimalist-fulcro/#_components_ident
     ;; - https://fulcro-community.github.io/guides/tutorial-minimalist-fulcro/#_pre_study_merging_data_into_the_client_db_with_merge_component
+    ;;   + https://fulcro-community.github.io/guides/tutorial-minimalist-fulcro/#_targeting_adding_references_to_the_new_data_to_existing_entities
     ;; - https://book.fulcrologic.com/#_using_mergemerge_component
     (defsc Address [_ {city :address/city}]
       {:query [:address/city]}
@@ -328,7 +329,7 @@
         (div (h2 "Team " name ":")
              (label (input {:type    "checkbox"
                             :checked all-checked?
-                            :onClick #(println "TODO: trigger the mutation `(set-players-checked {:players (map :player/id players) :value   (not all-checked?)})`")})
+                            :onClick #(println "TODO: trigger the mutation `(set-players-checked {:players (map :player/id players) :value (not all-checked?)})`")})
                     "Select all")
              (ol (map ui-player players)))))
 

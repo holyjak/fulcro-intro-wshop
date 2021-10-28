@@ -292,6 +292,18 @@ You will now get the chance to test your understanding of Fulcro concepts by com
 4. Open `src/holyjak/fulcro_exercises.cljs`, read the ns docstring and then work through it from top to bottom, following the `;; TASK` instructions
 5. You might need to refer to the https://fulcro-community.github.io/guides/tutorial-minimalist-fulcro/[Minimalist Fulcro Tutorial] to refresh your knowledge or fill in any gaps
 
+[IMPORTANT]
+==== 
+The exercises rely on some knowledge that the workshop does not provide so check carefully the `RESOURCES` section of each task and make sure you ± understand those. This applies especially to:
+
+* Ex.1: https://fulcro-community.github.io/guides/tutorial-minimalist-fulcro/#_rendering_dom_the_body_of_a_component[Creating DOM elements]
+* Ex.5: https://fulcro-community.github.io/guides/tutorial-minimalist-fulcro/#_targeting_adding_references_to_the_new_data_to_existing_entities[Data targeting]
+* Ex.7: https://fulcro-community.github.io/guides/tutorial-minimalist-fulcro/#_briefly_about_pathom[Writing and registering Pathom resolvers]
+* Ex.7.5 (feel free to skip this one): https://fulcro-community.github.io/guides/tutorial-minimalist-fulcro/#_bonus_tracking_loading_state_with_load_markers[Tracking loading state with load markers] 
+====
+
+TIP: If you run into troubles then check the <<Help>> section below
+
 ### Help
 
 #### Troubleshooting and getting help during the exercises
