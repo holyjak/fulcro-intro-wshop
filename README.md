@@ -16,7 +16,7 @@ Prerequisites
 
 There are no "hard" theoretical prerequisites other than general experience with Clojure development but it will help a lot if you:
 
-* Have an experience with ClojureScript
+* (Preferably) have an experience with ClojureScript
 * Have an idea about how React works
 * Have an idea about GraphQL
 
