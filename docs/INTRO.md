@@ -9,7 +9,13 @@
 
 ## Fulcro intro
 
-_Disclaimer: I'm not going to talk about WHY things are they way they are. Read https://fulcro-community.github.io/guides/tutorial-minimalist-fulcro/index.html#_why_fulcro to learn about that._
+_Disclaimer: I'm not going to talk much about WHY things are they way they are. Read https://fulcro-community.github.io/guides/tutorial-minimalist-fulcro/index.html#_why_fulcro to learn about that._
+
+### Why Fulcro?
+
+Because it provides a complete, integrated model for building non-trivial business applications that span front- and backend. No more tons of plumbing code, editing N disparate places, searching for string IDs!
+
+### What is Fulcro?
 
 Fulcro is a full-stack web framework for a _graph API_. Let's unpack that:
 
@@ -20,6 +26,7 @@ Fulcro is a full-stack web framework for a _graph API_. Let's unpack that:
   * _Frontend describes_ what data it wants using EDN Query Language (EQL) and _backend fills them in_, returning a data tree
 * On the _backend_ we have _Pathom_ - Fulcro's twin library (cljc) that _parses_ EQL and answers with data
   * You code _resolvers_ that provide parts of the answer
+  * Your Pathom resolvers typically talk to a DB such as Datomic and PostgreSQL or remote REST APIs
 
 ![](./images/fulcro-system-view.svg)
 

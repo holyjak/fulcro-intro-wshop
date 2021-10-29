@@ -77,12 +77,14 @@
 
 (defmutation todo-delete-item [{:keys [list-id id]}]
   (action [{:keys [state]}]
+    (js/alert "Sorry, deleting items has been disabled for the workshop")
+    #_
     (swap! state #(-> %
                     (update-in [:list/id list-id :list/items] remove-from-idents id)
                     (update :item/id dissoc id))))
   (error-action [{:keys [result] :as env}]
     (log/info "Delete cancelled!!!" result))
-  (remote [_] true))
+  (remote [_] #_true false))
 
 (defn on-all-items-in-list
   "Run the xform on all of the todo items in the list with list-id. The xform will be called with the state map and the

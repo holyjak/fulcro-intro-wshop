@@ -26,11 +26,12 @@ There are no "hard" theoretical prerequisites other than general experience with
 * Install Java, [Clojure CLI tools](https://clojure.org/guides/getting_started), [Node and npm](https://nodejs.org/en/)
 * In a Chromium browser such as Vivaldi or Chrome:
   * Install [Fulcro Inspect](https://chrome.google.com/webstore/detail/fulcro-inspect/meeijplnfjcihnhkpanepcaffklobaal)
-  * Install [React Developer Tools](https://chrome.google.com/webstore/detail/fulcro-inspect/meeijplnfjcihnhkpanepcaffklobaal)
+  * Install [React Developer Tools](https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi)
   * Restart the browser after you install the two plugins
   * Configure [Chrome Development Settings](https://developers.google.com/web/tools/chrome-devtools/customize): 
     * Under "Console": "Enable Custom Formatters"
     * Under "Network": "Disable Cache (while devtools is open)"
+  * (Optional, recommended) Install VS Code with Calva
 
 After that, **run the application** as described below at least once, so that all dependencies are downloaded before the workshop. Make sure you can see the To Do application in the browser. If not, follow the _Troubleshooting_ instructions below.
 
@@ -40,6 +41,8 @@ Usage
 ### Running the app from VS Code with Calva
 
 To make everyone's lives simpler, it is _recommended_ that use use VS Code with [Calva](https://calva.io/), no matter what is your preferred editor / IDE. You only [need to know a few Calva keybindings](https://github.com/holyjak/interactive-dev-wshop/blob/master/Cheatsheet.md#vs-code-and-calva-shortcuts) to be sufficiently effective during the workshop.
+
+(You can use your editor if you really prefer that but you are on your own if you run into any problems with that.)
 
 To run the application using Calva:
 

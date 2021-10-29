@@ -29,6 +29,8 @@ http://localhost:8181[Webapp] tab + http://localhost:9630/inspect-latest[Shadow-
 
 image::./images/fulcro-wshop-screen-setup.png["screen layout"]
 
+(You do not need to see the Zoom window during the exercises.)
+
 [#exercises]
 ### Exercise instructions
 
@@ -96,6 +98,7 @@ NOTE: The evaluation result is displayed both inline and inside the `output.calv
 2. Now let's look at what the props look like - at the same place, under _Exercise 3.2_, eval the `(-> ... (comp/props) ..))` form.
  * _Note_: We used `tap>` so the data will not show up in the REPL but in a tap client. So:
   . open the http://localhost:9630/inspect-latest[Shadow-cljs Inspect Latest] in a new tab of the same browser window where the webapp is
+    ** if this displays an empty window, go to http://localhost:9630/ and click the _Inspect Latest_ tab there
   . eval the form again; the value should appear in Shadow Inspect
   . **click _Pretty-Print_** at the very bottom of Inspect to make it readable
  * Compare the props and the query (and notice it is the same thing we saw in the Element tab)
@@ -118,7 +121,7 @@ image::images/query-composition.svg["Query composition",250]
 +
 Now https://github.com/holyjak/fulcro-intro-wshop/blob/ccad99e8af91882c0091bedf8bd353689353a82e/src/fulcro_todomvc/ui.cljs#L126[look at the code] to see how the child's query is included - it is not simply pasted in the parent, it is included via `(comp/get-query TodoItem)`. This is important because it brings with it some important metadata. Let's have a look at it:
 
-5. In `ui.cljs`, under _Exercise 3.5_, execute the form `(binding ...)` and explore the output in Shadow Inspect
+5. In `ui.cljs`, under _Exercise 3.5_, execute the form `(binding ...)` and explore the output in Shadow Inspect (no _Pretty-Print_ available :()
  * The output is a string and thus displayed in a single line, making it hard to read. Fortunately you only need to notice the metadata maps `^{...}` preceding some query vectors
 
 [#eql-primer]**EQL Primer**: An EQL query includes 1) _properties_ (a.k.a. attributes) such as `:list/label`, 2) _joins_ of the form `{<property or ident> <query>}`, 3) _idents_ such as `[:item/id 1]` to ask for the data of the entity with that ident (and we can again use a join to precise what data).
@@ -173,6 +176,7 @@ Remember that any "request for a change" passes through the "asynchronous" trans
 1. In Fulcro Inspect, open the _Transactions_ tab. You should see a single transaction^1^ there, a [.underline]#LOAD#, and its EQL query. Explore the query. +
 *^1^) Tip*: If you do not see the transaction then try to hard-reload the browser tab. (This happens if you opened Fulcro Inspect after the data has already been loaded.)
  * How does the LOAD query differ from Root query? Are they same? No? Why?
+ * _Transactions_ show side-effects executed in the frontend, i.e. data loads and other Fulcro mutations
 2. Click on the transaction to see its details. Notice that the transaction is simply data, of the form `(<fully qualified symbol> {options...})`. Let's explore the details of its query. +
    Note: Sadly, the _Diff added_ / _Diff removed_ does not work in the current version of Fulcro Inspect, so ignore it.
 3. Open Fulcro Inspect's _Network_ tab (not the browser's!). You should see a single _Request_ with the load's query. Click it to see its details and the _Response_ and notice how the response data tree mirrors the EQL query.
