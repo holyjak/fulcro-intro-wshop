@@ -175,7 +175,7 @@
   ;; Exercise 4.2
   (tap> (comp/get-query Root))
   ;; Exercise 4.3
-  (let [state (app/current-state app)]
+  (let [state (app/current-state app)] ; state = Client DB current value
     (tap> (fdn/db->tree
             (comp/get-query Root)
             state state)))
