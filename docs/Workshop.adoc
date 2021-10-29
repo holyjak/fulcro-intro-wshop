@@ -10,23 +10,26 @@ These interactive exercises introduce you to Fulcro concepts and the way of work
 
 Start by http://localhost:8181[opening the application] in the browser and opening the browser Dev Tools.
 
-Make sure that Calva is connected to the REPL, with the server started, as described in link:./https://github.com/holyjak/fulcro-intro-wshop/blob/main/README.md#running-the-app-from-vs-code-with-calva[Readme: Running the app from VS Code with Calva].
+Make sure that Calva is connected to the REPL, with the server started, as described in https://github.com/holyjak/fulcro-intro-wshop/blob/main/README.md#running-the-app-from-vs-code-with-calva[Readme: Running the app from VS Code with Calva].
 
-TIP: It might be easier to read this rendered, for example by looking at in the browser: https://github.com/holyjak/fulcro-intro-wshop/blob/main/docs/Workshop.adoc
+TIP: Read this rendered, for example by looking at in the browser: https://github.com/holyjak/fulcro-intro-wshop/blob/main/docs/Workshop.adoc
 
 #### Recommended window layout
 
-It is best to lay out your windows so that you can always see the exercises and then either the webapp or Calva (except of the last exercise, where we need both Calva and the webapp):
+It is best to lay out your windows so that you can always see the exercises and then either the webapp or Calva (except of the last exercise, where we need both Calva and the webapp). This layout works best for me:
 
 [%autowidth]
 |===
 | Left window | Right window
 
-| https://github.com/holyjak/fulcro-intro-wshop/blob/main/docs/Workshop.adoc#exercises[Exercises] tab | 
+| Calva +
+https://github.com/holyjak/fulcro-intro-wshop/blob/main/docs/Workshop.adoc#exercises[Workshop docs] tab | 
 http://localhost:8181[Webapp] tab + http://localhost:9630/inspect-latest[Shadow-Cljs] tab +
 or +
 Calva
 |===
+
+image::./images/fulcro-wshop-screen-setup.png["screen layout"]
 
 [#exercises]
 ### Exercise instructions
@@ -71,13 +74,13 @@ React dev tools cannot show us the props of the component because it is a Clojur
 
 1. Open now the **Fulcro Inspect** tab and its **Element** sub-tab.
 2. Click the _Pick Element_ in the top left corner and then click "Item 1" in the webapp
+  * Note: The element tab is showing a _snapshot_ of the Fulcro component data how it was at the time when you picked it
 3. You should now see the details of the TodoItem, including
   * its "_ident_", meaning "identifier", namely `[:item/id 1]`
   * its _props_, including `:item/complete` and `:item/label`
     (click the ▶ to expand them)
   * its _query_ - notice how the props mostly mirror the query
-4. Mark "Item 1" as complete by clicking to the left of its label and change its text by double-clicking on it and typing something then clicking outside of the list. How have the props changed? +
-*_Beware_: You might need to _Pick Element_ again to see the changes*
+4. Mark "Item 1" as complete by clicking to the left of its label and change its text by double-clicking on it and typing something then clicking outside of the list. Pick the element again. How have the props changed?
   * Notice that for most purposes, having a prop with the value `false` and not having the prop at all are equivalent
 5. _Pick_ another list item element and compare its values with the original item
 6. Select the whole `TodoList` and look at its ident, props, and query
@@ -99,15 +102,15 @@ NOTE: The evaluation result is displayed both inline and inside the `output.calv
   . **click _Pretty-Print_** at the very bottom of Inspect to make it readable
  * Compare the props and the query (and notice it is the same thing we saw in the Element tab)
  * Notice some attributes from the query are missing from the props - that's because client DB had no value for them (which is fine, since in Clojure `nil` is equivalent to `false`)
-3. Modify the 3.2 code to get the props of `TodoList`; you will need its ident - remember you can find its ident using the Element tab
-4. Modify also the 3.1 code to get the query of `TodoList`, then:
+3. Modify the Exercise 3.2 code to get the props of `TodoList`; you will need its ident - remember you can find its ident using the Fulcro Inspect - Element tab
+4. Modify also the Exercise 3.1 code to get the query of `TodoList`, then:
 +
 We see that `TodoList` queries for these props (some omitted): `[:list/id :list/items :list/title :list/filter]`.
 +
 But it also elaborates what it wants for each of the `:list/items` elements, namely `[:item/id :item/label :item/complete ...]`. How does it do that? By combining the two using a map, to produce a so called "join":
 +
 ```clojure
-{:list/items [:item/id :item/label :item/complete :ui/editing :ui/edit-text]}
+#:list{:items [:item/id :item/label :item/complete :ui/editing :ui/edit-text]}
 ```
 +
 and includes this in its query instead of just `:list/items`. Let's visualize how the query composes all the way to the Root:
@@ -152,7 +155,7 @@ This is the Root query:
 We will use it to navigate the client DB to see how Fulcro builds the props tree:
 
 1. Switch to _Fulcro Inspect_ - _DB Explorer_
-2. At the very bottom, under _Top-Level Keys_ (which are all the keys in the DB that are not "entity tables", such as `:item/id`), there is `:root/todos` - which is also the beginning of the Root's query. Click on its value to "drill down". You will see the list 1 data map, displayed as table, with properties on the left and values on the right. Compare it to the query then drill down to one of the items. Notice that an item is not included in a list but referred to from the list using its ident.
+2. At the very bottom, under _Top-Level Keys_ (which are all the keys in the DB that are not "entity tables", such as `:item/id`), there is `:root/current-list` - which is also the beginning of the Root's query. Click on its value to "drill down". You will see the list 1 data map, displayed as table, with properties on the left and values on the right. Compare it to the query then drill down to one of the items. Notice that an item is not included in a list but referred to from the list using its ident.
 3. Open _Fulcro Inspect_ - _DB_ and click on the little triangle ▶ to expand the `:list/id` and `:item/id` "tables". Now we can see the same data as before, but all at once.
 4. Let's see now how the raw data of the client DB looks like. Go to `ui.cljs` and execute the _Exercise 5.4_ form, then switch to _Shadow - Inspect Latest_ to look at it and _Pretty-Print_ it.
  * Notice that you are looking at the very _same data_ that you can see in Fulcro Inspect - DB
@@ -169,9 +172,9 @@ image::images/fulcro-system-view.svg["Fulcro overview",400]
 
 Remember that any "request for a change" passes through the "asynchronous" transaction subsystem (marked _Tx_) and that this includes both queries - i.e. data loads - and mutations. Notice also that EQL queries are used both for getting the props tree from the Client DB (not shown in the figure) and for loading data from the backend into the Client DB. Let's see how the loading looks in practice.
 
-1. In Fulcro Inspect, open the _Transactions_ tab. You should see a single transaction there, a [.underline]#LOAD#, and its EQL query. Explore the query. +
-Tip: If you do not see the transaction then try to hard-reload the browser tab.
- * How dos the LOAD query differ from Root query? Are they same? No? Why?
+1. In Fulcro Inspect, open the _Transactions_ tab. You should see a single transaction^1^ there, a [.underline]#LOAD#, and its EQL query. Explore the query. +
+*^1^) Tip*: If you do not see the transaction then try to hard-reload the browser tab. (This happens if you opened Fulcro Inspect after the data has already been loaded.)
+ * How does the LOAD query differ from Root query? Are they same? No? Why?
 2. Click on the transaction to see its details. Notice that the transaction is simply data, of the form `(<fully qualified symbol> {options...})`. Let's explore the details of its query. +
    Note: Sadly, the _Diff added_ / _Diff removed_ does not work in the current version of Fulcro Inspect, so ignore it.
 3. Open Fulcro Inspect's _Network_ tab (not the browser's!). You should see a single _Request_ with the load's query. Click it to see its details and the _Response_ and notice how the response data tree mirrors the EQL query.
@@ -198,6 +201,7 @@ In the previous exercise we have observed the _effect_ of the application loadin
    (Note: df/load! is just a helper function that eventually transacts a Fulcro mutation (the Fulcro and Pathom concept of a mutation diverge slightly and not all F. mutations are P. mutations but let's ignore that for now))
  * Notice that it only returns a uuid of the submitted transaction, which is executed asynchronously
  * Also notice that we pass it the ident of the thing we want to load and a component - internally, Fulcro will call `(comp/get-query <the component>)`
+ * Finally, notice that item 1 in the UI has been updated (thanks to the two lists sharing the item and data normalization)
 2. Check that you can see the transaction in the Fulcro Inspect _Transactions_ tab and explore the request and response in its _Network_ tab.
  * Notice that the ident and the query of the component that you supplied to `df/load!` have been combined into a join query - which the backend can resolve because it https://github.com/holyjak/fulcro-intro-wshop/blob/ccad99e8af91882c0091bedf8bd353689353a82e/src/fulcro_todomvc/server.clj#L111[has the `list-resolver`] that takes a `:list/id` and returns its data
  * Notice the shape of the response - it is a tree
@@ -216,7 +220,7 @@ In the previous exercise we have observed the _effect_ of the application loadin
   ...)
 ```
 
-LESSON: Load targets a backend resolver by providing the inputs it responds to. It includes a component's query to request a particular subset of the available data and uses the component's (and children's) ident to normalize the data into the Client DB. 
+LESSON: Load targets a backend resolver by asking for a data that it can provide and supplying the inputs that it requires. It includes a component's query to request a particular subset of the available data and uses the component's (and children's) ident to normalize the data into the Client DB. 
 
 #### 8. Changing local and remote data with mutations
 
