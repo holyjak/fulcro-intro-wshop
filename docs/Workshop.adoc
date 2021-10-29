@@ -24,9 +24,7 @@ It is best to lay out your windows so that you can always see the exercises and 
 
 | Calva +
 https://github.com/holyjak/fulcro-intro-wshop/blob/main/docs/Workshop.adoc#exercises[Workshop docs] tab | 
-http://localhost:8181[Webapp] tab + http://localhost:9630/inspect-latest[Shadow-Cljs] tab +
-or +
-Calva
+http://localhost:8181[Webapp] tab + http://localhost:9630/inspect-latest[Shadow-Cljs] tab 
 |===
 
 image::./images/fulcro-wshop-screen-setup.png["screen layout"]
