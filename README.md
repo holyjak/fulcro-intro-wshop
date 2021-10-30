@@ -35,7 +35,7 @@ To do right now:
   * Install [Fulcro Inspect](https://chrome.google.com/webstore/detail/fulcro-inspect/meeijplnfjcihnhkpanepcaffklobaal)
   * Install [React Developer Tools](https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi)
   * Restart the browser after you install the two plugins
-  * Configure [Chrome Development Settings](https://developers.google.com/web/tools/chrome-devtools/customize): 
+  * Configure [Chrome Development Settings](https://developers.google.com/web/tools/chrome-devtools/customize):
     * Under "Console": "Enable Custom Formatters"
     * Under "Network": "Disable Cache (while devtools is open)"
 * (Optional, recommended) Install VS Code with Calva
@@ -84,7 +84,7 @@ Clojure 1.10.3
 user=> ((requiring-resolve 'fulcro-todomvc.server/http-server))
 ```
 
-Connect you editor to the browser REPL. In Calva, execute _Calva: Connect to a Running REPL Server in the Project_ - select shadow-cljs - accept the default localhost:9000.
+Connect your editor to the browser REPL. In Calva, execute _Calva: Connect to a Running REPL Server in the Project_ - select shadow-cljs - accept the default localhost:9000.
 
 ### Troubleshooting problems with running the application
 
