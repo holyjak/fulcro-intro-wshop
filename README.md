@@ -1,6 +1,11 @@
 Workshop: Introduction to creating webapps with Fulcro
 ======================================================
 
+<table><tr>
+<td style="font-size: 4rem">⚠️</td>
+<td>You must <strong><a href="#prerequisites">install prerequisites</a> and have the <a href="#running-the-app-from-vs-code-with-calva">app running</a> BEFORE</strong> the workshop!</td>
+</tr></table>
+
 An online workshop held as a part of [re:Clojure 2021](https://www.reclojure.org/) on December 1st, 3-5pm GMT. See the [workshop Eventbrite page](https://www.eventbrite.com/e/reclojure-introduction-to-fulcro-workshop-tickets-188718210247) for details and registration.
 
 *Get your hands dirty with Fulcro to experience and "get" this unique, full-stack web framework for Clojure*
@@ -22,6 +27,8 @@ There are no "hard" theoretical prerequisites other than general experience with
 
 ### Practical
 
+To do right now:
+
 * Clone / download this repository to a directory on your computer
 * Install Java, [Clojure CLI tools](https://clojure.org/guides/getting_started), [Node and npm](https://nodejs.org/en/)
 * In a Chromium browser such as Vivaldi or Chrome:
@@ -31,9 +38,13 @@ There are no "hard" theoretical prerequisites other than general experience with
   * Configure [Chrome Development Settings](https://developers.google.com/web/tools/chrome-devtools/customize): 
     * Under "Console": "Enable Custom Formatters"
     * Under "Network": "Disable Cache (while devtools is open)"
-  * (Optional, recommended) Install VS Code with Calva
+* (Optional, recommended) Install VS Code with Calva
+* Try to [run the application](#running-the-app-from-vs-code-with-calva) and connect to its REPL as described below
 
-After that, **run the application** as described below at least once, so that all dependencies are downloaded before the workshop. Make sure you can see the To Do application in the browser. If not, follow the _Troubleshooting_ instructions below.
+An hour or so before the workshop:
+
+* Have the [application running](#running-the-app-from-vs-code-with-calva) as described below. Make sure you can see the To Do application in the browser. If not, follow the _Troubleshooting_ instructions below. Open Dev Tools and verify that _Fulcro Inspect_ is there.
+* Set up your windows as described in the [workshop instructions](https://github.com/holyjak/fulcro-intro-wshop/blob/main/docs/Workshop.adoc#setup) and have the [Fulcro intro](https://github.com/holyjak/fulcro-intro-wshop/blob/main/docs/INTRO.md) opened in a browser tab
 
 Usage
 -----

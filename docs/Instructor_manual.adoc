@@ -1,0 +1,13 @@
+# Instructor Manual
+
+Agenda
+
+1. Welcome participants etc.
+2. Verify everybody followed the instructions and has the app running, REPL connected, Fulcro Inspect open
+3. Present link:./INTRO.md[INTRO] (which starts with the workshop agenda)
+4. Post to the chat:
++
+> Here are two links you will need to have opened https://github.com/holyjak/fulcro-intro-wshop/blob/main/docs/INTRO.md and  https://github.com/holyjak/fulcro-intro-wshop/blob/main/docs/Workshop.adoc
+5. Give a tour of the recommended window setup and fly through the Fulcro Inspect tabs that we will use
+6. Ask them to post *finished ex. number* such as 1 .. 9 to the chat so that you have an overview of the progress
+7. Let them follow link:./Workshop.adoc[] while doing the exercises on the screen (not expecting them to watch, just for the recording and to pass time :))
