@@ -72,9 +72,11 @@ LESSON: The UI is indeed a tree of components: `Root > TodoList > TodoItem`.
 
 React dev tools cannot show us the props of the component because it is a ClojureScript data structure. Let's have a look at them using Fulcro Inspect!
 
+image::./images/brwsr-fi-element.png["Fulcro Inspect - Element"]
+
 1. Open now the **Fulcro Inspect** tab and its **Element** sub-tab.
 2. Click the _Pick Element_ in the top left corner and then click "Item 1" in the webapp
-  * Note: The element tab is showing a _snapshot_ of the Fulcro component data how it was at the time when you picked it
+  * Beware: The element tab is showing a _snapshot_ of the Fulcro component data how it was at the time when you picked it
 3. You should now see the details of the TodoItem, including
   * its "_ident_", meaning "identifier", namely `[:item/id 1]`
   * its _props_, including `:item/complete` and `:item/label`
@@ -87,9 +89,11 @@ React dev tools cannot show us the props of the component because it is a Clojur
 
 LESSON: We have learned to use _Fulcro Inspect - Element_ to explore a component and we have learned that it has props, ident, and a query. We saw that the props mirror what is specified in the query.
 
-#### 3. Exploring the query
+#### 3. Exploring the query & Shadow Inspect
 
-The query of a component declares its data needs and Fulcro uses it to build the props for the component. We have seen it using Fulcro Inspect - Element, now we will explore it using the REPL.
+The query of a component declares its data needs and Fulcro uses it to build the props for the component. We have seen it using Fulcro Inspect - Element, now we will explore it using the REPL and Shadow Inspect.
+
+image::./images/brwsr-shadow-inspect.png["Shadow Inspect"]
 
 1. Open `src/fulcro_todomvc/ui.cljs`, scroll to the bottom and inside the `(comment ...)` find _Exercise 3.1_ and evaluate the `get-query` call, read the result
 +
@@ -130,7 +134,11 @@ LESSON: Components declare their data needs using `:query`, listing the properti
 
 #### 4. Root query
 
-Despite a common misconception, Fulcro does not supply props to every and each component individually. It only supplies props to the root component - and it uses only the root query, which composes the queries of its children and so on, as we have seen. So let's have a look at the query and how it is turned into a props tree.
+Despite a common misconception, Fulcro does not supply props to every and each component individually. It only supplies props to the root component - and it uses only the root query, which composes the queries of its children and so on, as we have seen. This picture from the introduction illustrates that: 
+
+image::./images/fulcro-ui-query-data.svg["Query composition"]
+
+Let's have a look at the query and how it is turned into a props tree.
 
 1. Open `src/fulcro_todomvc/ui.cljs`, scroll to the bottom and inside the `(comment ...)` evaluate the `get-query Root` form marked _Exercise 4.1_
 2. It is little long and hard to read so open the http://localhost:9630/inspect-latest[Shadow-cljs Inspect Latest] in a new tab of the same browser and then evaluate the `(tap> ...)` call. The value should appear in the Shadow Inspect; at the very bottom, **click _Pretty-Print_**
@@ -154,6 +162,8 @@ This is the Root query:
 ```
 
 We will use it to navigate the client DB to see how Fulcro builds the props tree:
+
+image::./images/brwsr-fi-db-explorer.png["Fulcro Inspect - DB Explorer"]
 
 1. Switch to _Fulcro Inspect_ - _DB Explorer_
 2. At the very bottom, under _Top-Level Keys_ (which are all the keys in the DB that are not "entity tables", such as `:item/id`), there is `:root/current-list` - which is also the beginning of the Root's query. Click on its value to "drill down". You will see the list 1 data map, displayed as table, with properties on the left and values on the right. Compare it to the query then drill down to one of the items. Notice that an item is not included in a list but referred to from the list using its ident.
