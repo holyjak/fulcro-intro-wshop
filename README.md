@@ -86,6 +86,12 @@ user=> ((requiring-resolve 'fulcro-todomvc.server/http-server))
 
 Connect you editor to the browser REPL. In Calva, execute _Calva: Connect to a Running REPL Server in the Project_ - select shadow-cljs - accept the default localhost:9000.
 
+#### Relevant ports
+
+* 8181 the webapp, served by our server (see `server.clj`)
+* 9000 shadow-cljs nREPL
+* 9630 shadow-cljs UI including its Inspect
+
 ### Troubleshooting problems with running the application
 
 * If the application does not work properly when you start it from Calva then try to start it manually from the terminal, as described above.
