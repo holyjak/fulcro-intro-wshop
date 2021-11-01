@@ -27,6 +27,7 @@ Fulcro is a full-stack web framework for a _graph API_. Let's unpack that:
 * On the _backend_ we have _Pathom_ - Fulcro's twin library (cljc) that _parses_ EQL and answers with data
   * You code _resolvers_ that provide parts of the answer
   * Your Pathom resolvers typically talk to a DB such as Datomic and PostgreSQL or remote REST APIs
+  * Note: Pathom can also run in the browser and it can work as an adapter of a REST API, as [demonstrated on the Twitter v1 API](https://youtu.be/YaHiff2vZ_o?t=1210) in Wilker Lucio's talk "Data Navigation with Pathom 3"
 
 ![](./images/fulcro-system-view.svg)
 
@@ -68,3 +69,7 @@ What is a Fulcro component anyway?
 * Query
 
 TP: You do not need to understand everything here. We will be coming back to these terms in the exercises. There you will experience and grok them.
+
+## Additional resources
+
+* [Data Navigation with Pathom 3](https://www.youtube.com/watch?v=YaHiff2vZ_o) by Wilker Lucio is a great explanation of the problem with REST and multiple clients (e.g. UI components) with varying data needs and why an attribute-centric approach - such as implemented by Pathom - is a better solution. You will see Pathom in action and learn about some of its super-powers. all of this in just 45 minutes.
