@@ -33,8 +33,8 @@ Fulcro is a full-stack web framework for a _graph API_. Let's unpack that:
 Let's zoom in on the Frontend. It has:
 
 * the **UI** component tree
-* a client-side **state**, called "client DB", and storing data mostly in a _normalized_ form
-* an asynchronous **transaction** subsystem ("Tx") for triggering local and remote mutations and data loads from the components
+* a client-side **state**, called _client DB_, and storing data mostly in a _normalized_ form
+* an asynchronous **transaction** subsystem (_Tx_) for triggering local and remote mutations and data loads from the components
 
 Let's zoom in even more, on the UI tree and its rendering:
 

@@ -112,7 +112,7 @@ NOTE: The evaluation result is displayed both inline and inside the `output.calv
 +
 We see that `TodoList` queries for these props (some omitted): `[:list/id :list/items :list/title :list/filter]`.
 +
-But it also elaborates what it wants for each of the `:list/items` elements, namely `[:item/id :item/label :item/complete ...]`. How does it do that? By combining the two using a map, to produce a so called "join":
+But it also elaborates what it wants for each of the `:list/items` elements, namely `[:item/id :item/label :item/complete ...]`. How does it do that? By combining the two using a map, to produce what we call a _join_:
 +
 ```clojure
 #:list{:items [:item/id :item/label :item/complete :ui/editing :ui/edit-text]}
