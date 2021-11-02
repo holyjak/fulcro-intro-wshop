@@ -186,7 +186,7 @@ Remember that any "request for a change" passes through the "asynchronous" trans
 1. In Fulcro Inspect, open the _Transactions_ tab. You should see a single transaction^1^ there, a [.underline]#LOAD#, and its EQL query. Explore the query. +
 *^1^) Tip*: If you do not see the transaction then try to hard-reload the browser tab. (This happens if you opened Fulcro Inspect after the data has already been loaded.)
  * How does the LOAD query differ from Root query? Are they same? No? Why?
- * _Transactions_ show side-effects executed in the frontend, i.e. data loads and other Fulcro mutations
+ * _Transactions_ shows side-effects executed in the frontend, i.e. data loads and other Fulcro mutations
 2. Click on the transaction to see its details. Notice that the transaction is simply data, of the form `(<fully qualified symbol> {options...})`. Let's explore the details of its query. +
    Note: Sadly, the _Diff added_ / _Diff removed_ does not work in the current version of Fulcro Inspect, so ignore it.
 3. Open Fulcro Inspect's _Network_ tab (not the browser's!). You should see a single _Request_ with the load's query. Click it to see its details and the _Response_ and notice how the response data tree mirrors the EQL query.
@@ -217,9 +217,13 @@ In the previous exercise we have observed the _effect_ of the application loadin
 2. Check that you can see the transaction in the Fulcro Inspect _Transactions_ tab and explore the request and response in its _Network_ tab.
  * Notice that the ident and the query of the component that you supplied to `df/load!` have been combined into a join query - which the backend can resolve because it https://github.com/holyjak/fulcro-intro-wshop/blob/ccad99e8af91882c0091bedf8bd353689353a82e/src/fulcro_todomvc/server.clj#L111[has the `list-resolver`] that takes a `:list/id` and returns its data
  * Notice the shape of the response - it is a tree
-3. Go to _Fulcro Inspect - DB_ and expand `:list/id` to verify the list `2` has been added there. Then expand `:item/id` to verify that the item `99` has also been added and item 1 updated
+3. Go to _Fulcro Inspect - DB_ and expand `:list/id` to verify the list `2` has been added there. Then expand `:item/id` to verify that the item `99` has also been added and item `1` updated
  * Notice the shape of the data in the client DB: is it exactly the same as the response (a single tree) or not?
- * not - Fulcro has placed each _data entity_ into its own "table", i.e. the list into `:list/id` and the item into `:item/id`, and the list links to the item using its ident instead of containing it. I.e. Fulcro has https://rdbms.ca/database/normalization.html[_normalized_] the incoming data tree into the Client DB's "entity tables". That is only possible because both `TodoList` and `TodoItem` declare their `:ident` and thanks to the metadata linking each (sub)query to the component where it originates:
+ * not - Fulcro has placed each _data entity_ into its own "table", i.e. the list into `:list/id` and the item into `:item/id`, and the list links to the item using its ident instead of containing it. I.e. Fulcro has https://rdbms.ca/database/normalization.html[_normalized_] the incoming data tree into the Client DB's "entity tables":
++
+image::./images/brwsr-fi-db+norm.png["Fulcro Inspect - DB and normalized data"]
++
+That is only possible because both `TodoList` and `TodoItem` declare their `:ident` and thanks to the metadata linking each (sub)query to the component where it originates:
 +
 ```clojure
 (defsc TodoItem [_ _]
@@ -258,7 +262,7 @@ LESSON: A mutation is data that can have a handler associated on the frontend an
 
 #### 9. Triggering a mutation manually
 
-As always in Fulcro, we do not need to click around and we can trigger the mutation from the REPL.
+As always in Fulcro, we do not need to click around and can trigger the mutation from the REPL.
 
 1. Go to `ui.cljs` and eval the form marked _Exercise 9.1_
 2. Observe that the UI now shows the item as not completed
