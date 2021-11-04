@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentScriptType="application/ecmascript" contentStyleType="text/css" height="173px" preserveAspectRatio="none" style="width:647px;height:173px;background:#FFFFFF;" version="1.1" viewBox="0 0 647 173" width="647px" zoomAndPan="magnify"><defs><filter height="300%" id="f16eteyahw2w0g" width="300%" x="-1" y="-1"><feGaussianBlur result="blurOut" stdDeviation="2.0"/><feColorMatrix in="blurOut" result="blurOut2" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .4 0"/><feOffset dx="4.0" dy="4.0" in="blurOut2" result="blurOut3"/><feBlend in="SourceGraphic" in2="blurOut3" mode="normal"/></filter></defs><g><!--MD5=[fecc3c2ec38baefc79235866b615fdc8]
+cluster shadow-cljs--><rect fill="#FFFFFF" filter="url(#f16eteyahw2w0g)" height="154" style="stroke:#000000;stroke-width:1.5;" width="628" x="7" y="7"/><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="89" x="276.5" y="22.5352">shadow-cljs</text><!--MD5=[0f974f892f656225d1589528e0caa360]
+cluster Clojure REPL--><rect fill="#FFFFFF" filter="url(#f16eteyahw2w0g)" height="87" style="stroke:#000000;stroke-width:1.5;" width="178" x="433" y="50"/><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="92" x="476" y="65.5352">Clojure REPL</text><!--MD5=[3673242c2b29f8f739736ddfd39ee815]
+entity Shadow Inspect UI--><rect fill="#FEFECE" filter="url(#f16eteyahw2w0g)" height="36.4883" style="stroke:#000000;stroke-width:1.5;" width="145" x="269.5" y="85"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="125" x="279.5" y="108.5352">Shadow Inspect UI</text><!--MD5=[0de932d8f456d593c33e711ba869a8f9]
+entity Build & hot-reload frontend--><rect fill="#FEFECE" filter="url(#f16eteyahw2w0g)" height="36.4883" style="stroke:#000000;stroke-width:1.5;" width="211" x="23.5" y="85"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="191" x="33.5" y="108.5352">Build &amp; hot-reload frontend</text><!--MD5=[07335a39a32b01c144a8bc70f404b870]
+entity ClojureScript REPL--><rect fill="#FEFECE" filter="url(#f16eteyahw2w0g)" height="36.4883" style="stroke:#000000;stroke-width:1.5;" width="145" x="449.5" y="85"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="125" x="459.5" y="108.5352">ClojureScript REPL</text><!--MD5=[9313a4d48886d6da5dad8137162462e4]
+@startuml "Overview of Cljs tooling"
+rectangle shadow-cljs {
+    rectangle "Shadow Inspect UI"
+    rectangle "Clojure REPL" {
+        rectangle "ClojureScript REPL"
+    }
+    rectangle "Build & hot-reload frontend"
+}
+
+@enduml
+
+PlantUML version 1.2021.7(Sun May 23 14:40:07 CEST 2021)
+(GPL source distribution)
+Java Runtime: OpenJDK Runtime Environment
+JVM: OpenJDK 64-Bit Server VM
+Default Encoding: UTF-8
+Language: en
+Country: GB
+--></g></svg>

@@ -1,0 +1,10 @@
+@startuml "Overview of Cljs tooling"
+rectangle shadow-cljs {
+    rectangle "Shadow Inspect UI"
+    rectangle "Clojure REPL" {
+        rectangle "ClojureScript REPL"
+    }
+    rectangle "Build & hot-reload frontend"
+}
+
+@enduml

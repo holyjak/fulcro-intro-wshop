@@ -2,6 +2,14 @@
 
 By now, the https://github.com/holyjak/fulcro-intro-wshop/blob/main/docs/INTRO.md[brief introduction to Fulcro] should have been presented to you. Keep the document at hand because you might want to refer to it again during the workshop.
 
+## Battle plan
+
+1. DIY _app exercises_ 1 - 9 (stop latest 10 min before the workshop's end)
+2. Review <<Summary - lessons learned>>
+3. Q&A
+4. _Coding exercises_ - if time permits or do them at home after the workshop
+5. Learn more about Fulcro
+
 ## Part 1: App exercises
 
 These interactive exercises introduce you to Fulcro concepts and the way of working with a Fulcro application
@@ -95,7 +103,7 @@ The query of a component declares its data needs and Fulcro uses it to build the
 
 image::./images/brwsr-shadow-inspect.png["Shadow Inspect"]
 
-1. Open `src/fulcro_todomvc/ui.cljs`, scroll to the bottom and inside the `(comment ...)` find _Exercise 3.1_ and evaluate the `get-query` call, read the result
+1. Open `src/fulcro_todomvc/ui.cljs`, scroll to the bottom and inside the `(comment ...)` find _Exercise 3.1_ and evaluate the `get-query` form (`Alt - ENTER` from the https://github.com/holyjak/interactive-dev-wshop/blob/master/Cheatsheet.md#vs-code-and-calva-shortcuts[essential few Calva keybindings]), read the result
 +
 NOTE: The evaluation result is displayed both inline and inside the `output.calva-repl` file (_Go - Go to File..._ to reopen it)
 
@@ -115,6 +123,7 @@ We see that `TodoList` queries for these props (some omitted): `[:list/id :list/
 But it also elaborates what it wants for each of the `:list/items` elements, namely `[:item/id :item/label :item/complete ...]`. How does it do that? By combining the two using a map, to produce what we call a _join_:
 +
 ```clojure
+; :list/items + [:item/id :item/label ...] =>
 #:list{:items [:item/id :item/label :item/complete :ui/editing :ui/edit-text]}
 ```
 +
@@ -125,7 +134,7 @@ image::images/query-composition.svg["Query composition",250]
 +
 Now https://github.com/holyjak/fulcro-intro-wshop/blob/ccad99e8af91882c0091bedf8bd353689353a82e/src/fulcro_todomvc/ui.cljs#L126[look at the code] to see how the child's query is included - it is not simply pasted in the parent, it is included via `(comp/get-query TodoItem)`. This is important because it brings with it some important metadata. Let's have a look at it:
 
-5. In `ui.cljs`, under _Exercise 3.5_, execute the form `(binding ...)` and explore the output in Shadow Inspect (no _Pretty-Print_ available :()
+5. In `ui.cljs`, under _Exercise 3.5_, evaluate the form `(binding ...)` and explore the output in Shadow Inspect (no _Pretty-Print_ available :( )
  * The output is a string and thus displayed in a single line, making it hard to read. Fortunately you only need to notice the metadata maps `^{...}` preceding some query vectors
 
 [#eql-primer]**EQL Primer**: An EQL query includes 1) _properties_ (a.k.a. attributes) such as `:list/label`, 2) _joins_ of the form `{<property or ident> <query>}`, 3) _idents_ such as `[:item/id 1]` to ask for the data of the entity with that ident (and we can again use a join to precise what data).
@@ -141,8 +150,8 @@ image::./images/fulcro-ui-query-data.svg["Query composition"]
 Let's have a look at the query and how it is turned into a props tree.
 
 1. Open `src/fulcro_todomvc/ui.cljs`, scroll to the bottom and inside the `(comment ...)` evaluate the `get-query Root` form marked _Exercise 4.1_
-2. It is little long and hard to read so open the http://localhost:9630/inspect-latest[Shadow-cljs Inspect Latest] in a new tab of the same browser and then evaluate the `(tap> ...)` call. The value should appear in the Shadow Inspect; at the very bottom, **click _Pretty-Print_**
-3. Now let's see how Fulcro fulfills that query from the client DB, using `fdn/db->tree` - execute the form marked _Exercise 4.3_ and observe the result in Shadow's Inspect Latest. First use _Pretty-Print_ on it then switch to _Browse_ - you can click on any line to "drill in" and you can use the `<` and `<<` to go (all the way) back
+2. It is little long and hard to read so open the http://localhost:9630/inspect-latest[Shadow-cljs Inspect Latest] in a new tab of the same browser and then evaluate the `(tap> ...)` form marked _Exercise 4.2_. The value should appear in the Shadow Inspect; at the very bottom, **click _Pretty-Print_**
+3. Now let's see how Fulcro fulfills that query from the client DB, using `fdn/db->tree` - evaluate the form marked _Exercise 4.3_ and observe the result in Shadow's Inspect Latest. First use _Pretty-Print_ on it then switch to _Browse_ - you can click on any line to "drill in" and you can use the `<` and `<<` to go (all the way) back
 
 LESSON: The Root query is turned to a props tree using the client DB. Shadow Inspect is a fine tool for looking at complex data.
 
@@ -166,13 +175,13 @@ We will use it to navigate the client DB to see how Fulcro builds the props tree
 image::./images/brwsr-fi-db-explorer.png["Fulcro Inspect - DB Explorer"]
 
 1. Switch to _Fulcro Inspect_ - _DB Explorer_
-2. At the very bottom, under _Top-Level Keys_ (which are all the keys in the DB that are not "entity tables", such as `:item/id`), there is `:root/current-list` - which is also the beginning of the Root's query. Click on its value to "drill down". You will see the list 1 data map, displayed as table, with properties on the left and values on the right. Compare it to the query then drill down to one of the items. Notice that an item is not included in a list but referred to from the list using its ident.
+2. At the very bottom, under _Top-Level Keys_ (which are all the keys in the DB that are not "entity tables", such as `:item/id`), there is `:root/current-list` - which is also the beginning of the Root's query. Click on its value to "drill down". You will see the list 1 data map, displayed as table, with properties on the left and values on the right. Compare it to the query (shown above) then drill down to one of the items. (Notice that an item is not included in a list but referred to from the list using its ident.)
 3. Open _Fulcro Inspect_ - _DB_ and click on the little triangle ▶ to expand the `:list/id` and `:item/id` "tables". Now we can see the same data as before, but all at once.
-4. Let's see now how the raw data of the client DB looks like. Go to `ui.cljs` and execute the _Exercise 5.4_ form, then switch to _Shadow - Inspect Latest_ to look at it and _Pretty-Print_ it.
+4. Let's see now how the raw data of the client DB looks like. Go to `ui.cljs` and evaluate the _Exercise 5.4_ form, then switch to _Shadow - Inspect Latest_ to look at it and _Pretty-Print_ it.
  * Notice that you are looking at the very _same data_ that you can see in Fulcro Inspect - DB
  * Pay attention to the values of `:list/items` - it is not the attribute maps but just _idents_ of the included items
 
-LESSON: We saw how data is stored in the client DB mostly in a normalized form (`<entity name>/id -> <id value> -> <map of props, with idents as values to link to other entities>`) and how idents are used to link entities together. We have experienced how Fulcro fulfills a query by "walking" the client DB. We have seen that the client DB is nothing else than a map (of maps of maps, mostly).
+LESSON: We saw how data is stored in the client DB mostly in a normalized form (`<entity name>/id -> <id value> -> <map of props, where some props contain idents, to link to other entities>`) and how idents are used to link entities together. We have experienced how Fulcro fulfills a query by "walking" the client DB. We have seen that the client DB is nothing else than a map (of maps of maps, mostly).
 
 #### 6. Loading data from the server
 
@@ -183,6 +192,7 @@ image::images/fulcro-system-view.svg["Fulcro overview",400]
 
 Remember that any "request for a change" passes through the "asynchronous" transaction subsystem (marked _Tx_) and that this includes both queries - i.e. data loads - and mutations. Notice also that EQL queries are used both for getting the props tree from the Client DB (not shown in the figure) and for loading data from the backend into the Client DB. Let's see how the loading looks in practice.
 
+1. Make sure _Fulcro Inspect_ is opened and reload the page
 1. In Fulcro Inspect, open the _Transactions_ tab. You should see a single transaction^1^ there, a [.underline]#LOAD#, and its EQL query. Explore the query. +
 *^1^) Tip*: If you do not see the transaction then try to hard-reload the browser tab. (This happens if you opened Fulcro Inspect after the data has already been loaded.)
  * How does the LOAD query differ from Root query? Are they same? No? Why?
@@ -251,11 +261,11 @@ To change state either in the frontend or in the backend, you "transact" (submit
 Note: The `todo-check` call simply returns the surrounding list, quoted
 2. Look at the transaction in the _Transactions_ tab and verify it indeed is a list
 3. Explore it in Fulcro Inspect's _Network_ tab
-4. Read the https://github.com/holyjak/fulcro-intro-wshop/blob/ccad99e8af91882c0091bedf8bd353689353a82e/src/fulcro_todomvc/api.cljs#L47[frontend Fulcro defmutation] code.
+4. Read the https://github.com/holyjak/fulcro-intro-wshop/blob/ccad99e8af91882c0091bedf8bd353689353a82e/src/fulcro_todomvc/api.cljs#L47[frontend Fulcro defmutation] code in `fulcro-todomvc.api`.
  * `action` is performed to handle the mutation on the frontend 
  * `(remote [_] true)` instructs Fulcro to also send the mutation to the backend (as we have seen in the Network tab)
-5. Read the https://github.com/holyjak/fulcro-intro-wshop/blob/ccad99e8af91882c0091bedf8bd353689353a82e/src/fulcro_todomvc/server.clj#L37[backend Pathom defmutation] code
- * It explicitly sets its symbol `::pc/sym` to match what the frontend is sending (otherwise it would default to `<current ns>/<its name>`, i.e. `fulcro-todomvc.server/todo-check`, and not be executed to handle this mutation)
+5. Read the https://github.com/holyjak/fulcro-intro-wshop/blob/ccad99e8af91882c0091bedf8bd353689353a82e/src/fulcro_todomvc/server.clj#L37[backend Pathom defmutation] code in `fulcro-todomvc.server`
+ * The frontend and backend "handlers" must be registered under the same symbol, which is normally derived from the defmutation name and the current namespace; since here the backend mutation is in a different ns than the frontend one, we override that with the `::pc/sym` config option
  * It updates the server-side "db" and returns an empty map (as we have seen in the Network tab)
 
 LESSON: A mutation is data that can have a handler associated on the frontend and backend. The frontend handler action updates the Client DB and the mutation is then sent to the backend as an EQL transaction iff it is marked as remote. The backend handler gets the same parameters (plus the general pathom environment) and typically updates a data store. 
@@ -266,7 +276,7 @@ As always in Fulcro, we do not need to click around and can trigger the mutation
 
 1. Go to `ui.cljs` and eval the form marked _Exercise 9.1_
 2. Observe that the UI now shows the item as not completed
-3. In `api.cljs`, find the `todo-check` mutation and inside the `remote` section change the [.line-through]`true` to `false`.
+3. In `api.cljs`, find the `todo-check` mutation and inside the `remote` section change the [.line-through]`true` to `false` and _save the file_ (so that Shadow will hot-reload the code).
 4. In `ui.cljs`, eval the form marked _Exercise 9.2_
  .. Notice the item is marked as completed in the UI
  .. Verify that you see the `todo-check` mutation in the _Transactions_ tab
@@ -298,12 +308,12 @@ Now is the time to ask any questions you might have, before we proceed to the fi
 ## Part 2: Coding exercises
 
 You will now get the chance to test your understanding of Fulcro concepts by completing coding exercises
-(included from https://github.com/fulcro-community/fulcro-exercises[fulcro-exercises]).
+(included from https://github.com/fulcro-community/fulcro-exercises[fulcro-exercises]). Here you will modify and evolve tiny Fulcro applications, one concept at a time.
 
 ### Setup
 
-1. Stop the running todomvc REPL (either by clicking `REPL` in VS Code's bottom toolbar or running _Calva: Disconnect from the REPL Server_).
-2. Start REPL for the exercises:
+1. 🛑 Stop the running todomvc REPL (either by clicking `REPL` in VS Code's bottom toolbar or running _Calva: Disconnect from the REPL Server_).
+2. 🏁 Start REPL for the exercises:
   .. In the menu _View - Command Palette... - Calva: Start a Project REPL and Connect (aka Jack-In)_
   .. Select _shadow-cljs_
   .. Select (only!) `:coding` for the aliases to launch with
@@ -330,7 +340,7 @@ TIP: If you run into troubles then check the <<Help>> section below
 
 Use repeatedly `(hint <exercise number>)` (as long as there are any more hints for the exercise) to get useful tips when you get stuck.
 
-Leverage the [Fulcro Troubleshooting Decision Tree](https://blog.jakubholy.net/2020/troubleshooting-fulcro/) to help you troubleshoot your problems.
+Leverage the https://blog.jakubholy.net/2020/troubleshooting-fulcro/[Fulcro Troubleshooting Decision Tree] to help you troubleshoot your problems.
 
 Leverage Fulcro Inspect (especially the DB and perhaps Element tabs), check the Chrome JS Console for warnings and errors.
 
@@ -343,3 +353,8 @@ It might help to close it, reload the page, then open it again.
 ##### 'shadow-cljs - (reload failed)' reported in the browser
 
 If shadow-cljs fails because of a coding error then this error is reported in the browser. It may break live reloading, i.e. you might need to hard-reload the page after you fix it.
+
+
+## Learn more about Fulcro
+
+Study the https://fulcro-community.github.io/guides/tutorial-minimalist-fulcro/[Minimalist Fulcro Tutorial] and explore the resources it links to.

@@ -86,11 +86,19 @@ user=> ((requiring-resolve 'fulcro-todomvc.server/http-server))
 
 Connect you editor to the browser REPL. In Calva, execute _Calva: Connect to a Running REPL Server in the Project_ - select shadow-cljs - accept the default localhost:9000.
 
+Shadow-cljs runs a number of things:
+
+!["Overview of cljs tooling"](./docs/images/cljs-tooling-overview.svg)
+
 #### Relevant ports
 
 * 8181 the webapp, served by our server (see `server.clj`)
 * 9000 shadow-cljs nREPL
 * 9630 shadow-cljs UI including its Inspect
+
+### Using Cursive, Emacs, etc.
+
+It is possible to participate using any IDE but I really **_implore you_** to bite the bullet and use Calva this one time (though I am normally Cursive user myself). I do not have the bandwidth to support people that run into issues with any other setup and inevitably the do, even though they are otherwise experts in their IDE of choice. You will not do anything fancy in the editor - you only need a single keybinding to eval a form (alt-enter) and the biggest editing you will do is changing one keyword to another.
 
 ### Troubleshooting problems with running the application
 

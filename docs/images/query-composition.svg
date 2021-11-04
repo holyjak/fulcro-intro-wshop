@@ -53,7 +53,7 @@
 <title>Root&#45;&gt;Client DB</title>
 <path fill="none" stroke="black" d="M37,-86.8C37,-75.16 37,-59.55 37,-46.24"/>
 <polygon fill="black" stroke="black" points="40.5,-46.18 37,-36.18 33.5,-46.18 40.5,-46.18"/>
-<text text-anchor="middle" x="126" y="-57.8" font-family="Times,serif" font-size="14.00"> {:root/todo &lt;TodoList query&gt;}</text>
+<text text-anchor="middle" x="144" y="-57.8" font-family="Times,serif" font-size="14.00"> {:root/current&#45;list &lt;TodoList query&gt;}</text>
 </g>
 </g>
 </svg>

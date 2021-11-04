@@ -162,7 +162,7 @@
   ;; Exercise 3.1
   (comp/get-query TodoItem) ; TodoList, Root
   ;; Exercise 3.2
-  (-> (comp/ident->components app [:item/id 1])
+  (-> (comp/ident->components app [:item/id 2])
       first
       (comp/props)
       ;; BEWARE: Open Shadow-cljs Inspect to see the output, see the instructions

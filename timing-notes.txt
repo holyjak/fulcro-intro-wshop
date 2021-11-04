@@ -1,3 +1,4 @@
 Run #1: Intro about 5 min, first 5 exercises 40-50min
 Run #2: Intro + all 9 exercises 1h25
 Run #3 at ml-study: 1h40
+Run #4 fastest parsen done 1h35 after start (intro included); others got to 6-9 (some due to using wrong IDE etc.)

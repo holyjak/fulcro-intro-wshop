@@ -3,9 +3,12 @@
 ## Workshop agenda
 
 1. Intro (here)
-2. Workshop exercises
+2. Workshop exercises (1-9)
+   * We might not have time for them all - you can finish on your own
+   * Review [Summary - lessons learned](Workshop.adoc#summary---lessons-learned) at the end
 3. Q&A session
-4. Coding exercises from fulcro-exercises
+4. (Coding exercises - likely a home work, unless we are really quick)
+   * Learn building a Fulcro app from "scratch," once concept at a time
 
 ## Fulcro intro
 
@@ -14,6 +17,12 @@ _Disclaimer: I'm not going to talk much about WHY things are they way they are. 
 ### Why Fulcro?
 
 Because it provides a complete, integrated model for building non-trivial business applications that span front- and backend. No more tons of plumbing code, editing N disparate places, searching for string IDs!
+
+* Data-driven, UI = f(data)
+* Dev friendliness - co-location, tooling, navigability
+* Sustainable webapp development - minimize incidental complexity
+* Extreme customizability
+* Graph API >> REST (see Wilker's talk)
 
 ### What is Fulcro?
 
