@@ -281,7 +281,7 @@ As always in Fulcro, we do not need to click around and can trigger the mutation
  .. Notice the item is marked as completed in the UI
  .. Verify that you see the `todo-check` mutation in the _Transactions_ tab
  .. Verify that you _do not_ see it in Fulcro Inspect's _Network_ tab
-5. (Bonus) At the top left of the _DB_ tab, click on the `<` next to the slider a few times - notice the UI reverts to the previous state and so does the item's attributes in the client DB. This way you can go back and forward in the history and the UI (which always reflects the DB state).
+5. (Bonus) At the top left of the _DB_ tab, click on the `<` next to the slider a few times - notice the item's attributes in the client DB revert to the previous state and you can use the circular arrow icon to reset the app and UI to that state (which create a new _revision_ of the state). This way you can go back and forward in the history. (The UI used to get changed as you did this but that seems not to work for me anymore. This is reportedly a cool feature in theory but worse in practice due to side-effects such as I/O and lifecycle hooks.)
 6. Hard-reload the browser page. Notice that "Item 3" is no longer marked as completed (since it was only checked on the frontend and we replaced that with the backend data)
 
 LESSON: Mutations can be local-only or both local and remote. You can use the DB view to go back in history and look at the data and UI at any prior point in time.
