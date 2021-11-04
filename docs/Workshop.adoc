@@ -193,21 +193,21 @@ image::images/fulcro-system-view.svg["Fulcro overview",400]
 Remember that any "request for a change" passes through the "asynchronous" transaction subsystem (marked _Tx_) and that this includes both queries - i.e. data loads - and mutations. Notice also that EQL queries are used both for getting the props tree from the Client DB (not shown in the figure) and for loading data from the backend into the Client DB. Let's see how the loading looks in practice.
 
 1. Make sure _Fulcro Inspect_ is opened and reload the page
-1. In Fulcro Inspect, open the _Transactions_ tab. You should see a single transaction^1^ there, a [.underline]#LOAD#, and its EQL query. Explore the query. +
+2. In Fulcro Inspect, open the _Transactions_ tab. You should see a single transaction^1^ there, a [.underline]#LOAD#, and its EQL query. Explore the query. +
 *^1^) Tip*: If you do not see the transaction then try to hard-reload the browser tab. (This happens if you opened Fulcro Inspect after the data has already been loaded.)
  * How does the LOAD query differ from Root query? Are they same? No? Why?
  * _Transactions_ shows side-effects executed in the frontend, i.e. data loads and other Fulcro mutations
-2. Click on the transaction to see its details. Notice that the transaction is simply data, of the form `(<fully qualified symbol> {options...})`. Let's explore the details of its query. +
+3. Click on the transaction to see its details. Notice that the transaction is simply data, of the form `(<fully qualified symbol> {options...})`. Let's explore the details of its query. +
    Note: Sadly, the _Diff added_ / _Diff removed_ does not work in the current version of Fulcro Inspect, so ignore it.
-3. Open Fulcro Inspect's _Network_ tab (not the browser's!). You should see a single _Request_ with the load's query. Click it to see its details and the _Response_ and notice how the response data tree mirrors the EQL query.
-4. Now click the _[Send to query]_ button next to the Request in the details, which will send you to the _EQL_ tab. Once there, press also the _[(Re)load Pathom Index]_ button to the very right (for autocompletion) and then the _[Run EQL]_ button next to it. Here we can play with EQL queries that the backend can answer.
-5. Play with the query. Delete some attributes (keywords), add a made-up attribute and run it again. Replace the `{:list/items ...}` join with just the plain `:list/items` attribute and re-run. (Note: The data is returned primarily by the https://github.com/holyjak/fulcro-intro-wshop/blob/ccad99e8af91882c0091bedf8bd353689353a82e/src/fulcro_todomvc/server.clj#L111[`list-resolver`].)
+4. Open Fulcro Inspect's _Network_ tab (not the browser's!). You should see a single _Request_ with the load's query. Click it to see its details and the _Response_ and notice how the response data tree mirrors the EQL query.
+5. Now click the _[Send to query]_ button next to the Request in the details, which will send you to the _EQL_ tab. Once there, press also the _[(Re)load Pathom Index]_ button to the very right (for autocompletion) and then the _[Run EQL]_ button next to it. Here we can play with EQL queries that the backend can answer.
+6. Play with the query. Delete some attributes (keywords), add a made-up attribute and run it again. Replace the `{:list/items ...}` join with just the plain `:list/items` attribute and re-run. (Note: The data is returned primarily by the https://github.com/holyjak/fulcro-intro-wshop/blob/ccad99e8af91882c0091bedf8bd353689353a82e/src/fulcro_todomvc/server.clj#L111[`list-resolver`].)
  * As you have noticed, Pathom by default returns all attributes of a _nested entity_ if you do not declare what you want using a join
-6. Review the <<eql-primer,EQL Primer>> above
-7. Replace the whole query with the ident query `[[:item/id 1]]`. What do you get back?
- * Notice this case differs from 5. above because we do not query for an _attribute_ but for an _ident_
-8. Change the plain ident query to a join, to specify the details of what you want from the item, run. (See ^1^ below for help.)
-9. [Optional] Open the _Index Explorer_ tab and click its _[Load index]_ button. Then collapse the _▼ Attributes_ section so that you will see the _Resolvers_ and click e.g. the `.../list-resolver`. Here you can see all the resolvers defined on the server, what input they need, and what attributes they can output.
+7. Review the <<eql-primer,EQL Primer>> above
+8. Replace the whole query with the ident query `[[:item/id 1]]`. What do you get back?
+ * Notice this case differs from 6. above because we do not query for an _attribute_ but for an _ident_
+9. Change the plain ident query to a join, to specify the details of what you want from the item, run. (See ^1^ below for help.)
+10. [Optional] Open the _Index Explorer_ tab and click its _[Load index]_ button. Then collapse the _▼ Attributes_ section so that you will see the _Resolvers_ and click e.g. the `.../list-resolver`. Here you can see all the resolvers defined on the server, what input they need, and what attributes they can output.
 
 
 
