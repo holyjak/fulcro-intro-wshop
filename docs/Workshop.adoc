@@ -44,6 +44,8 @@ image::./images/fulcro-wshop-screen-setup.png["screen layout"]
 
 Note: You have about 5 - 10 minutes per exercise.
 
+Take good time to read and understand the data / code you are looking at.
+
 #### 1. Component tree
 
 1. Open the React dev tools' **Components tab**
