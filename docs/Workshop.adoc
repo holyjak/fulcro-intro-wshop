@@ -326,12 +326,14 @@ You will now get the chance to test your understanding of Fulcro concepts by com
 
 [IMPORTANT]
 ==== 
-The exercises rely on some knowledge that the workshop does not provide so check carefully the `RESOURCES` section of each task and make sure you ± understand those. This applies especially to:
+The exercises rely on some knowledge that the workshop does not provide so read carefully the `RESOURCES` referenced by each task and make sure you understand them. (You might occasionally also need to refer to a previous part of the tutorial, if something is not clear.) This applies especially to:
 
 * Ex.1: https://fulcro-community.github.io/guides/tutorial-minimalist-fulcro/#_rendering_dom_the_body_of_a_component[Creating DOM elements]
 * Ex.5: https://fulcro-community.github.io/guides/tutorial-minimalist-fulcro/#_targeting_adding_references_to_the_new_data_to_existing_entities[Data targeting]
 * Ex.7: https://fulcro-community.github.io/guides/tutorial-minimalist-fulcro/#_briefly_about_pathom[Writing and registering Pathom resolvers]
 * Ex.7.5 (feel free to skip this one): https://fulcro-community.github.io/guides/tutorial-minimalist-fulcro/#_bonus_tracking_loading_state_with_load_markers[Tracking loading state with load markers] 
+
+It is advisable that you skim through the https://fulcro-community.github.io/guides/tutorial-minimalist-fulcro/[whole tutorial] to get an idea what is there, and where.
 ====
 
 TIP: If you run into troubles then check the <<Help>> section below

@@ -92,6 +92,9 @@
     ;; Refactor the previous solution by moving the `<li>` into a separate
     ;; component called `ValuePropositionPoint` and `map` over the provided
     ;; `value-proposition-points` to produce the whole list.
+    ;; TIP: When you paste the previous code and Calva messes up the indentation,
+    ;;      select all of the wrongly indented code and press `tab` to fix it
+    ;;      (or execute Format Selection)
     ;;
     ;; LEARNING OBJECTIVES:
     ;; - Creating and using Fulcro components
@@ -137,6 +140,8 @@
        ;; NOTE: Normally the initial-db we pass here should be already normalized but
        ;; since we do not care about normalization and are happy with denormalized data
        ;; in this exercise, it is OK to pass in the data tree as-is.
+       ;; BEWARE: The initial data is only processed at app initialization, i.e.
+       ;; not after hot-reloading of a code change
        {:page/heading "<3> Fulcro is:"
         :page/value-proposition-points
                       [{:proposition/label "Malleable"}
