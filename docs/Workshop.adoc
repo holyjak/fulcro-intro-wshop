@@ -312,18 +312,6 @@ Now is the time to ask any questions you might have, before we proceed to the fi
 You will now get the chance to test your understanding of Fulcro concepts by completing coding exercises
 (included from https://github.com/fulcro-community/fulcro-exercises[fulcro-exercises]). Here you will modify and evolve tiny Fulcro applications, one concept at a time.
 
-### Setup
-
-1. 🛑 Stop the running todomvc REPL (either by clicking `REPL` in VS Code's bottom toolbar or running _Calva: Disconnect from the REPL Server_).
-2. 🏁 Start REPL for the exercises:
-  .. In the menu _View - Command Palette... - Calva: Start a Project REPL and Connect (aka Jack-In)_
-  .. Select _shadow-cljs_
-  .. Select (only!) `:coding` for the aliases to launch with
-  .. Wait a few seconds, then select `:coding` for the build to connect to
-3. Navigate to http://localhost:9001
-4. Open `src/holyjak/fulcro_exercises.cljs`, read the ns docstring and then work through it from top to bottom, following the `;; TASK` instructions
-5. You might need to refer to the https://fulcro-community.github.io/guides/tutorial-minimalist-fulcro/[Minimalist Fulcro Tutorial] to refresh your knowledge or fill in any gaps
-
 [IMPORTANT]
 ==== 
 The exercises rely on some knowledge that the workshop does not provide so read carefully the `RESOURCES` referenced by each task and make sure you understand them. (You might occasionally also need to refer to a previous part of the tutorial, if something is not clear.) This applies especially to:
@@ -337,6 +325,18 @@ It is advisable that you skim through the https://fulcro-community.github.io/gui
 ====
 
 TIP: If you run into troubles then check the <<Help>> section below
+
+### Setup
+
+1. 🛑 Stop the running todomvc REPL (either by clicking `REPL` in VS Code's bottom toolbar or running _Calva: Disconnect from the REPL Server_).
+2. 🏁 Start REPL for the exercises:
+  .. In the menu _View - Command Palette... - Calva: Start a Project REPL and Connect (aka Jack-In)_
+  .. Select _shadow-cljs_
+  .. Select (only!) `:coding` for the aliases to launch with
+  .. Wait a few seconds, then select `:coding` for the build to connect to
+3. Navigate to http://localhost:9001
+4. Open `src/holyjak/fulcro_exercises.cljs`, read the ns docstring and then work through it from top to bottom, following the `;; TASK` instructions
+5. You might need to refer to the https://fulcro-community.github.io/guides/tutorial-minimalist-fulcro/[Minimalist Fulcro Tutorial] to refresh your knowledge or fill in any gaps
 
 ### Help
 
