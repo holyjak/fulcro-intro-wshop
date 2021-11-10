@@ -5,11 +5,38 @@
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport"/>
     <link rel="stylesheet" href="/base.css">
     <link rel="stylesheet" href="/index.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.63.3/codemirror.min.css">
+    <style>#query > .CodeMirror {height: auto}</style>
     <link href="data:image/x-icon;," rel="shortcut icon" type="image/x-icon"/>
 </head>
-<body>
-<div id="app"></div>
+<body style="margin: 5px">
+<div id="app" style="display: none;"></div>
 <script src="js/main.js"></script>
 <script >fulcro_todomvc.main.start();</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.63.3/codemirror.min.js"></script>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.63.3/codemirror.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.63.3/mode/clojure/clojure.min.js"></script>
+<div id="jh-tmp-demo" style="display:flex; flex-direction: column; width: 100%">
+    <p style="margin-block-end: 0"><b>Root query:</b></p>
+    <pre id="query" style="margin-top: 0">
+[{:root/current-list [:list/id 
+                      :list/title 
+                      :list/filter
+                      :ui/new-item-text 
+                      #{:list/items [:item/id 
+                                     :item/label 
+                                     :item/complete 
+                                     :ui/editing 
+                                     :ui/edit-text]}]} 
+{:root/user [[:logged-in-user '_]]}]
+    </pre>
+    <p style="margin-block-end: 0; margin-block-start: 0"><b>Data tree to return:</b></p>
+    <textarea id="text-edit" rows=10></textarea>
+    <script>CodeMirror.fromTextArea(document.getElementById("text-edit"))</script>
+    <script>const q = document.getElementById("query"); qv = q.textContent; q.textContent='';
+    CodeMirror(q, {readOnly: true, value: qv});</script>
+</div>
 </body>
 </html>

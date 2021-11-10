@@ -153,14 +153,25 @@
 
 (def ui-todo-list (comp/factory TodoList))
 
-(defsc Root [this {:root/keys [current-list] :as props}]
-  {:query         [{:root/current-list (comp/get-query TodoList)}]}
+(defsc User [_ _]
+  {:initial-state {}
+   :ident (fn [] [:component/id :User])
+   :query [[:logged-in-user '_]]}
+  nil)
+
+(defsc Root [this {:root/keys [current-list user] :as props}]
+  {:initial-state {:root/user {}}
+   :query         [{:root/current-list (comp/get-query TodoList)} {:root/user (comp/get-query User)}]}
   (dom/div {}
+    ((comp/factory User) user)
     (ui-todo-list current-list)))
 
 (comment
+  (tap> (comp/props (comp/class->any app Root)))
+  (com.fulcrologic.fulcro.algorithms.merge/merge!
+    app {:logged-in-user #:user{:name "jo" :fname "Jo"}} ['*])
   ;; Exercise 3.1
-  (comp/get-query TodoItem) ; TodoList, Root
+  (comp/get-query Root) ; TodoList, Root
   ;; Exercise 3.2
   (-> (comp/ident->components app [:item/id 2])
       first
@@ -189,7 +200,8 @@
   ;; Exercise 9.1
   (comp/transact! app [(api/todo-uncheck {:id 3})])
   ;; Exercise 9.2
-  (comp/transact! app [(api/todo-check {:id 3})])
+  (comp/transact! app [(api/todo-check {:id 3})]))
+  
 
 
-  )
+  
