@@ -68,13 +68,14 @@ The following code is a simplified version of the code defining the UI:
 (defsc TodoList [_ props]
   {...}
   (dom/ul 
-    (map #((com/factory TodoItem) %) 
+    (map #((com/factory TodoItem) %) ; <1>
          (:list/items props))))
 
 (defsc Root [_ props]
   {...}
   (dom/div ((comp/factory TodoList) (:root/current-list props))))
 ```
+<1> React requires us to turn a component _class_ into an _element_ using a _factory_ before it can be rendered
 
 LESSON: The UI is indeed a tree of components: `Root > TodoList > TodoItem`.
 
@@ -183,7 +184,7 @@ image::./images/brwsr-fi-db-explorer.png["Fulcro Inspect - DB Explorer"]
  * Notice that you are looking at the very _same data_ that you can see in Fulcro Inspect - DB
  * Pay attention to the values of `:list/items` - it is not the attribute maps but just _idents_ of the included items
 
-LESSON: We saw how data is stored in the client DB mostly in a normalized form (`<entity name>/id -> <id value> -> <map of props, where some props contain idents, to link to other entities>`) and how idents are used to link entities together. We have experienced how Fulcro fulfills a query by "walking" the client DB. We have seen that the client DB is nothing else than a map (of maps of maps, mostly).
+LESSON: We saw how data is stored in the client DB mostly in a normalized form (`<entity name>/id -> <id value> -> <map of props, where some props contain idents, to link to other entities>`) and how idents are used to link entities together. We have experienced how Fulcro fulfills a query by "walking" the client DB. We have seen that the client DB is nothing else than a map (of maps of maps, mostly). Tip: my short screencast https://youtu.be/rzK0_k5lzg4[Fulcro explained: Turning Root query into props tree] also demonstrates how the the query and client DB work in tandem to produce props for the Root component.
 
 #### 6. Loading data from the server
 
@@ -263,6 +264,7 @@ To change state either in the frontend or in the backend, you "transact" (submit
 Note: The `todo-check` call simply returns the surrounding list, quoted
 2. Look at the transaction in the _Transactions_ tab and verify it indeed is a list
 3. Explore it in Fulcro Inspect's _Network_ tab
+ * Notice the mutation is now wrapped in `[ ... ]` to become a complete _EQL transaction_.
 4. Read the https://github.com/holyjak/fulcro-intro-wshop/blob/ccad99e8af91882c0091bedf8bd353689353a82e/src/fulcro_todomvc/api.cljs#L47[frontend Fulcro defmutation] code in `fulcro-todomvc.api`.
  * `action` is performed to handle the mutation on the frontend 
  * `(remote [_] true)` instructs Fulcro to also send the mutation to the backend (as we have seen in the Network tab)
