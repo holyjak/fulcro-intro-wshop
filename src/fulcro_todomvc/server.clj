@@ -178,7 +178,13 @@
 (comment
 
   ;; Calva setup: Execute the line below to start the server
+  ;; (Alt-Enter or, on Mac, Option-Enter; if it does not work, make sure to
+  ;; put your cursor after the closing parenthese)
   (http-server)
+  ;; You should see output like:
+  ;; => #function[fulcro-todomvc.server/http-server/fn--63504]
+  ;; if you see instead `#function[fulcro-todomvc.server/http-server]` then
+  ;; you have not run the function, only evaluated the var
 
 
   (web/stop @server)

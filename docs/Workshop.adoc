@@ -95,7 +95,7 @@ image::./images/brwsr-fi-element.png["Fulcro Inspect - Element"]
 4. Mark "Item 1" as complete by clicking to the left of its label and change its text by double-clicking on it and typing something then clicking outside of the list. Pick the element again. How have the props changed?
   * Notice that for most purposes, having a prop with the value `false` and not having the prop at all are equivalent
 5. _Pick_ another list item element and compare its values with the original item
-6. Select the whole `TodoList` and look at its ident, props, and query
+6. Select the whole `TodoList` and look at its ident, props, and query. Does it relate in nay way to the ``TodoItem``'s query and props? How?
 
 LESSON: We have learned to use _Fulcro Inspect - Element_ to explore a component and we have learned that it has props, ident, and a query. We saw that the props mirror what is specified in the query.
 
