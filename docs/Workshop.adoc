@@ -106,7 +106,7 @@ The query of a component declares its data needs and Fulcro uses it to build the
 
 image::./images/brwsr-shadow-inspect.png["Shadow Inspect"]
 
-1. Open `src/fulcro_todomvc/ui.cljs`, scroll to the bottom and inside the `(comment ...)` find _Exercise 3.1_ and evaluate the `get-query` form (`Alt - ENTER` from the https://github.com/holyjak/interactive-dev-wshop/blob/master/Cheatsheet.md#vs-code-and-calva-shortcuts[essential few Calva keybindings]), read the result
+1. Open `src/fulcro_todomvc/ui.cljs`, scroll to the bottom and inside the `(comment ...)` find _Exercise 3.1_ and evaluate the `get-query` form (`Alt - ENTER` or `Option - ENTER` from the https://github.com/holyjak/interactive-dev-wshop/blob/master/Cheatsheet.md#vs-code-and-calva-shortcuts[essential few Calva keybindings]), read the result
 +
 NOTE: The evaluation result is displayed both inline and inside the `output.calva-repl` file (_Go - Go to File..._ to reopen it)
 
