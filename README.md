@@ -14,11 +14,11 @@ Fulcro is unique among Clojure web frameworks in providing a complete, integrate
 
 In this workshop you will get a brief introduction to Fulcro and then get your hands dirty exploring the concepts in practice on an existing application in a series of guided exercises. We will use the excellent Fulcro Inspect tooling and mess up with the code.
 
-You can find the workshop materials (here)[https://github.com/holyjak/fulcro-intro-wshop/tree/main/docs], including:
+You can find the workshop materials [here](docs), including:
 
-* (course introduction)[https://github.com/holyjak/fulcro-intro-wshop/blob/main/docs/INTRO.md]
-* (instructor's manual)[https://github.com/holyjak/fulcro-intro-wshop/blob/main/docs/Instructor_manual.adoc]
-* (student exercises)[https://github.com/holyjak/fulcro-intro-wshop/blob/main/docs/Workshop.adoc]
+* [Course introduction](docs/INTRO.md)
+* [Instructor's manual](docs/Instructor_manual.adoc)
+* [Student exercises](docs/Workshop.adoc)
 
 Prerequisites
 --------------
