@@ -27,7 +27,8 @@
     [com.fulcrologic.fulcro.data-fetch :as df]
     [com.fulcrologic.fulcro.mutations :refer [defmutation]]
     [com.fulcrologic.fulcro.dom :as dom :refer [button div form h1 h2 h3 input label li ol p ul]]
-    [com.wsscode.pathom.connect :as pc :refer [defresolver]]))
+    [com.wsscode.pathom.connect :as pc :refer [defresolver]]
+    [com.fulcrologic.fulcro.mutations :as m]))
 
 (defn init [])
 
@@ -249,7 +250,10 @@
     ; (hint 5)
 
     ;; More tasks!
-    ;; 2. Make sure the data is normalized in the DB by adding idents. What will the DB look like?
+    ;; 2. Try to make the data normalized in the DB by adding idents. What do you 
+    ;;    expect the DB to look like? How does it actually look?
+    ;;    (Don't worry if you fail - we will get back to it soon.)
+    ; (hint 5)
     ; (hint 5)
     ; (hint 5)
     ;;
@@ -463,6 +467,55 @@
     ;; TODO: TASK 5 - Use Fulcro load markers to display "Loading..." instead of the content while loading the data (see Root7)
 
     ,))
+
+(comment ; 8 Fix the graph
+  (do
+    ;; TASK:
+    ;; Fix the code to actually show the list of cities.
+    ;;
+    ;; LEARNING OBJECTIVES: 
+    ;; - Understand the importance of connections in the frontend data and how 
+    ;;   to establish them
+    ;; - Understand that you can add any arbitrary connection between components;
+    ;;   they do not need to come only from the backend data
+    ;;
+    ;; RESOURCES:
+    ;; - https://fulcro-community.github.io/guides/tutorial-minimalist-fulcro/index.html#_components_initial_state
+    ;; - https://fulcro-community.github.io/guides/tutorial-minimalist-fulcro/index.html#_components_query
+    ;;
+    ;; TIP: You need to fix 4 places, most of them in Root8
+    ;;
+    (defsc Menu [this {:keys [cities selected-city]}]
+      {:ident (fn [] [:component/id ::Menu])
+       :query [:cities :selected-city]}
+      ;; Note: This is not a very good way of using a select :-) 
+      (dom/select {:value (or selected-city "Select one:")
+                   :onChange #(do (println "Selected city:" (.-value (.-target %)))
+                                (m/set-string! this :selected-city :event %))}
+        (->> (cons "Select one:" cities)
+             (mapv #(dom/option {:key %, :value %} %)))))
+
+    (def ui-menu (comp/factory Menu))
+
+    (defsc Root8 [_ props]
+      {:query []}
+      (dom/div
+        (h1 "Select a city!")
+        (ui-menu {:TODO "fix this and other places"})))
+    
+    (defresolver cities [_ _]
+      {::pc/input #{}
+       ::pc/output [:cities]}
+      {:cities ["Linköping" "Oslo" "Prague"]})
+
+    ;; Render the app, with a backend using these resolvers
+    (def app8 (config-and-render! Root8 {:resolvers [cities]}))
+
+    ;; We want to load :cities into the Menu component because it is the only
+    ;; one needing the data (rather then polluting root with it and having to
+    ;; use a Link Query)
+    (df/load! app8 :cities nil {:target (conj (comp/get-ident Menu {}) :cities)})
+    ))
 
 ;; TODO Additional exercises:
 ;; - computed props for passing a callback from the parent

@@ -10,7 +10,8 @@
     [com.fulcrologic.fulcro.data-fetch :as df]
     [com.fulcrologic.fulcro.mutations :refer [defmutation]]
     [com.fulcrologic.fulcro.dom :as dom :refer [button div form h1 h2 h3 input label li ol p ul]]
-    [com.wsscode.pathom.connect :as pc :refer [defresolver]]))
+    [com.wsscode.pathom.connect :as pc :refer [defresolver]]
+    [com.fulcrologic.fulcro.mutations :as m]))
 
 ;; TIP: Use your editor's powers to collapse all the comments and only open the one you want to study
 ;;      (Cursive: 'Collapse All', `Shift Cmd -` on Mac)
@@ -473,3 +474,37 @@
             (comp/fragment (h1 "Teams")
                            (map ui-team teams))))))
     ,))
+
+(comment ; 8 Fix the graph
+  (do
+    (defsc Menu [this {:keys [cities selected-city]}]
+      {:ident (fn [] [:component/id ::Menu])
+       :query [:cities :selected-city]
+       :initial-state {}}
+      ;; Note: This is not a very good way of using a select :-) 
+      (dom/select {:value (or selected-city "Select one:")
+                   :onChange #(do (println "Selected city:" (.-value (.-target %)))
+                                (m/set-string! this :selected-city :event %))}
+        (->> (cons "Select one:" cities)
+             (mapv #(dom/option {:key %, :value %} %)))))
+
+    (def ui-menu (comp/factory Menu))
+
+    (defsc Root8 [_ props]
+      ;; The key discovery is that we can add _arbitrary_ "edges" to the client DB / graph
+      ;; (here Root -(:menu)-> Menu) f.ex. by setting them up via :initial-state
+      {:query [{:menu (comp/get-query Menu)}]
+       :initial-state {:menu {}}}
+      (dom/div
+        (h1 "Select a city!")
+        (ui-menu (:menu props))))
+
+    (defresolver cities [_ _]
+      {::pc/input #{}
+       ::pc/output [:cities]}
+      {:cities ["Linköping" "Oslo" "Prague"]})
+
+    (def app8 (config-and-render! Root8 {:resolvers [cities]}))
+
+    (df/load! app8 :cities nil {:target (conj (comp/get-ident Menu {}) :cities)})
+    ))

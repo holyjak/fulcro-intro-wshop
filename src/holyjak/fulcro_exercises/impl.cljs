@@ -62,7 +62,7 @@
        (println "LOG: Configured the remote" (-> remotes keys first) "for the Fulcro App"))
      (reset! current-app app)
      (println "LOG: Rendering" RootComponent "...")
-     (app/mount! app RootComponent "app" {:initialize-state? (some? initial-db)})
+     (app/mount! app RootComponent "app" #_{:initialize-state? (some? initial-db)}) ; FIXME:!!!!
      app)))
 
 (defn refresh []
@@ -87,6 +87,7 @@
       "5.1b Use `comp/get-query` to get it!"
       "5.2a Normalization: Add idents to all components (but the root). Use the https://book.fulcrologic.com/#_keyword_idents form."
       "5.2b Normalization: Use :team/id, :player/id, :address/city as the idents (same as `(fn [] [:team/id (:team/id <props>)])` ...). But also remember to add the IDs to the queries!"
+      "5.2c Normalization: Your data still is not normalized - and that is expected. We address that in the next exercise, 5.3"
       "5.3 Normalization fix: remember to use comp/get-query in your queries!"
       "5.4a merge-component!: We cannot use Root5 because it has no ident and thus we cannot merge the whole tree. But we can merge a team's data using the correct component."
       "5.4b Inserting the team's data is not enough - we also need to re-establish the 'edge' between it and `:teams`. Look at the client DB and see it is missing! Look at what options merge-component! takes to support this."
@@ -97,5 +98,11 @@
       "7.1b The component class passed to load! holds the query defining what to fetch for each element. Since we are getting a list of teams, the component should be `Team`"
       "7.2 load! does internally transact a mutation and can be called as-is, directly from the :onClick. Use the component's `this` instead of `app7` there."
       "7.3 After you factor out a resolver, remember to add it to the `:resolvers` list, as Pathom needs to be informed of it."
-      "7.4 Use the `:target` option of load! with `(targeting/replace-at ..)`."]})
+      "7.4 Use the `:target` option of load! with `(targeting/replace-at ..)`."]
+   8 ["8a Fix the page's query first"
+      "8b Remember the query must compose up to the parent"
+      "8c Tip: You can make up an arbitrary keyword for the Menu's data in Root, e.g. `:menu` is fine"
+      "8d Query is not enough - you need connection between Root and Menu in the client DB's data"
+      "8e Namely you need `:menu [:component/id ::Menu]` at the top of the Client DB"
+      "8f You can leverage initial-state to set that connection up"]})
 
