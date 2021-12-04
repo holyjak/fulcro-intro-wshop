@@ -108,7 +108,9 @@ Shadow-cljs runs a number of things:
 
 It is possible to participate using any IDE but I really **_implore you_** to bite the bullet and use Calva this one time (though I am normally Cursive user myself). I do not have the bandwidth to support people that run into issues with any other setup and inevitably the do, even though they are otherwise experts in their IDE of choice. You will not do anything fancy in the editor - you only need a single keybinding to eval a form (alt-enter) and the biggest editing you will do is changing one keyword to another.
 
-### Troubleshooting problems with running the application
+### Troubleshooting 
+
+#### Troubleshooting problems with running the application
 
 * If the application does not work properly when you start it from Calva then try to start it manually from the terminal, as described above.
 * Are there any errors from shadow-cljs? Look both in the Calva Jack-in _Terminal_ at the bottom of VS Code (if you have closed it: _View - Open View..._ - type `terminal` - you should see 3, where the third is the one you want, "1.1 Calva Jack-in: shadow-cljs") There is lot of output, including the following lines:
@@ -128,3 +130,9 @@ shadow-cljs - watching build :todomvc
 ```
 
 * Look also into `output.calva-repl` for any problems. (You can re-open it by running _Go - Go to File..._ - type `output.calva-repl`)
+* Make sure that you actually use the `shadow-cljs` version declared in `package.json` (and not e.g. your older. global installation)
+* Make sure that your Node version is compatible with the one in `package.json - engines`
+
+#### Troubleshooting other problems
+
+* Fulcro Inspect is just a blank page - try a different Chromium-based browser (Chrome, Vivaldi). Right-click - Inspect inside Fulcro Inspect to look for errors in its Console. It can fail e.g. if it is not allowed to access `localStorage`.
