@@ -232,7 +232,7 @@ In the previous exercise we have observed the _effect_ of the application loadin
  * Notice the shape of the response - it is a tree
 3. Go to _Fulcro Inspect - DB_ and expand `:list/id` to verify the list `2` has been added there. Then expand `:item/id` to verify that the item `99` has also been added and item `1` updated
  * Notice the shape of the data in the client DB: is it exactly the same as the response (a single tree) or not?
- * not - Fulcro has placed each _data entity_ into its own "table", i.e. the list into `:list/id` and the item into `:item/id`, and the list links to the item using its ident instead of containing it. I.e. Fulcro has https://rdbms.ca/database/normalization.html[_normalized_] the incoming data tree into the Client DB's "entity tables":
+ * not - Fulcro has placed each _data entity_ into its own "table", i.e. the list into `:list/id` and the item into `:item/id`, and the list _links_ to the item using its ident instead of containing it. I.e. Fulcro has https://rdbms.ca/database/normalization.html[_normalized_] the incoming data tree into the Client DB's "entity tables":
 +
 image::./images/brwsr-fi-db+norm.png["Fulcro Inspect - DB and normalized data"]
 +
@@ -280,7 +280,7 @@ As always in Fulcro, we do not need to click around and can trigger the mutation
 
 1. Go to `ui.cljs` and eval the form marked _Exercise 9.1_
 2. Observe that the UI now shows the item as not completed
-3. In `api.cljs`, find the `todo-check` mutation and inside the `remote` section change the [.line-through]`true` to `false` and _save the file_ (so that Shadow will hot-reload the code).
+3. In `api.cljs`, find the `todo-check` mutation (you can Command-click / Control-click the "call" go to its definition) and inside the `remote` section change the [.line-through]`true` to `false` and _save the file_ (so that Shadow will hot-reload the code) and wait a few seconds.
 4. In `ui.cljs`, eval the form marked _Exercise 9.2_
  .. Notice the item is marked as completed in the UI
  .. Verify that you see the `todo-check` mutation in the _Transactions_ tab
