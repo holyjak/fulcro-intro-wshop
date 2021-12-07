@@ -48,14 +48,14 @@
   "Check the given item, by id."
   [{:keys [id]}]
   (action [{:keys [state]}] ; <- `state` is the atom holding the Client DB
-    (swap! state set-item-checked* id true))
+    (swap! state assoc-in [:item/id id :item/complete] true))
   (remote [_] true))
 
 (defmutation todo-uncheck
   "Uncheck the given item, by id."
   [{:keys [id]}]
   (action [{:keys [state]}]
-    (swap! state set-item-checked* id false))
+    (swap! state assoc-in [:item/id id :item/complete] false))
   (remote [_] true))
 
 (defn set-item-label*
