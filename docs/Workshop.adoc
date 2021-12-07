@@ -227,6 +227,7 @@ In the previous exercise we have observed the _effect_ of the application loadin
  * Notice that it only returns a uuid of the submitted transaction, which is executed asynchronously
  * Also notice that we pass it the ident of the thing we want to load and a component - internally, Fulcro will call `(comp/get-query <the component>)`
  * Finally, notice that item 1 in the UI has been updated (thanks to the two lists sharing the item and data normalization)
+ * (The loaded list will _not_ be displayed because we do not tell Fulcro to do so. Loading and displaying data are unrelated concerns.)
 2. Check that you can see the transaction in the Fulcro Inspect _Transactions_ tab and explore the request and response in its _Network_ tab.
  * Notice that the ident and the query of the component that you supplied to `df/load!` have been combined into a join query - which the backend can resolve because it https://github.com/holyjak/fulcro-intro-wshop/blob/ccad99e8af91882c0091bedf8bd353689353a82e/src/fulcro_todomvc/server.clj#L111[has the `list-resolver`] that takes a `:list/id` and returns its data
  * Notice the shape of the response - it is a tree
