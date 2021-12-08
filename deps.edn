@@ -1,6 +1,6 @@
 {:paths   ["src"]
 
- :deps    {com.fulcrologic/fulcro     {:mvn/version "3.5.6"}
+ :deps    {com.fulcrologic/fulcro     {:mvn/version "3.5.8"} ; 3.5.9-RC1
            com.taoensso/timbre        {:mvn/version "4.10.0"}
 
            com.taoensso/sente         {:mvn/version "1.16.1"}

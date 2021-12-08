@@ -172,7 +172,10 @@
   (let [result (web/run middleware {:host "0.0.0.0"
                                     :port 8181})]
     (reset! server result)
-    ((requiring-resolve 'clojure.java.browse/browse-url) "http://localhost:8181")
+    (try
+      ((requiring-resolve 'clojure.java.browse/browse-url) "http://localhost:8181")
+      (catch UnsupportedOperationException e
+        (println "Browse to http://localhost:8181 (opening it automatically not supported:" (ex-message e) ")")))
     (fn [] (web/stop result))))
 
 (comment

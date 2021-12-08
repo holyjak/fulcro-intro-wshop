@@ -57,6 +57,14 @@ An hour or so before the workshop:
 Usage
 -----
 
+### Running the app with in-browser VS Code and backend via Gitpod [EXPERIMENTAL]
+
+It is preferable to run the app locally with Calva (see below) but if you run into some issues with the editor or tooling, you can run everything in the browser with a pre-configured virtual machine:
+
+[![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/from-referrer/)
+
+(Requires login via GitHub / GitLab / Bitbucket. Gitpod offers enough free usage time for this workshop.)
+
 ### Running the app from VS Code with Calva
 
 To make everyone's lives simpler, it is _recommended_ that use use VS Code with [Calva](https://calva.io/), no matter what is your preferred editor / IDE. You only [need to know a few Calva keybindings](https://github.com/holyjak/interactive-dev-wshop/blob/master/Cheatsheet.md#vs-code-and-calva-shortcuts) to be sufficiently effective during the workshop.

@@ -11,3 +11,11 @@ Agenda
 5. Give a tour of the recommended window setup and fly through the Fulcro Inspect tabs that we will use
 6. Ask them to post *finished ex. number* such as 1 .. 9 to the chat so that you have an overview of the progress
 7. Let them follow link:./Workshop.adoc[] while doing the exercises on the screen (not expecting them to watch, just for the recording and to pass time :))
+
+## Before workshop
+
+Run the app via GitPod to verify that it still works and to get GitPod to build (and hopefully cache) the image for faster startup for the participants.
+
+## Tips
+
+Use Discord and create a _room_ for each exercises where participants could discuss and help each other.

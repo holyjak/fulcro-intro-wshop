@@ -1,0 +1,40 @@
+image:
+  file: .gitpod.Dockerfile
+
+vscode:
+  extensions:
+    - betterthantomorrow.calva
+    - asciidoctor.asciidoctor-vscode # for instructions preview
+ports:
+  - port: 8181 # the webapp, served by our server (see `server.clj`)
+    onOpen: open-browser
+    visibility: public
+  - port: 9000 # shadow-cljs nREPL
+    onOpen: ignore
+    visibility: public
+  - port: 9001 # shadow-cljs http server - unused
+    onOpen: ignore
+  - port: 9630 # shadow-cljs UI including its Inspect
+    onOpen: open-browser
+    visibility: public
+
+tasks:
+  - name: Node deps
+    init: yarn install
+  - name: Prepare project deps
+    init: clojure -A:dev -P
+  - name: Prepare Calva deps
+    init: clojure -Sdeps '{:deps {nrepl/nrepl {:mvn/version,"0.8.3"},cider/cider-nrepl {:mvn/version,"0.26.0"}}}' -P
+  - name: shadow deps
+    init: npx shadow-cljs classpath
+  - name: Shadow-cljs - set devtools-url to fix WS connection to go through the host that GitPod exposes it as
+    # GitPod exposes each port under `https://<port>-<workspace url>:443` so we need to tell Shadow to connect to WebSockets via that:
+    # (alternatively, the user could install https://www.gitpod.io/blog/local-app to be able to use the VM via localhost)
+    # See https://github.com/gitpod-io/gitpod/issues/3282 for background and https://shadow-cljs.github.io/docs/UsersGuide.html#proxy-support
+    command: export URL="$(echo $GITPOD_WORKSPACE_URL | sed 's/https:\/\//9630-/')"; sed -i "s/;GITPOD_REPLACE/:devtools-url \"https:\/\/$URL\"/" shadow-cljs.edn
+  - name: Open files # does not work
+    command: code src/fulcro_todomvc/server.clj src/fulcro_todomvc/ui.cljs
+
+github:
+  prebuilds:
+    main: true
