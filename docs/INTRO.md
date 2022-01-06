@@ -16,11 +16,12 @@ _Disclaimer: I'm not going to talk much about WHY things are they way they are. 
 
 ### Why Fulcro?
 
-Because it provides a complete, integrated model for building non-trivial business applications that span front- and backend. No more tons of plumbing code, editing N disparate places, searching for string IDs!
+Because it provides a complete, integrated model and solution for building non-trivial business applications, applications that span front- and backend as they essentially all do.
+Being integrated, it substantially reduces the amount of boilerplate you have to write, and being "complete," it often provides all you need, without having to add other libraries or make ad-hoc solutions.
 
-* Data-driven, UI = f(data)
-* Dev friendliness - co-location, tooling, navigability
+* (Really) Data-driven, UI = f(data)
 * Sustainable webapp development - minimize incidental complexity
+* Dev friendliness - co-location, tooling, navigability => no more editing N disparate places, searching for string IDs!
 * Extreme customizability
 * Graph API >> REST (see Wilker's talk)
 

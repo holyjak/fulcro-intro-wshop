@@ -37,6 +37,8 @@ http://localhost:8181[Webapp] tab + http://localhost:9630/inspect-latest[Shadow-
 
 image::./images/fulcro-wshop-screen-setup.png["screen layout"]
 
+BEWARE: Open the browser Dev Tools _after_ the application loaded - otherwise the React and Fulcro Inspect tabs might not show up there.
+
 (You do not need to see the Zoom window during the exercises.)
 
 [#exercises]
