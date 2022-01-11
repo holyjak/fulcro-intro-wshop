@@ -67,7 +67,7 @@ It is preferable to run the app locally with Calva (see below) but if you run in
 
 ### Running the app from VS Code with Calva
 
-To make everyone's lives simpler, it is _recommended_ that use use VS Code with [Calva](https://calva.io/), no matter what is your preferred editor / IDE. You only [need to know a few Calva keybindings](https://github.com/holyjak/interactive-dev-wshop/blob/master/Cheatsheet.md#vs-code-and-calva-shortcuts) to be sufficiently effective during the workshop.
+To make everyone's lives simpler, it is _recommended_ that you use VS Code with [Calva](https://calva.io/), no matter what is your preferred editor / IDE. You only [need to know a few Calva keybindings](https://github.com/holyjak/interactive-dev-wshop/blob/master/Cheatsheet.md#vs-code-and-calva-shortcuts) to be sufficiently effective during the workshop.
 
 (You can use your editor if you really prefer that but you are on your own if you run into any problems with that.)
 
