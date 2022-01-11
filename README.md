@@ -6,9 +6,7 @@ Workshop: Introduction to creating webapps with Fulcro
 <td>You must <strong><a href="#prerequisites">install prerequisites</a> and have the <a href="#running-the-app-from-vs-code-with-calva">app running</a> BEFORE</strong> the workshop!</td>
 </tr></table>
 
-An online workshop held as a part of [re:Clojure 2021](https://www.reclojure.org/) on December 1st, 3-5pm GMT. See the [workshop Eventbrite page](https://www.eventbrite.com/e/reclojure-introduction-to-fulcro-workshop-tickets-188718210247) for details and registration.
-
-*Get your hands dirty with Fulcro to experience and "get" this unique, full-stack web framework for Clojure*
+*A self-paced or facilitated workshop that enables you to get your hands dirty with Fulcro to experience and "get" this unique, full-stack web framework for Clojure. Originally presented at [re:Clojure 2021](https://www.reclojure.org/).*
 
 Fulcro is unique among Clojure web frameworks in providing a complete, integrated, full-stack solution for creating non-trivial web applications. It is based on a few simple ideas with far-reaching consequences, it is unusually malleable, and we love it for its focus on creating maintainable, developer-friendly code.
 
@@ -19,6 +17,13 @@ You can find the workshop materials [here](docs), including:
 * [Course introduction](docs/INTRO.md)
 * [Instructor's manual](docs/Instructor_manual.adoc)
 * [Student exercises](docs/Workshop.adoc)
+
+Doing the workshop: self-paced or facilitated
+---------------------------------------------
+
+You can do this workshop **on your own** - perform the setup linked above, [watch the minimalist introduction to Fulcro](https://youtu.be/UrpYLyGy4Lc), and then [follow the instructions and do the exercises](docs/Workshop.adoc). If you run into any issues or need help, use this repository's [discussions](discussions) or [issues](issues) and/or reach out to `@holyjak` in the [Clojurians Slack](http://clojurians.net/). I am also making a video of me doing the exercises, accompanied by a commentary, which will be available for $10 (to cover some of the costs of making this workshop) - [get in touch](blog.jakubholy.net/contact/) if you are interested.
+
+**I can also facilitate this workshop** for you or your company, see [my business site for details](https://holyjak.cz/holy-dev.html) and [get in touch](blog.jakubholy.net/contact/).
 
 Prerequisites
 --------------

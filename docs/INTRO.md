@@ -12,6 +12,8 @@
 
 ## Fulcro intro
 
+(_[See a recording of me giving this introduction](https://youtu.be/UrpYLyGy4Lc)_)
+
 _Disclaimer: I'm not going to talk much about WHY things are they way they are. Read https://fulcro-community.github.io/guides/tutorial-minimalist-fulcro/index.html#_why_fulcro to learn about that._
 
 ### Why Fulcro?
