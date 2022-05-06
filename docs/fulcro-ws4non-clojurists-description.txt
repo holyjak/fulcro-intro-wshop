@@ -1,0 +1,5 @@
+# Description of the workshop for non-Clojure web developers
+
+Experience the lessons the Clojure community has learned about sustainable and productive development of real-world, full-stack web applications. See the dev productivity boost provided by locality, navigability, and excellent dev tooling, the value of a graph API, of a normalised data cache. You may never use Clojure but these lessons will stay with you.
+
+You will get a brief introduction to the concepts employed by Fulcro and we will then explore them in detail in a demo full-stack webap via a series of guided exercises. Prepare your PC according to https://github.com/holyjak/fulcro-intro-wshop#practical (though there will also be an in-browser option).
