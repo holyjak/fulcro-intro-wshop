@@ -34,7 +34,7 @@ Prerequisites
 
 ### Theoretical
 
-There are no "hard" theoretical prerequisites other than general experience with Clojure development but it will help a lot if you:
+There are no "hard" theoretical prerequisites other than general experience with web development (ideally in Clojure) but it will help a lot if you:
 
 * (Preferably) have an experience with ClojureScript
 * Have an idea about how React works
@@ -45,7 +45,7 @@ There are no "hard" theoretical prerequisites other than general experience with
 To do right now:
 
 * Clone / download this repository to a directory on your computer
-* Install Java, [Clojure CLI tools](https://clojure.org/guides/getting_started), [Node and npm](https://nodejs.org/en/)
+* Install Java, [Clojure CLI tools](https://clojure.org/guides/install_clojure), [Node and npm](https://nodejs.org/en/) (_NOTE: You can skip this step and run instead everything in a virtual machine provided by GitPod, see the [GitPod instructions below](#running-the-app-with-in-browser-vs-code-and-backend-via-gitpod-experimental)._)
 * In a Chromium browser such as Vivaldi or Chrome:
   * Install [Fulcro Inspect](https://chrome.google.com/webstore/detail/fulcro-inspect/meeijplnfjcihnhkpanepcaffklobaal)
   * Install [React Developer Tools](https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi)
@@ -82,19 +82,20 @@ To make everyone's lives simpler, it is _recommended_ that you use VS Code with 
 
 To run the application using Calva:
 
-* Make sure Node dependencies are installed. In the terminal, run `npm install` (or use yarn)
-* In the menu _View - Command Palette... - [Calva: Start a Project REPL and Connect (aka Jack-In)](https://calva.io/connect/)_
-* Select _shadow-cljs_
-* Select `:todomvc` for the aliases to launch with (Note that it is not enough to press `enter` on the item, you need to first press `space` or click the checkbox.)
-* Wait a few seconds, then select `:todomvc` for the build to connect to
+* [Desktop]: Run `npm install` (or use yarn) in a terminal to make sure Node dependencies are installed. [_Not needed in GitPod_]
+* Connect to the runtime
+  1. In the menu (in GitPod it is the ☰ in the top-left corner) select _View - Command Palette... - [Calva: Start a Project REPL and Connect (aka Jack-In)](https://calva.io/connect/)_ ![](docs/images/jack-in-1.png)
+  2. Select `shadow-cljs` for the project type ![](docs/images/jack-in-2.png)
+  3. Select `:todomvc` for the builds to start ![](docs/images/jack-in-3.png) (Notice that it is not enough to press `enter` on the item, you need to first check the checbox via a click or by pressing `space`.)
+  4. Wait a few seconds, then select `:todomvc` for the build to connect to ![](docs/images/jack-in-4.png)
 * Once you see the message `[:todomvc] Build completed.` in the Calva Jack-in terminal:
     1. Open the file `src/fulcro_todomvc/server.clj` (_Go_ - _Go to File..._)
-    1. Load the file by executing the command _View - Command Palette... - Calva: Load current Current File and Dependencies_
+    1. Load the file by executing the command _Calva: Load current Current File and Dependencies_ (via menu - _View - Command Palette..._)
     1. Scroll down to the `(comment ...)` form and place the cursor in `(http-server)`, then press `alt+enter`
        * This will evaluate the form (call the `http-server` function)
        * The web browser will open with your application
 
-### Running the app from the terminal
+### Alternative 1 to VS Code: Running the app from the terminal
 
 You can start the app, both the frontend build and the backend server, from the terminal, as described below. But it is preferable to use VS Code with Calva and start them from Calva, which will provide you with better code inspection capabilities.
 
@@ -121,7 +122,7 @@ Shadow-cljs runs a number of things:
 * 9000 shadow-cljs nREPL
 * 9630 shadow-cljs UI including its Inspect
 
-### Using Cursive, Emacs, etc.
+### Alternative 2: Using Cursive, Emacs, etc.
 
 It is possible to participate using any IDE but I really **_implore you_** to bite the bullet and use Calva this one time (though I am normally Cursive user myself). I do not have the bandwidth to support people that run into issues with any other setup and inevitably the do, even though they are otherwise experts in their IDE of choice. You will not do anything fancy in the editor - you only need a single keybinding to eval a form (alt-enter) and the biggest editing you will do is changing one keyword to another.
 
