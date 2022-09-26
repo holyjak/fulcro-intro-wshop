@@ -1,16 +1,20 @@
-Workshop: Introduction to creating webapps with Fulcro
-======================================================
+Workshop: Web development from the future / Introduction to creating webapps with Fulcro
+========================================================================================
 
 <table><tr>
 <td style="font-size: 4rem">⚠️</td>
 <td>You must <strong><a href="#prerequisites">install prerequisites</a> and have the <a href="#running-the-app-from-vs-code-with-calva">app running</a> BEFORE</strong> the workshop!</td>
 </tr></table>
 
-*A self-paced or facilitated workshop that enables you to get your hands dirty with Fulcro to experience and "get" this unique, full-stack web framework for Clojure. Originally presented at [re:Clojure 2021](https://www.reclojure.org/).*
+*A self-paced or facilitated workshop that enables you to get your hands dirty with Fulcro to experience and "get" this unique, full-stack web framework. Originally presented at [re:Clojure 2021](https://www.reclojure.org/).*
 
-Fulcro is unique among Clojure web frameworks in providing a complete, integrated, full-stack solution for creating non-trivial web applications. It is based on a few simple ideas with far-reaching consequences, it is unusually malleable, and we love it for its focus on creating maintainable, developer-friendly code.
+**For non-Clojure developers**: Experience the lessons the Clojure community has learned about sustainable and productive development of real-world, full-stack web applications. See the dev productivity boost provided by locality, navigability, and excellent dev tooling, the value of a graph API, of a normalised data cache. You may never use Clojure but these lessons will stay with you. This workshop brings ideas from the Fulcro web framework to the wider public. You will learn about the ideas behind Fulcro and get to interact with a Fulcro web app using its excellent developer tooling to see how these ideas work in practice. No knowledge of Clojure required.
+
+**For Clojure developers**: Fulcro is unique among Clojure web frameworks in providing a complete, integrated, full-stack solution for creating non-trivial web applications. It is based on a few simple ideas with far-reaching consequences, it is unusually malleable, and we love it for its focus on creating maintainable, developer-friendly code.
 
 In this workshop you will get a brief introduction to Fulcro and then get your hands dirty exploring the concepts in practice on an existing application in a series of guided exercises. We will use the excellent Fulcro Inspect tooling and mess up with the code.
+
+There are two slight variations of this workshop, depending on whether you have previous experience with Clojure or not. The text below caters primarily to the Clojure-experienced crowd and some parts might be simplified / jumped over for non-Clojure audience.
 
 You can find the workshop materials [here](docs), including:
 
