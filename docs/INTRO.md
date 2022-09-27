@@ -8,7 +8,7 @@
    * Review [Summary - lessons learned](Workshop.adoc#summary---lessons-learned) at the end
 3. Q&A session
 4. (Coding exercises - likely a home work, unless we are really quick)
-   * Learn building a Fulcro app from "scratch," once concept at a time
+   * Learn building a Fulcro app from "scratch," one concept at a time
 
 ## Fulcro intro
 

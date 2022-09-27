@@ -14,7 +14,7 @@ Workshop: Web development from the future / Introduction to creating webapps wit
 
 In this workshop you will get a brief introduction to Fulcro and then get your hands dirty exploring the concepts in practice on an existing application in a series of guided exercises. We will use the excellent Fulcro Inspect tooling and mess up with the code.
 
-There are two slight variations of this workshop, depending on whether you have previous experience with Clojure or not. The text below caters primarily to the Clojure-experienced crowd and some parts might be simplified / jumped over for non-Clojure audience.
+There are two slight variations of this workshop, depending on whether you have previous experience with Clojure or not. The text below caters primarily to the Clojure-experienced crowd and some parts might be simplified / jumped over for non-Clojure audiences.
 
 You can find the workshop materials [here](docs), including:
 
@@ -59,14 +59,14 @@ To do right now:
 An hour or so before the workshop:
 
 * Have the [application running](#running-the-app-from-vs-code-with-calva) as described below. Make sure you can see the To Do application in the browser. If not, follow the _Troubleshooting_ instructions below. Open Dev Tools and verify that _Fulcro Inspect_ is there.
-* Set up your windows as described in the [workshop instructions](https://github.com/holyjak/fulcro-intro-wshop/blob/main/docs/Workshop.adoc#setup) and have both these workshop and [Fulcro intro](https://github.com/holyjak/fulcro-intro-wshop/blob/main/docs/INTRO.md) opened in a browser tab:
+* Set up your windows as described in the [workshop instructions](https://github.com/holyjak/fulcro-intro-wshop/blob/main/docs/Workshop.adoc#setup) and have both these workshop instructions and the [Fulcro intro](https://github.com/holyjak/fulcro-intro-wshop/blob/main/docs/INTRO.md) opened in two tabs of a browser window:
 
 !["Apps layout"](docs/images/fulcro-wshop-screen-setup.png)
 
 Usage
 -----
 
-### Running the app with in-browser VS Code and backend via Gitpod [EXPERIMENTAL]
+### Running the app with in-browser VS Code and backend via Gitpod
 
 It is preferable to run the app locally with Calva (see below) but if you run into some issues with the editor or tooling, you can run everything in the browser with a pre-configured virtual machine:
 
