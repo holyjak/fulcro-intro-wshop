@@ -83,18 +83,13 @@ To make everyone's lives simpler, it is _recommended_ that you use VS Code with 
 To run the application using Calva:
 
 * [Desktop]: Run `npm install` (or use yarn) in a terminal to make sure Node dependencies are installed. [_Not needed in GitPod_]
-* Connect to the runtime
+* Connect to the runtime:
   1. In the menu (in GitPod it is the ☰ in the top-left corner) select _View - Command Palette... - [Calva: Start a Project REPL and Connect (aka Jack-In)](https://calva.io/connect/)_ ![](docs/images/jack-in-1.png)
-  2. Select `shadow-cljs` for the project type ![](docs/images/jack-in-2.png)
-  3. Select `:todomvc` for the builds to start ![](docs/images/jack-in-3.png) (Notice that it is not enough to press `enter` on the item, you need to first check the checbox via a click or by pressing `space`.)
-  4. Wait a few seconds, then select `:todomvc` for the build to connect to ![](docs/images/jack-in-4.png)
-* Once you see the message `[:todomvc] Build completed.` in the Calva Jack-in terminal:
-    1. Open the file `src/fulcro_todomvc/server.clj` (_Go_ - _Go to File..._)
-    1. Load the file by executing the command _Calva: Load current Current File and Dependencies_ (via menu - _View - Command Palette..._)
-    1. Scroll down to the `(comment ...)` form and place the cursor in `(http-server)`, then press `alt+enter`
-       * This will evaluate the form (call the `http-server` function)
-       * The web browser will open with your application
+  2. Select `Fulcro Workshop` for the project type ![](docs/images/jack-in-2.png)
+    * Note: This will also start the backend server and start serving the frontend app but it will take a while before its compilation is finished so you will need to refresh the browser
 
+NOTE to Clojure devs: The Jack-in starts the shadow-cljs build `:todomvc` and also loads and starts the server thanks to a [custom Calva connect sequence](https://calva.io/connect-sequences/) defined here in [settings.json](.vscode/settings.json).
+  
 ### Alternative 1 to VS Code: Running the app from the terminal
 
 You can start the app, both the frontend build and the backend server, from the terminal, as described below. But it is preferable to use VS Code with Calva and start them from Calva, which will provide you with better code inspection capabilities.

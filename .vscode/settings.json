@@ -1,0 +1,15 @@
+{
+    "calva.replConnectSequences": [
+        
+        {
+            "name": "Fulcro Workshop",
+            "projectType": "shadow-cljs",
+            "cljsType": "shadow-cljs",
+            "menuSelections": {
+                "cljsDefaultBuild": "todomvc",
+                "cljsLaunchBuilds": ["todomvc"],
+            },
+            "afterCLJReplJackInCode": "(do (require 'fulcro-todomvc.server) (fulcro-todomvc.server/http-server))"
+        }
+    ]
+}
