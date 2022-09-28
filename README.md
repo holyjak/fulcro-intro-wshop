@@ -66,7 +66,17 @@ An hour or so before the workshop:
 Usage
 -----
 
-### Running the app with in-browser VS Code and backend via Gitpod
+### Running the app from VS Code with Calva
+
+#### Alternative 1: Using a local desktop VS Code
+
+To make everyone's lives simpler, it is _recommended_ that you use VS Code with [Calva](https://calva.io/), no matter what is your preferred editor / IDE. You only [need to know a few Calva keybindings](https://github.com/holyjak/interactive-dev-wshop/blob/master/Cheatsheet.md#vs-code-and-calva-shortcuts) to be sufficiently effective during the workshop.
+
+(You can use your editor if you really prefer that but you are on your own if you run into any problems with that.)
+
+Provided that you have Calva installed, you are ready to go. Read "Starting the app below".
+
+#### Alternative 2: Using an in-browser VS Code and backend via Gitpod
 
 It is preferable to run the app locally with Calva (see below) but if you run into some issues with the editor or tooling, you can run everything in the browser with a pre-configured virtual machine:
 
@@ -74,19 +84,16 @@ It is preferable to run the app locally with Calva (see below) but if you run in
 
 (Requires login via GitHub / GitLab / Bitbucket. Gitpod offers enough free usage time for this workshop.)
 
-### Running the app from VS Code with Calva
-
-To make everyone's lives simpler, it is _recommended_ that you use VS Code with [Calva](https://calva.io/), no matter what is your preferred editor / IDE. You only [need to know a few Calva keybindings](https://github.com/holyjak/interactive-dev-wshop/blob/master/Cheatsheet.md#vs-code-and-calva-shortcuts) to be sufficiently effective during the workshop.
-
-(You can use your editor if you really prefer that but you are on your own if you run into any problems with that.)
+#### Starting the app from VS Code (desktop/remote)
 
 To run the application using Calva:
 
 * [Desktop]: Run `npm install` (or use yarn) in a terminal to make sure Node dependencies are installed. [_Not needed in GitPod_]
 * Connect to the runtime:
-  1. In the menu (in GitPod it is the ☰ in the top-left corner) select _View - Command Palette... - [Calva: Start a Project REPL and Connect (aka Jack-In)](https://calva.io/connect/)_ ![](docs/images/jack-in-1.png)
+  1. In the menu (in Gitpod it is the ☰ in the top-left corner) select _View - Command Palette... - [Calva: Start a Project REPL and Connect (aka Jack-In)](https://calva.io/connect/)_ ![](docs/images/jack-in-1.png)
   2. Select `Fulcro Workshop` for the project type ![](docs/images/jack-in-2.png)
-    * Note: This will also start the backend server and start serving the frontend app but it will take a while before its compilation is finished so you will need to refresh the browser
+    * Note: This _should_ also start the backend server and open the frontend app in a browser - but it will take a while before its compilation is finished so you will need to refresh the browser.
+* Start the server & open the page (if it did not start automatically, which it fails to do in Gitpod): open the file `src/fulcro_todomvc/server.clj`, Command Palette - _Load/Evaluate Current File and its Requires/Dependencies_, then place your cursor at the line `(http-server)` close to the end of the file and press `Alt-Enter` (or execute _Calva: Evaluate Top Level Form_)
 
 NOTE to Clojure devs: The Jack-in starts the shadow-cljs build `:todomvc` and also loads and starts the server thanks to a [custom Calva connect sequence](https://calva.io/connect-sequences/) defined here in [settings.json](.vscode/settings.json).
   

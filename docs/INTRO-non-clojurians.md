@@ -1,6 +1,6 @@
 # A very brief introduction to Fulcro for the general public
 
-_Questions to the audience: How many know React? GraphQL? Redux? Heard of Clojure?_
+_Questions to the audience: How many know React? GraphQL? Redux? Web dev? Heard of Clojure?_
 
 The purpose of this workshop is to bring the lessons from the Clojure web framework Fulcro to the general public. You are most likely never going to use Fulcro itself but you can still seek or apply its ideas elsewhere.
 
@@ -8,7 +8,7 @@ The purpose of this workshop is to bring the lessons from the Clojure web framew
 
 In one word: **productivity**
 
-Q: How many places do you need to edit to get a new piece of data onto the screen? In Redux it is shockingly many, across multiple files. In Fulcro it is three: write the new UI component, include it in a parent component, and possibly add a backend function to fetch the data.
+First a personal story. My love affair with Fulcro started with suffering. I worked with a React & Redux FE app and was horrified at the amount of work, boilerplate code, and number of changed files it took to get a piece of data from the BE onto the screen. Then I discovered Fulcro. There it takes 2-3 changes: write the new UI component, include it in a parent component, and possibly add a backend function to fetch the data.
 
 How is this possible?
 
@@ -21,12 +21,12 @@ Thanks to:
   * awesome dev tooling
   * (and generally to eliminating accidental complexity and boilerplate)
 2. not shying away from the questions _how do I fetch data?_ and _how do I change it?_ and providing a full-stack, \*integrated answer\* (many UI frameworks pretend it is not their problem)
-3. leveraging a Graph API instead of REST
+3. leveraging a Graph API instead of REST (since UI/props is a tree, using a Graph API makes perfect sense)
 4. <del>(Being conservative about features baked into the framework and providing numerous extension points to customize it - important but not discussed in this workshop)</del>
 
 # World's shortest introduction to Clojure syntax
 
-Before we proceed, let's learn how to read Clojure syntax:
+You will be looking at some Clojure code and data so let's spend few minutes learning to understand the syntax. Fortunately it is very simple!
 
 [Open PDF](./Clojure-syntax-intro-slides.pdf)
 
@@ -75,19 +75,6 @@ What is a Fulcro component anyway?
     (dom/h1 "Hello" (:name props) "!")
     (some-child-component (:some-child props))))
 ```
-
-### Keyword cloud
-
-* Component
-* Component tree
-* Data tree
-* Mutation
-* Transaction
-* Client DB
-* EQL
-* Query
-
-TP: You do not need to understand everything here. We will be coming back to these terms in the exercises. There you will experience and grok them.
 
 ## Additional resources
 
