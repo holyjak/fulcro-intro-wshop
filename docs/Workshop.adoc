@@ -112,15 +112,15 @@ image::./images/brwsr-shadow-inspect.png["Shadow Inspect"]
 +
 NOTE: The evaluation result is displayed both inline and inside the `output.calva-repl` file (_Go - Go to File..._ to reopen it)
 
-2. Now let's look at what the props look like - at the same place, under _Exercise 3.2_, eval the `(-> ... (comp/props) ..))` form.
+2. Now let's look at what the props look like - at the same place, under _Exercise 3.2_, eval the `(-> ... (comp/props) ..))` form (put your cursor on it and `Alt - Enter`).
  * _Note_: We used `tap>` so the data will not show up in the REPL but in a tap client. So:
-  . open the http://localhost:9630/inspect-latest[Shadow-cljs Inspect Latest] in a new tab of the same browser window where the webapp is (_GitPod: Duplicate the webapp tab and replace 8181 in the url with 9630 to access Shadow Inspect._)
+  . open the http://localhost:9630/inspect-latest[Shadow-cljs Inspect Latest] in a new tab of the same browser window where the webapp is (_Gitpod: Duplicate the webapp tab and replace 8181 in the url with 9630 to access Shadow Inspect._)
     ** if this displays an empty window, go to http://localhost:9630/ and click the _Inspect Latest_ tab there
   . eval the form again; the value should appear in Shadow Inspect
   . **click _Pretty-Print_** at the very bottom of Inspect to make it readable
  * Compare the props and the query (and notice it is the same thing we saw in the Element tab)
  * Notice some attributes from the query are missing from the props - that's because client DB had no value for them (which is fine, since in Clojure `nil` is equivalent to `false`)
-3. Modify the Exercise 3.2 code to get the props of `TodoList`; you will need its ident - remember you can find its ident using the Fulcro Inspect - Element tab
+3. Modify the Exercise 3.2 code to get the props of `TodoList`; for that you will need its ident - remember you can find it using the Fulcro Inspect - Element tab
 4. Modify also the Exercise 3.1 code to get the query of `TodoList`, then:
 +
 We see that `TodoList` queries for these props (some omitted): `[:list/id :list/items :list/title :list/filter]`.
@@ -129,7 +129,8 @@ But it also elaborates what it wants for each of the `:list/items` elements, nam
 +
 ```clojure
 ; :list/items + [:item/id :item/label ...] =>
-#:list{:items [:item/id :item/label :item/complete :ui/editing :ui/edit-text]}
+{:list/items [:item/id :item/label :item/complete :ui/editing :ui/edit-text]}
+; NOTE: #list{:items ...} == {:list/items ...}
 ```
 +
 and includes this in its query instead of just `:list/items`. Let's visualize how the query composes all the way to the Root:
@@ -146,6 +147,8 @@ Now https://github.com/holyjak/fulcro-intro-wshop/blob/6a06c8881696ff2225be3502d
 
 LESSON: Components declare their data needs using `:query`, listing the properties they want. They _join_ in the query of each child using `get-query` to include the child's needs and thus to specify what properties of a nested data entity to include. The query also includes metadata that Fulcro needs for its processing.
 
+LESSON 2: This demonstrates _locality_ - only a component knows what data it needs and it declares next to its body. It also demonstrates the simplicity of only caring about the Root - queries are propagated up so that Root's query will get data for the whole page.
+
 #### 4. Root query
 
 Despite a common misconception, Fulcro does not supply props to every and each component individually. It only supplies props to the root component - and it uses only the root query, which composes the queries of its children and so on, as we have seen. This picture from the introduction illustrates that: 
@@ -159,6 +162,8 @@ Let's have a look at the query and how it is turned into a props tree.
 3. Now let's see how Fulcro fulfills that query from the client DB, using `fdn/db->tree` - evaluate the form marked _Exercise 4.3_ and observe the result in Shadow's Inspect Latest. First use _Pretty-Print_ on it then switch to _Browse_ - you can click on any line to "drill in" and you can use the `<` and `<<` to go (all the way) back
 
 LESSON: The Root query is turned to a props tree using the client DB. Shadow Inspect is a fine tool for looking at complex data.
+
+LESSON 2: The simplicity of the functional design where UI represented by Root is a "pure" function of data. Data in the UI only comes from what you give to the Root => easy to inspect, easy to understand. No messy side-band data retrieval by components.
 
 #### 5. Exploring the client DB
 
@@ -188,6 +193,8 @@ image::./images/brwsr-fi-db-explorer.png["Fulcro Inspect - DB Explorer"]
 
 LESSON: We saw how data is stored in the client DB mostly in a normalized form (`<entity name>/id -> <id value> -> <map of props, where some props contain idents, to link to other entities>`) and how idents are used to link entities together. We have experienced how Fulcro fulfills a query by "walking" the client DB. We have seen that the client DB is nothing else than a map (of maps of maps, mostly). Tip: my short screencast https://youtu.be/rzK0_k5lzg4[Fulcro explained: Turning Root query into props tree] also demonstrates how the the query and client DB work in tandem to produce props for the Root component.
 
+LESSON 2: Normalized data cache means it is easy to find any piece of data & a change will affect all places that use it.
+
 #### 6. Loading data from the server
 
 Where does the current-list list data come from? From the server, as we will see. But first, let's review what the frontend part of a Fulcro application looks like:
@@ -215,10 +222,11 @@ Remember that any "request for a change" passes through the "asynchronous" trans
 10. [Optional] Open the _Index Explorer_ tab and click its _[Load index]_ button. Then collapse the _▼ Attributes_ section so that you will see the _Resolvers_ and click e.g. the `.../list-resolver`. Here you can see all the resolvers defined on the server, what input they need, and what attributes they can output.
 
 
-
 ^1^) The query thus becomes `[ {[:item/id 1] [<some item attributes...>]} ]`
 
 LESSON: EQL queries are used both to turn data from the Client DB into a props tree and to load data from the backend into the Client DB. All changes in the application, including loading data, pass through the transaction subsystem and thus show up in the _Transactions_ view of Fulcro Inspect. You have further used the _Network_ tab to see both the load request and response. Finally, you have used the _EQL_ tab to experiment with crafting different queries that the server could resolve.
+
+LESSON 2: The backend exposes all data frontend might care about through a single endpoint and the frontend asks for whatever subset of it that it wants. To expose a new piece of data just write a backend function that returns it and add it to the frontend query.
 
 #### 7. Loading data from the REPL
 
@@ -226,8 +234,8 @@ In the previous exercise we have observed the _effect_ of the application loadin
 
 1. Go to `ui.cljs` and evaluate the `df/load!` form marked _Exercise 7.1_ +
    (Note: df/load! is just a helper function that eventually transacts a Fulcro mutation (the Fulcro and Pathom concept of a mutation diverge slightly and not all F. mutations are P. mutations but let's ignore that for now))
- * Notice that it only returns a uuid of the submitted transaction, which is executed asynchronously
- * Also notice that we pass it the ident of the thing we want to load and a component - internally, Fulcro will call `(comp/get-query <the component>)`
+ * Notice that it only returns a uuid of the submitted transaction, which is executed _asynchronously_
+ * Also notice that we pass it the ident of the thing we want to load and a component - internally, Fulcro will call `(comp/get-query <the component>)` to get the component's query with its metadata.
  * Finally, notice that item 1 in the UI has been updated (thanks to the two lists sharing the item and data normalization)
  * (The loaded list will _not_ be displayed because we do not tell Fulcro to do so. Loading and displaying data are unrelated concerns.)
 2. Check that you can see the transaction in the Fulcro Inspect _Transactions_ tab and explore the request and response in its _Network_ tab.
@@ -252,7 +260,7 @@ That is only possible because both `TodoList` and `TodoItem` declare their `:ide
   ...)
 ```
 
-LESSON: Load targets a backend resolver by asking for a data that it can provide and supplying the inputs that it requires. It includes a component's query to request a particular subset of the available data and uses the component's (and children's) ident to normalize the data into the Client DB. 
+LESSON: Load targets a backend resolver by asking for a data that it can provide and supplying the inputs that it requires. It includes a component's query to request a particular subset of the available data and uses the component's (and children's) ident to normalize the data into the Client DB. Normalized data ensure that a change affects all relevant places.
 
 #### 8. Changing local and remote data with mutations
 
@@ -275,7 +283,9 @@ Note: The `todo-check` call simply returns the whole expression as-is (otherwise
  * The frontend and backend "handlers" must be registered under the same symbol, which is normally derived from the defmutation name and the current namespace; since here the backend mutation is in a different ns than the frontend one, we override that with the `::pc/sym` config option
  * It updates the server-side "db" and returns an empty map (as we have seen in the Network tab)
 
-LESSON: A mutation is data that can have a handler associated on the frontend and backend. The frontend handler action updates the Client DB and the mutation is then sent to the backend as an EQL transaction iff it is marked as remote. The backend handler gets the same parameters (plus the general pathom environment) and typically updates a data store. 
+LESSON: A mutation is data that can have a handler associated on the frontend and backend. The frontend handler action updates the Client DB and the mutation is then sent asynchronously to the backend as an EQL transaction iff it is marked as remote. The backend handler gets the same parameters (plus the general pathom environment) and typically updates a data store and possibly returns data.
+
+LESSON 2: Navigability - you can click through to the mutation code for where you "transact" it. Locality - the frontend and backend mutation code can be next to each other. Productivity - adding a new local/remote side-effect is one defmutation away.
 
 #### 9. Triggering a mutation manually
 

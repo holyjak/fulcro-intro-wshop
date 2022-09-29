@@ -19,3 +19,9 @@ Run the app via GitPod to verify that it still works and to get GitPod to build 
 ## Tips
 
 Use Discord and create a _room_ for each exercises where participants could discuss and help each other.
+
+## Non-Clojurians
+
+* 3.5 metadata - explain it is like annotations in Java etc., interpret the output for them
+* 7.2 points to a resolver code - skip or read & explain
+* 8.4, 8.5 reading `defmutation` - read & interpret it for them
