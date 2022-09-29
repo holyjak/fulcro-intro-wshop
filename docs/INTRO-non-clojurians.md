@@ -20,7 +20,7 @@ Thanks to:
   * being data-driven and REPL-able
   * awesome dev tooling
   * (and generally to eliminating accidental complexity and boilerplate)
-2. not shying away from the questions _how do I fetch data?_ and _how do I change it?_ and providing a full-stack, \*integrated answer\* (many UI frameworks pretend it is not their problem)
+2. not shying away from the question _how do I deal with data? (fetch, store, change)_ and providing a full-stack, \*integrated answer\* (many UI frameworks pretend it is not their problem)
 3. leveraging a Graph API instead of REST (since UI/props is a tree, using a Graph API makes perfect sense)
 4. <del>(Being conservative about features baked into the framework and providing numerous extension points to customize it - important but not discussed in this workshop)</del>
 
@@ -63,6 +63,8 @@ Let's zoom in even more, on the UI tree and its rendering:
 1. Fulcro asks the `Root` component for its _query_, which composes the queries of its children (and so forth)
 2. Fulcro fulfills the query using the data in the client DB, producing a tree of data, also known as _props_ (= properties)
 3. Fulcro invokes the Root's render function passing it the props tree; Root in turn renders its children, passing them the relevant sub-trees
+
+Simplicity: UI = Root(data) - no side-channel data grabbing by components
 
 ### Fulcro component
 
