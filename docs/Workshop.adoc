@@ -293,7 +293,7 @@ As always in Fulcro, we do not need to click around and can trigger the mutation
 
 1. Go to `ui.cljs` and eval the form marked _Exercise 9.1_
 2. Observe that the UI now shows the item as not completed
-3. In `api.cljs`, find the `todo-check` mutation (you can Command-click / Control-click the "call" go to its definition) and inside the `remote` section change the [.line-through]`true` to `false` and _save the file_ (so that Shadow will hot-reload the code) and wait a few seconds.
+3. In `api.cljs`, find the `todo-check` mutation (you can Command-click / Control-click the "call" go to its definition) and inside the `remote` section change the [.line-through]`true` to `false` and _save the file_ (so that Shadow will hot-reload the code) and wait a few seconds. (Perhaps even check browser's Console for the info log `shadow-cljs: load JS fulcro_todomvc/api.cljs`.)
 4. In `ui.cljs`, eval the form marked _Exercise 9.2_
  .. Notice the item is marked as completed in the UI
  .. Verify that you see the `todo-check` mutation in the _Transactions_ tab
