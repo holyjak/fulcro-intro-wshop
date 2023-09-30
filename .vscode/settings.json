@@ -9,7 +9,8 @@
                 "cljsDefaultBuild": "todomvc",
                 "cljsLaunchBuilds": ["todomvc"],
             },
-            "afterCLJReplJackInCode": "(do (require 'fulcro-todomvc.server) (fulcro-todomvc.server/http-server))"
+            "afterCLJReplJackInCode": "(do (require 'fulcro-todomvc.server) (fulcro-todomvc.server/http-server))",
+            "autoSelectForJackIn": true
         }
     ]
 }

@@ -91,10 +91,10 @@ To run the application using Calva:
 * [Desktop]: Run `npm install` (or use yarn) in a terminal to make sure Node dependencies are installed. [_Not needed in GitPod_]
 * Connect to the runtime:
   1. In the menu (in Gitpod it is the ☰ in the top-left corner) select _View - Command Palette... - [Calva: Start a Project REPL and Connect (aka Jack-In)](https://calva.io/connect/)_ ![](docs/images/jack-in-1.png)
-  2. Select `Fulcro Workshop` for the project type ![](docs/images/jack-in-2.png)
     * Note: This _should_ also start the backend server and open the frontend app in a browser - but it will take a while before its compilation is finished so you will need to refresh the browser.
 * Give it a while to finish the startup sequence
-* Start the server & open the page (if it did not start automatically, which it fails to do in Gitpod): open the file `src/fulcro_todomvc/server.clj`, Command Palette - _Load/Evaluate Current File and its Requires/Dependencies_, then place your cursor at the line `(http-server)` close to the end of the file and press `Alt-Enter` (or execute _Calva: Evaluate Top Level Form_)
+* [If necessary] Start the server & open the page (if it did not start automatically, which it fails to do in Gitpod): open the file `src/fulcro_todomvc/server.clj`, Command Palette - _Load/Evaluate Current File and its Requires/Dependencies_, then place your cursor at the line `(http-server)` close to the end of the file and press `Alt-Enter` (or execute _Calva: Evaluate Top Level Form_)
+* NOTE: Browser with the app should open automatically. If it shows "stale output" for too long, reload the app in there.
 
 NOTE to Clojure devs: The Jack-in starts the shadow-cljs build `:todomvc` and also loads and starts the server thanks to a [custom Calva connect sequence](https://calva.io/connect-sequences/) defined here in [settings.json](.vscode/settings.json).
   

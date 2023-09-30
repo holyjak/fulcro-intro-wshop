@@ -21,5 +21,5 @@
   (df/load! app [:list/id 1] ui/TodoList)
   (app/mount! app ui/Root "app" {:initialize-state? false})
   @(::app/state-atom app)
-  (fws/stop! remote)
+  ;(fws/stop! remote)
   )

@@ -14,6 +14,11 @@
     [clojure.tools.namespace.repl :as tools-ns]
     [com.fulcrologic.fulcro.algorithms.tempid :as tempid]))
 
+;(log/set-min-level! :info)
+(log/merge-config! {:min-level [[#{"fulcro-todomvc.*"} :debug]
+                                [#{"com.fulcrologic.fulcro.*"} :debug]
+                                [#{"*"} :info]]})
+
 (def item-db (atom {1 {:item/id       1
                        :item/label    "Item 1"
                        :item/complete false}
