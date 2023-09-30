@@ -24,7 +24,7 @@ tasks:
   - name: Prepare project deps
     init: clojure -A:dev -P
   - name: Prepare Calva deps
-    init: clojure -Sdeps '{:deps {nrepl/nrepl {:mvn/version,"0.9.0"},cider/cider-nrepl {:mvn/version,"0.28.5"}}}' -P
+    init: clojure -Sdeps '{:deps {nrepl/nrepl {:mvn/version,"1.0.0"},cider/cider-nrepl {:mvn/version,"0.28.5"}}}' -P
   - name: shadow deps
     init: npx shadow-cljs classpath
   - name: Shadow-cljs - set devtools-url to fix WS connection to go through the host that GitPod exposes it as
