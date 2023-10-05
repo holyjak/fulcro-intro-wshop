@@ -11,6 +11,15 @@
             },
             "afterCLJReplJackInCode": "(do (require 'fulcro-todomvc.server) (fulcro-todomvc.server/http-server))",
             "autoSelectForJackIn": true
+        },
+        {
+            "name": "Coding Exercises",
+            "projectType": "shadow-cljs",
+            "cljsType": "shadow-cljs",
+            "menuSelections": {
+                "cljsDefaultBuild": "coding",
+                "cljsLaunchBuilds": ["coding"],
+            }
         }
     ]
 }

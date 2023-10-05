@@ -1,6 +1,6 @@
 {:deps     {:aliases [:dev]}
  :nrepl    {:port 9000}
- ;:dev-http {9001 "resources/public"}
+ :dev-http {9001 "resources/public"} ; needed for 'Coding Exercises'
  :jvm-opts ["-Xmx1G"]
  :builds   {:todomvc    {:target     :browser
                          :output-dir "resources/public/js"

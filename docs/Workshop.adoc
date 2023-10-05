@@ -345,10 +345,9 @@ TIP: If you run into troubles then check the <<Help>> section below
 
 1. 🛑 Stop the running todomvc REPL (either by clicking `REPL` in VS Code's bottom toolbar or running _Calva: Disconnect from the REPL Server_).
 2. 🏁 Start REPL for the exercises:
+  .. In `.vscode/settings.json`, remove `autoSelectForJackIn` or set it to `false` (so that you can select the "coding" alias instead of the F. Workshop one)
   .. In the menu _View - Command Palette... - Calva: Start a Project REPL and Connect (aka Jack-In)_
-  .. Select _shadow-cljs_
-  .. Select (only!) `:coding` for the aliases to launch with
-  .. Wait a few seconds, then select `:coding` for the build to connect to
+  .. Select _Coding Exercises_
 3. Navigate to http://localhost:9001
 4. Open `src/holyjak/fulcro_exercises.cljs`, read the ns docstring and then work through it from top to bottom, following the `;; TASK` instructions
 5. You might need to refer to the https://fulcro-community.github.io/guides/tutorial-minimalist-fulcro/[Minimalist Fulcro Tutorial] to refresh your knowledge or fill in any gaps

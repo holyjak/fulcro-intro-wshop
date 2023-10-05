@@ -21,5 +21,7 @@
                                                                          :exclusions [com.fulcrologic/fulcro]}
                                       binaryage/devtools                {:mvn/version "1.0.7"}
                                       ring/ring-core                    {:mvn/version "1.10.0"}
-                                      org.immutant/web                  {:mvn/version "2.1.10"}
+                                      com.fzakaria/slf4j-timbre         {:mvn/version "0.4.0"} ; for immutant / undertow
+                                      org.immutant/web                  {:mvn/version "2.1.10"
+                                                                         :exclusions [ch.qos.logback/logback-classic]}
                                       org.clojure/tools.namespace       {:mvn/version "1.4.4"}}}}}
