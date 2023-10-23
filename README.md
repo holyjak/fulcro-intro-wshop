@@ -156,4 +156,4 @@ shadow-cljs - watching build :todomvc
 
 #### Troubleshooting other problems
 
-* Fulcro Inspect is just a blank page - try a different Chromium-based browser (Chrome, Vivaldi). Right-click - Inspect inside Fulcro Inspect to look for errors in its Console. It can fail e.g. if it is not allowed to access `localStorage`.
+* Fulcro Inspect is just a blank page: 1) Try to unblock third part cookies (go to chrome://settings/content/cookies, uncheck Block third-party cookies, restart browser). If that doesn't help then 2) try a different Chromium-based browser (Chrome, Vivaldi). Further troubleshooting: Right-click - Inspect inside Fulcro Inspect to look for errors in its Console. It can fail e.g. if it is not allowed to access `localStorage`.
